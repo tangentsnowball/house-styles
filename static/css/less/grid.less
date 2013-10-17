@@ -1,0 +1,61 @@
+/*== GRID GENERATOR ==*/
+
+/* grid variables and calculation */
+    @gridWidth: 1024px; //set to maximum page width required
+    @gridSpacing: 20; //spacing between columns required
+    @numCols: 12; //number of columns required
+
+    @percentColGutter: percentage(@gridSpacing / @gridWidth);
+    @percentColWidth: percentage(((@gridWidth - (@gridSpacing * (@numCols - 1))) / @numCols) / @gridWidth);
+
+    /* indent calculation mixin */
+    .offset(@multiply, @add:0){
+        margin-left:(@percentColWidth * @multiply) + (@percentColGutter * @multiply) + (@percentColGutter * @add);
+    }
+
+/* base grid styles */
+    .container {
+        margin:0 auto;
+        padding:0 10px;
+        .border-box();
+        max-width:@gridWidth;
+    }
+    .row {
+        .clearfix;
+        clear:both;
+        [class*="span"] {
+            float:left;
+            margin-left:@percentColGutter;
+            &:first-child {
+                margin-left:0;
+            }
+        }
+        
+        /* build all the columns */
+        /* http://blog.thehippo.de/2012/04/programming/do-a-loop-with-less-css/ */
+        @iterations: @numCols;
+        .loopingClass(@index) when (@index > 0){
+            .span@{index}{
+                width:@percentColWidth * @index + (@percentColGutter * (@index - 1));
+            }
+            .loopingClass(@index - 1);
+        }
+        .loopingClass(0){}
+        .loopingClass(@iterations);
+
+        /* build all the indents - need to use new variables for the loop */
+        @iiterations: @numCols - 1;
+        .loopingClass2(@iindex) when (@iindex > 0){
+            .offset@{iindex}{
+                .offset(@iindex,1);
+                &:first-child {
+                    .offset(@iindex);
+                }
+            }
+            .loopingClass2(@iindex - 1);
+        }
+        .loopingClass2(0){}
+        .loopingClass2(@iiterations);
+    }
+
+    

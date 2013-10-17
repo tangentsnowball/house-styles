@@ -1,0 +1,10 @@
+/* --clearfix */
+    * html .clearfix{height:1%;overflow:visible;}/* float clearing for IE6 */
+    *+html .clearfix{min-height:1%;}/* float clearing for IE7 */
+    .clearfix:after{clear:both;content:".";display:block;height:0;visibility:hidden;font-size:0;}/* float clearing for everyone else */
+
+    .clearfix() {
+      zoom: 1;
+      &:before { content: ''; display: block; }
+      &:after { content: ''; display: table; clear: both; }
+    }

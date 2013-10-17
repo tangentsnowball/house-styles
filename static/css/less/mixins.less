@@ -1,0 +1,93 @@
+/* --mixins */
+	/* border radius */
+	.border-radius(@radius: 0.3em) {
+		-webkit-border-radius: @radius;
+		-moz-border-radius   : @radius;
+		border-radius        : @radius;
+	}
+
+    /* --gradients */
+    	/* linear */
+    	.linear-gradient( @startcolor, @startpoint, @endcolor, @endpoint ) {
+    		background: @endcolor;
+    		background: -webkit-gradient(linear, left top, left bottom, color-stop(@startpoint, @startcolor), color-stop(@endpoint,@endcolor)); /* Chrome,Safari4+ */
+    		background: -moz-linear-gradient(top, @startcolor @startpoint, @endcolor @endpoint); /* FF3.6+ */
+    		background: -o-gradient(top, @startcolor @startpoint, @endcolor @endpoint); /* Opera 11.10+ */
+    		background: -ms-linear-gradient(top, @startcolor @startpoint, @endcolor @endpoint); /* IE10+ */
+    		background: linear-gradient(top, @startcolor @startpoint, @endcolor @endpoint);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=@startcolor, endColorstr=@endcolor,GradientType=0 ); /* IE6-9 */
+    	}
+        /* radial */
+        /* limited support for IE, will only work in 10 */
+        /*  @shape can be circle or ellipse (ellipse untested)
+            @size can be closest-side, closest-corner, farthest-side, farthest-corner, contain, cover
+            @position can be any value that background-position would accept, e.g. 10% 50%
+        */
+        .radial-gradient(@inner-color: #0058a1, @outer-color: #040505, @shape: ellipse, @size: cover, @position: center center ){
+            background-color: @outer-color; /* Old browsers */
+            background-image: -webkit-gradient(radial, @position, 0px, @position, 100%, color-stop(0%,@inner-color), color-stop(100%,@outer-color)); /* Chrome,Safari4+ */
+            background-image: -webkit-radial-gradient(@position, @shape @size,  @inner-color 0%,@outer-color 100%); /* Chrome10+,Safari5.1+ */
+            background-image: -moz-radial-gradient(@position, @shape @size,  @inner-color 0%, @outer-color 100%); /* FF3.6+ */
+            background-image: -ms-radial-gradient(@position, @shape @size,  @inner-color 0%,@outer-color 100%); /* IE10+ */
+            background-image: -o-radial-gradient(@position, @shape @size,  @inner-color 0%,@outer-color 100%); /* Opera 12+ */
+        }
+
+
+	/* shadow */
+	/* usage: .box-shadow( ~"0 1px 0 red, 0 -1px 0 green" ); */
+	.box-shadow( @shadow ) {
+		-webkit-box-shadow: @shadow;
+		box-shadow        : @shadow;
+	}
+
+	/* --transforms */
+    	.transform ( @trans ){
+            transform: @trans;
+            ms-transform: @trans;
+            -moz-tranform: @trans;
+            -webkit-transform: @trans;
+            -o-transform: @trans;
+        }
+    
+    	.transform-point ( @trans ) {
+            transform-origin: @trans;
+            -ms-transform-origin: @trans;
+            -moz-transform-origin: @trans;
+            -o-transform-origin: @trans;
+            -webkit-transform-origin: @trans;
+        }
+
+	/* usage: .transition( ~"transition, another transition" ); */
+    .transition( @trans ){
+        transition: @trans;
+        -moz-transition: @trans;
+        -webkit-transition: @trans;
+        -o-transition: @trans;
+    }
+
+    .transparency( @trans ){
+        @mstrans: @trans * 100;
+        filter: alpha(opacity=@mstrans);
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity="@mstrans")"; /* IE 8 */
+        -moz-opacity: @trans; /* Netscape */
+        -khtml-opacity: @trans; /* Safari 1.x */
+        opacity: @trans; /* Good browsers */
+    }
+
+	/* --box sizing */
+    	.border-box {
+    		-moz-box-sizing   : border-box;
+    		-webkit-box-sizing: border-box;
+    		-ms-box-sizing    : border-box;
+    		box-sizing        : border-box;
+    		// < IE7 fallback
+    		*behavior: url('static/css/boxsizing.htc'); //must be set per-project
+    	}
+    	.content-box {
+    		-moz-box-sizing   : content-box;
+    		-webkit-box-sizing: content-box;
+    		-ms-box-sizing    : content-box;
+    		box-sizing        : content-box;
+    		*behavior         : none;
+    	}
+

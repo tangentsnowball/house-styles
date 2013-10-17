@@ -1,0 +1,96 @@
+/* --forms and form elements */
+
+    //note that iphone requires a font-size of 100% set manually on input elements to prevent the 'zoom' problem when focussing
+    .form {
+        fieldset {
+            border:0;
+        }
+        label,
+        .faux_label {
+            float:left;
+            padding:0 0 @formElementSpacing 0;
+            width:@inputWidth;
+            .border-box();
+        }
+        input[type="text"],
+        input[type="number"],
+        input[type="email"],
+        input[type="password"],
+        input[type="search"],
+        input[type="file"],
+        select,
+        textarea {
+            padding:0.3em 0.4em;
+            margin:0 @formelementMargin @formElementSpacing 0;
+            width:@inputWidth;
+            .border-box();
+            background:#FFFFFF;
+            border:solid 1px #CCCCCC;
+            color:#888888;
+            font-size:90%;
+            font-family:Arial,Verdana;
+            &:focus {
+                color:#666666;
+            }
+        }
+        textarea {
+            height:80px;
+        }
+        .errormsg {
+            display:none;
+            .border-box();
+            color:red;
+            font-size:90%;
+        }
+        .helptext {
+            float:right;
+            width:@helpWidth;
+            color:#AAAAAA;
+            font-size:90%;
+        }
+
+        .field {
+            padding-bottom:@formElementSpacing * 2;
+            &.error {
+                input[type="text"],
+                input[type="number"],
+                input[type="email"],
+                input[type="password"],
+                input[type="search"],
+                input[type="file"],
+                select,
+                textarea {
+                    border-color:red;
+                }
+                .errormsg {
+                    display:block;
+                }
+            }
+            &.radiocheck {
+                position:relative;
+                label {
+                    position:relative;
+                    padding-left:30px;
+                }
+                input[type="checkbox"],
+                input[type="radio"]{
+                    position:absolute;
+                    top:0;
+                    left:5px;
+                }
+                .errormsg {
+                    padding-left:30px;
+                    clear:left;
+                }
+                &.horizontal {
+                    label {
+                        float:left;
+                        width:auto;
+                    }
+                }
+            }
+        }
+    }
+    /*
+    button[disabled], input[disabled] { cursor: default; }
+    */
