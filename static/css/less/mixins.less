@@ -7,7 +7,7 @@
 	}
 
     /* --gradients */
-    	/* linear */
+    	/* vertical, two colour */
     	.linear-gradient( @startcolor, @startpoint, @endcolor, @endpoint ) {
     		background: @endcolor;
     		background: -webkit-gradient(linear, left top, left bottom, color-stop(@startpoint, @startcolor), color-stop(@endpoint,@endcolor)); /* Chrome,Safari4+ */
@@ -17,6 +17,27 @@
     		background: linear-gradient(top, @startcolor @startpoint, @endcolor @endpoint);
             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=@startcolor, endColorstr=@endcolor,GradientType=0 ); /* IE6-9 */
     	}
+        /* vertical, multi colour */
+    	.multi-gradient( @color1, @pos1, @color2, @pos2, @color3, @pos3, @color4, @pos4 ){
+    		background: @pos4;
+    		background: -webkit-gradient(linear, left top, left bottom, color-stop(@pos1, @color1), color-stop(@pos2,@color2), color-stop(@pos3,@color3), color-stop(@pos4,@color4)); /* Chrome,Safari4+ */
+    		background: -moz-linear-gradient(top, @color1 @pos1, @color2 @pos2, @color3 @pos3, @color4 @pos4); /* FF3.6+ */
+    		background: -o-gradient(top, @color1 @pos1, @color2 @pos2, @color3 @pos3, @color4 @pos4 ); /* Opera 11.10+ */
+    		background: -ms-linear-gradient(top, @color1 @pos1, @color2 @pos2, @color3 @pos3, @color4 @pos4); /* IE10+ */
+    		background: linear-gradient(top, @color1 @pos1, @color2 @pos2, @color3 @pos3, @color4 @pos4);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=@color1, endColorstr=@color4,GradientType=0 ); /* IE6-9 */
+        }
+        /* horizontal, two colour */
+    	.horizontal-gradient( @startcolor, @startpoint, @endcolor, @endpoint ) {
+            background: @endcolor; /* Old browsers */
+            background: -moz-linear-gradient(left,  @startcolor @startpoint, @endcolor @endpoint); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, right top, color-stop(@startpoint,@startcolor), color-stop(@endpoint,@endcolor)); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(left,  @startcolor @startpoint,@endcolor @endpoint); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(left,  @startcolor @startpoint,@endcolor @endpoint); /* Opera 11.10+ */
+            background: -ms-linear-gradient(left,  @startcolor @startpoint,@endcolor @endpoint); /* IE10+ */
+            background: linear-gradient(to right,  @startcolor @startpoint,@endcolor @endpoint); /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=@startcolor, endColorstr=@endcolor,GradientType=1 ); /* IE6-9 */
+    	}        
         /* radial */
         /* limited support for IE, will only work in 10 */
         /*  @shape can be circle or ellipse (ellipse untested)
