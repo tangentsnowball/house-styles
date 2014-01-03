@@ -1,6 +1,5 @@
 
 $(function() {
-    $('body').removeClass('no-js');
 
     //if we want any forms to not be submittable twice, add the 'js-disable-on-click' class to any buttons in the form
     //(untested)

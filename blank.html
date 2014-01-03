@@ -15,13 +15,17 @@
         <link rel="stylesheet" type="text/css" href="static/css/mobile-styles.css"/>
     <![endif]-->
 
+    <script>
+        /* we want to remove the nojs class as soon as possible on page load */
+        document.getElementById("site").className = document.getElementById("site").className.replace(/nojs/i,'');
+    </script>
 </head>
 
-<!--[if lt IE 7 ]>				<body class="no-js ie ie6"> <![endif]-->
-<!--[if IE 7 ]>					<body class="no-js ie ie7"> <![endif]-->
-<!--[if IE 8 ]>					<body class="no-js ie ie8"> <![endif]-->
-<!--[if IE 9 ]>					<body class="no-js ie ie9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!-->	<body class="no-js"> <!--<![endif]-->
+<!--[if lt IE 7 ]>				<body id="site" class="nojs ie ie6"> <![endif]-->
+<!--[if IE 7 ]>					<body id="site" class="nojs ie ie7"> <![endif]-->
+<!--[if IE 8 ]>					<body id="site" class="nojs ie ie8"> <![endif]-->
+<!--[if IE 9 ]>					<body id="site" class="nojs ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->	<body id="site" class="nojs"> <!--<![endif]-->
 
     <div class="container">
         <div class="row">
@@ -32,6 +36,7 @@
     <!-- Grab Google-hosted jQuery. Fall back to locally saved file if necessary. -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="static/js/vendor/jquery-1.10.min.js">\x3C/script>')</script>
+    <script src="static/js/main.js"></script>
 
 </body>
 </html>
