@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="site" class="nojs">
 <head>
 <!--[if lt IE 9]>
 <script src="static/js/vendor/html5shiv.js"></script>
@@ -19,8 +19,8 @@
     <link rel="shortcut icon" href="/favicon.ico">
 
     <style>
-        .no-js #stylenav {position:relative;top:auto;right:auto;margin-bottom:1em;width:auto;}
-        .no-js #shownav {display:none;}
+        .nojs #stylenav {position:relative;top:auto;right:auto;margin-bottom:1em;width:auto;}
+        .nojs #shownav {display:none;}
         #stylenav {position:fixed;bottom:100%;left:0;height:100%;padding:0 5px;background:rgb(221,221,221);background:rgba(221,221,221,0.7);}
         #stylenav ul {padding:5px;margin:30px 0 0 0;}
         #stylenav .active {font-style:italic;}
@@ -31,13 +31,17 @@
         section {padding-bottom:150px;}
     </style>
 
+    <script>
+        /* we want to remove the nojs class as soon as possible on page load */
+        document.getElementById("site").className = document.getElementById("site").className.replace(/nojs/i,'');
+    </script>
 </head>
 
-<!--[if lt IE 7 ]>				<body class="no-js iex ie6"> <![endif]-->
-<!--[if IE 7 ]>					<body class="no-js iex ie7"> <![endif]-->
-<!--[if IE 8 ]>					<body class="no-js iex ie8"> <![endif]-->
-<!--[if IE 9 ]>					<body class="no-js ie9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!-->	<body class="no-js"> <!--<![endif]-->
+<!--[if lt IE 7 ]>				<body class="iex ie6"> <![endif]-->
+<!--[if IE 7 ]>					<body class="iex ie7"> <![endif]-->
+<!--[if IE 8 ]>					<body class="iex ie8"> <![endif]-->
+<!--[if IE 9 ]>					<body class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->	<body> <!--<![endif]-->
     <div class="container">
 
         <div class="row">
@@ -88,7 +92,7 @@
                 <section id="typography">
                     <h2>Typography</h2>
                     
-                    <h2>Headings</h2>
+                    <h3>Headings</h3>
                     
                     <span class="faux_h1">Heading 1</span>
                     <span class="faux_h2">Heading 2</span>

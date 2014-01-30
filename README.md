@@ -1,7 +1,7 @@
 TS House styles for front end development
 =========================================
 
-This is our initial set of front end files for beginning a new site build. The intent is to provide a basic starting point that will then help to shape the final front end. This is intended to both save time and effort but also to provide a consistent approach to front end projects. Therefore styles that control visual appearance such as backgrounds, shadows, etc. have deliberately been avoided.
+This is our initial set of front end files for beginning a new site build. The intent is to provide a basic starting point that will then help to shape the final front end. This should save time and effort but also provide a consistent approach to front end projects. Styles that control visual appearance such as backgrounds, shadows, etc. have deliberately been avoided.
 
 Due to increasing use of bootstrap 2 for some projects this CSS uses bootstrap compatible class names for common elements like the grid and buttons. This CSS is therefore designed to replace any initial bootstrap CSS, rather than work alongside it.
 
@@ -26,3 +26,20 @@ Further expansion
 -----------------
 
 It is expected that this set of front end files will be expanded and improved over time. If you have any suggestions or improvements, create a new branch (feature/name) and issue a pull request for review.
+
+General rules
+-------------
+
+This section will be folded into our FE coding standards eventually.
+
+- Use a new line for each style attribute
+- Use a four space tab for indenting
+- Order attributes generally as follows: display, position, size, borders, backgrounds, colours, fonts
+- Don't use a class with a specific purpose to accomplish something that a second class would do better, e.g. don't apply colours to a specific grid element, add another class to it
+
+Please follow these rules.
+
+- Don't use !important
+- Don't use IDs for styling, only classes
+- Don't use the * rule to apply a style to all elements, and avoid styling base elements such as DIV or LI
+
