@@ -39,13 +39,13 @@ $(function() {
     }
 
     //alert messages
-    $('.alert .close').on('click',function(e){
+    $('body').on('click','.alert .close',function(e){
         e.preventDefault();
         $(this).parent().fadeOut();
     });
 
     //popups
-    $('.js-openpopup').click(function(e){
+    $('body').on('click','.js-openpopup',function(e){
         e.preventDefault();
         $('.popupwrapper').find('.mask').fadeIn();
         var popup = $(this).attr('data-target');
