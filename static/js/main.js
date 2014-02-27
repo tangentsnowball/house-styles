@@ -48,12 +48,12 @@ $(function() {
     $('.js-openpopup').click(function(e){
         e.preventDefault();
         $('.popupwrapper').find('.mask').fadeIn();
-        var popup = $(this).attr('data-target');
-        var $target = $('.popup[data-id=' + popup + ']');
-        var option = 0; //used to detect positioning options
-
+        var popup = $(this).attr('data-target'),
+            $target = $('.popup[data-id=' + popup + ']'),
+            option = 0, //used to detect positioning options
         //if fixed position
-        var position = $(this).attr('data-position');
+            position = $(this).attr('data-position');
+
         if(position){
             $target.addClass(position);
             option = 1;
@@ -63,13 +63,28 @@ $(function() {
             var scrolltop = $(window).scrollTop();
             $target.css('top',scrolltop + 50);
         }
-        $target.fadeIn();
+        $target.fadeIn().addClass('js-enabledpopup');
+    });
+    $('body').on('keyup', function(e) {
+        if(e.keyCode == 27) {
+            popupClose();
+        }
     });
     $('.popup .js-closepopup').click(function(e){
         e.preventDefault();
-        $('.popupwrapper .mask').fadeOut();
-        $(this).closest('.popup').fadeOut();
+        popupClose(e);
     });
+
+    function popupClose(e) {
+        if(e === undefined) {
+            $('.popupwrapper .mask').fadeOut();
+            $('.popup.js-enabledpopup').fadeOut();
+        } else {
+            var $this = $(e.target);
+            $('.popupwrapper .mask').fadeOut();
+            $this.closest('.popup').fadeOut();
+        }
+    }
 
 
 });

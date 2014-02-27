@@ -893,8 +893,8 @@
     <script type="text/javascript">
         /* credit to Katrin Kerber for much of this useful js */
         $(document).ready(function() {
-            var $sections = $('#stylesections').find('section[id]:not(.tab-content)');
-            var $links    = $('#stylenav').find('ul a');
+            var $sections = $('#stylesections').find('section[id]:not(.tab-content)'),
+                $links    = $('#stylenav').find('ul a');
 
             if(window.location.hash) {
                 if(window.location.hash != '#all'){
@@ -912,8 +912,8 @@
 
             $links.click(function(e){
                 e.preventDefault();
-                var $this  = $(this);
-                var target = $(this).attr('href');
+                var $this  = $(this),
+                    target = $this.attr('href');
 
                 window.location.hash = target;
 
