@@ -38,11 +38,37 @@ $(function() {
         });
     }
 
-
     //alert messages
     $('.alert .close').on('click',function(e){
         e.preventDefault();
         $(this).parent().fadeOut();
+    });
+
+    //popups
+    $('.js-openpopup').click(function(e){
+        e.preventDefault();
+        $('.popupwrapper').find('.mask').fadeIn();
+        var popup = $(this).attr('data-target');
+        var $target = $('.popup[data-id=' + popup + ']');
+        var option = 0; //used to detect positioning options
+
+        //if fixed position
+        var position = $(this).attr('data-position');
+        if(position){
+            $target.addClass(position);
+            option = 1;
+        }
+
+        if(!option) {
+            var scrolltop = $(window).scrollTop();
+            $target.css('top',scrolltop + 50);
+        }
+        $target.fadeIn();
+    });
+    $('.popup .js-closepopup').click(function(e){
+        e.preventDefault();
+        $('.popupwrapper .mask').fadeOut();
+        $(this).closest('.popup').fadeOut();
     });
 
 
