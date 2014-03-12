@@ -62,6 +62,8 @@
                     <li><a href="#javascript">Plugins and JS</a></li>
                     <li>Specific elements</li>
                     <li><a href="#tabs">Tabs</a></li>
+                    <li><a href="#popups">Popups</a></li>
+                    <li><a href="#all">Show all</a></li>
                 </ul>
             </div>
             <a href="#" id="shownav">Show menu</a>
@@ -837,7 +839,11 @@
 
                 <section id="javascript">
                     <h2>Plugins and JavaScript</h2>
-                    <p></p>
+                    <p>
+                        <span class="fillin">
+                            Note that the JS included with the house styles is meant as a starting point only. In its current form, the JS is in places inefficient or even inappropriate depending on how it will be used, and you are advised to tailor it specifically to your needs.
+                        </span>
+                    </p>
                 </section>
 
                 <section id="tabs">
@@ -919,7 +925,74 @@
 &lt;/div&gt;
 </code></pre>
                 </section>
+                
+                <section id="popups">
+                    <h2>Popups</h2>
+                    <p>Popups are hidden elements at the foot of the page revealed by a click action on a specific element. By default popups are positioned 10% from the top of the current window position, unless the <code>data-position="fixed"</code> attribute is added to the link.</p>
 
+
+                    <ul class="standard">
+                        <li>
+                            <a href="#" class="js-openpopup" data-target="1">Standard popup</a>
+                            (<a href="#" class="js-openpopup" data-target="2">large version</a>)
+                        </li>
+
+                        <li>
+                            <a href="#" class="js-openpopup" data-target="3" data-position="fixed">Fixed position</a>
+                            (<a href="#" class="js-openpopup" data-target="4" data-position="fixed">large version</a>)
+                        </li>
+                    </ul>
+                    
+                    <h3>Code</h3>
+<pre class="language-markup clear"><code>
+&lt;a href="#" class="js-openpopup" data-target="1"&gt;Standard popup&lt;/a&gt;
+
+&lt;div class="popupwrapper"&gt;
+    &lt;div class="mask"&gt;&lt;/div&gt;
+
+    &lt;div class="popup" data-id="1"&gt;
+        &lt;a href="#" class="js-closepopup"&gt;close&lt;/a&gt;
+        &lt;div class="inner"&gt;
+            &lt;p&gt;This is popup 1.&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+                </section>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="popupwrapper">
+        <div class="mask"></div>
+
+        <div class="popup" data-id="1">
+            <a href="#" class="js-closepopup">close</a>
+            <div class="inner">
+                <p>This is popup 1.</p>
+            </div>
+        </div>
+
+        <div class="popup" data-id="2">
+            <a href="#" class="js-closepopup">close</a>
+            <div class="inner">
+                <p style="font-size:6em;line-height:1em;">This is popup 2, styled explicitly to test what happens when the content of the popup is overly tall.</p>
+            </div>
+        </div>
+
+        <div class="popup" data-id="3">
+            <a href="#" class="js-closepopup">close</a>
+            <div class="inner">
+                <p>This is popup 3, set to fixed position to scroll with the page</p>
+            </div>
+        </div>
+
+        <div class="popup" data-id="4">
+            <a href="#" class="js-closepopup">close</a>
+            <div class="inner">
+                <p style="font-size:6em;line-height:1em;">This is popup 5, styled explicitly to test what happens when the content of the popup is overly tall.</p>
             </div>
         </div>
 
@@ -935,14 +1008,16 @@
     <script type="text/javascript">
         /* credit to Katrin Kerber for much of this useful js */
         $(document).ready(function() {
-            var $sections = $('#stylesections').find('section[id]:not(.tab-content)');
-            var $links    = $('#stylenav').find('ul a');
+            var $sections = $('#stylesections').find('section[id]:not(.tab-content)'),
+                $links    = $('#stylenav').find('ul a');
 
             if(window.location.hash) {
-                $sections.hide();
-                $('#stylesections').find('> section' + window.location.hash).show();
-                $('#stylenav').find('a[href="' + window.location.hash + '"]').addClass('active');
-                $('html,body').scrollTop(0);
+                if(window.location.hash != '#all'){
+                    $sections.hide();
+                    $('#stylesections').find('> section' + window.location.hash).show();
+                    $('#stylenav').find('a[href="' + window.location.hash + '"]').addClass('active');
+                    $('html,body').scrollTop(0);
+                }
             }
             else {
                 $sections.hide();
@@ -950,17 +1025,22 @@
                 $('#stylenav li:first-child a').addClass('active');
             }
 
-            $links.click(function(){
-            var $this  = $(this);
-            var target = $(this).attr('href');
+            $links.click(function(e){
+                e.preventDefault();
+                var $this  = $(this),
+                    target = $this.attr('href');
 
-            window.location.hash = target;
+                window.location.hash = target;
 
-            $links.not(this).removeClass('active');
-            $sections.hide();
-            $this.addClass('active');
-            $('section' +target).fadeIn(500);
-                return false;
+                $links.not(this).removeClass('active');
+                $this.addClass('active');
+                if(target != '#all'){
+                    $sections.hide();
+                    $('section' +target).fadeIn(500);
+                }
+                else {
+                    $sections.show();
+                }
             });
 
             $('#shownav').click(function(e){
