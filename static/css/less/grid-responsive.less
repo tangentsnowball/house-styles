@@ -1,15 +1,27 @@
 /* --responsive grid */
 
-    .row {
+    .row,
+    .row.fixedspacing {
         [class*="span"] {
             float:none;
             width:auto;
             margin-left:0;
+            padding:0;
         }
-        [class*="offset"] { 
+        [class*="offset"] {
             margin-left:0;
             &:first-child {
                 margin-left:0;
             }
+        }
+        .row {
+            margin:0;
+        }
+    }
+    
+    .row.reverselayout {
+        [class*="span"] {
+            float:none;
+            margin:0;
         }
     }

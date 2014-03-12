@@ -26,7 +26,8 @@
         #stylenav .active {font-style:italic;}
         #shownav {position:fixed;top:0;left:0;padding:5px;background:#DDDDDD;font-size:80%;text-decoration:none;font-weight:bold;}
         #grid .row [class^="span"] { margin-bottom:5px; background:#EFEFEF; box-shadow:0 0 1px green inset; }
-        #grid .row [class^="span"] .row [class^="span"] { background:#DDDDDD; }
+        #grid .row [class^="span"] .row [class^="span"] { font-size:90%; background:#DDDDDD; }
+        #grid .row [class^="span"] .row [class^="span"] .row [class^="span"] { background:#EEEEEE; }
         .fillin {padding:0 0.5em;border:solid 1px #d2488f;background:#d2a5bc;color:#FFFFFF;font-style:italic;}
         section {padding-bottom:150px;}
     </style>
@@ -242,49 +243,7 @@
 &lt;/div&gt;
 </code></pre>
 
-                    <h2>Grid within grid</h2>
-                    <p>Grid within a grid works as normal grid, except that it scales down i.e. any grid column that contains another grid is made up of the same number columns as the top level grid, as shown.</p>
-
-                    <div class="row">
-                        <div class="span8">.span8</div>
-                        <div class="span4">.span4</div>
-                    </div>
-                    <div class="row">
-                        <div class="span8">
-                            <div class="row">
-                                <div class="span4">.span4</div>
-                                <div class="span4">.span4</div>
-                                <div class="span4">.span4</div>
-                            </div>
-                        </div>
-                        <div class="span4">
-                            <div class="row">
-                                <div class="span4">.span4</div>
-                                <div class="span4">.span4</div>
-                                <div class="span4">.span4</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <h3>Code</h3>
-<pre class="language-markup clear"><code>
-&lt;div class="row"&gt;
-    &lt;div class="span8"&gt;
-        &lt;div class="row"&gt;
-            &lt;div class="span8"&gt;.span8&lt;/div&gt;
-            &lt;div class="span4"&gt;.span4&lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="span4"&gt;
-        &lt;div class="row"&gt;
-            &lt;div class="span4"&gt;.span4&lt;/div&gt;
-            &lt;div class="span4"&gt;.span4&lt;/div&gt;
-            &lt;div class="span4"&gt;.span4&lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-</code></pre>
-
+                    <h2>Indents</h2>
                     <p>The grid also has indent classes that can be applied for more complex layouts.</p>
                     <div class="row example">
                         <div class="span1">.span1</div>
@@ -343,6 +302,158 @@
     &lt;div class="span1 offset1"&gt;.span1&lt;/div&gt;
 &lt;/div&gt;
 </code></pre>
+
+
+                    <h2>Grid within grid</h2>
+                    <p>Grid within a grid works as normal grid, except that it scales down i.e. any grid column that contains another grid is made up of the same number columns as the top level grid, as shown.</p>
+
+                    <div class="row">
+                        <div class="span8">.span8</div>
+                        <div class="span4">.span4</div>
+                    </div>
+                    <div class="row">
+                        <div class="span8">
+                            <div class="row">
+                                <div class="span4">.span4</div>
+                                <div class="span4">.span4</div>
+                                <div class="span4">.span4</div>
+                            </div>
+                        </div>
+                        <div class="span4">
+                            <div class="row">
+                                <div class="span4">.span4</div>
+                                <div class="span4">.span4</div>
+                                <div class="span4">.span4</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="span8">
+                            <div class="row">
+                                <div class="span4">
+                                    <div class="row">
+                                        <div class="span6">.span6</div>
+                                        <div class="span6">.span6</div>
+                                    </div>
+                                </div>
+                                <div class="span4">.span4</div>
+                                <div class="span4">.span4</div>
+                            </div>
+                        </div>
+                        <div class="span4">
+                            <div class="row">
+                                <div class="span4">.span4</div>
+                                <div class="span4">.span4</div>
+                                <div class="span4">.span4</div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <h3>Code</h3>
+<pre class="language-markup clear"><code>
+&lt;div class="row"&gt;
+    &lt;div class="span8"&gt;
+        &lt;div class="row"&gt;
+            &lt;div class="span8"&gt;.span8&lt;/div&gt;
+            &lt;div class="span4"&gt;.span4&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="span4"&gt;
+        &lt;div class="row"&gt;
+            &lt;div class="span4"&gt;.span4&lt;/div&gt;
+            &lt;div class="span4"&gt;.span4&lt;/div&gt;
+            &lt;div class="span4"&gt;.span4&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+                    <h2>Grid within grid, fixed spacing</h2>
+                    <p>The grid is based on percentages, including the space between grid columns. This means that a grid row within a grid row will have a narrower gap between columns because the same percentage of a narrower column is smaller (see above example).</p>
+                    <p>For grids that must maintain a fixed column spacing, the <code>.fixedspacing</code> class can be applied to the parent grid row. This will ensure that the spacing between columns remains consistent even for nested grids.</p>
+                    <p>This approach is considerably more limiting as the fixed column spacing must be split between the left and right of each column, meaning that the first left column will not align perfectly left as in the regular grid. e.g. if the column spacing is 20px, each column receives 10px of padding to the left and right.</p>
+                    <p>Grid indents can also be applied to the fixed spaced grid as normal.</p>
+
+                    <div class="row fixedspacing">
+                        <div class="span8">.span8</div>
+                        <div class="span4">.span4</div>
+                    </div>
+                    <div class="row fixedspacing">
+                        <div class="span8">
+                            <div class="row">
+                                <div class="span4">.span4</div>
+                                <div class="span4">.span4</div>
+                                <div class="span1">.span1</div>
+                                <div class="span3">.span3</div>
+                            </div>
+                        </div>
+                        <div class="span4">
+                            <div class="row">
+                                <div class="span4">.span4</div>
+                                <div class="span4">.span4</div>
+                                <div class="span4">.span4</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row fixedspacing">
+                        <div class="span8">
+                            <div class="row">
+                                <div class="span4">
+                                    <div class="row">
+                                        <div class="span6">.span6</div>
+                                        <div class="span6">.span6</div>
+                                    </div>
+                                </div>
+                                <div class="span4">.span4</div>
+                                <div class="span3 offset1">.span3 .offset1</div>
+                            </div>
+                        </div>
+                        <div class="span4">
+                            <div class="row">
+                                <div class="span4">.span4</div>
+                                <div class="span4">.span4</div>
+                                <div class="span4">.span4</div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <h2>Reverse layout</h2>
+                    <p>When collapsed into a single column the grid translates left to right into top to bottom, meaning that the first column in a row will appear above the second column, and so forth.</p>
+                    <p>For some layouts, this approach is not suited. Where this approach should be reversed, apply the <code>.reverselayout</code> class to the parent row, and reverse the order of the elements in the page, as shown.</p>
+                    <p>Reverse layout can also be applied to the fixed spaced grid.</p>
+
+                    <div class="row reverselayout">
+                        <div class="span4">
+                            <p>This column appears on the right at full size, but first when collapsed.</p>
+                        </div>
+                        <div class="span4">
+                            <p>This column occurs in the middle.</p>
+                        </div>
+                        <div class="span4">
+                            <p>This column appears on the left at full size, but last when collapsed.</p>
+                        </div>
+                    </div>
+
+
+                    <h3>Code</h3>
+<pre class="language-markup clear"><code>
+&lt;div class="row reverselayout"&gt;
+    &lt;div class="span4"&gt;
+        &lt;p&gt;This column appears on the right at full size, but first when collapsed.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="span4"&gt;
+        &lt;p&gt;This column occurs in the middle.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="span4"&gt;
+        &lt;p&gt;This column appears on the left at full size, but last when collapsed.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+
+
                 </section>
 
 
