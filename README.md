@@ -7,7 +7,7 @@ Due to increasing use of bootstrap 2 for some projects this CSS uses bootstrap c
 
 LESS is divided into files for each element type or related group of element types. For example, form elements are in forms.less. Some more specific information:
 
-- global variables such as colours and responsive breakpoints are kept in variables.less. Specific variables such as form variables should be placed at the top of the relevant LESS file.
+- global variables such as colours and responsive breakpoints are kept in variables.less. Specific variables such as form variables should be placed at the top of the relevant LESS file, unless also required for responsive styles (see below).
 - browser specific styles should go at the bottom of the relevant LESS file.
 - grid.less contains a grid generator. Set the variables at the top of the file for the required page width, number of columns and column spacing.
 - responsive styles should be kept in a element-responsive.less file, e.g. grid-responsive.less. These files are then compiled into a separate stylesheet, styles-responsive, which is included using a media query in the HEAD element and can also be specifically served to older browsers.
