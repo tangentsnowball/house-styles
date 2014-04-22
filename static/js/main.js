@@ -32,7 +32,7 @@ $(function() {
                 var parentel = $(this).closest('.nav');
                 parentel.find('li').removeClass('active');
                 $(this).parent().addClass('active');
-                $(tab).closest('.tabwrapper').find('.tabpane').removeClass('active');
+                $(tab).closest('.tabwrapper').children('.tabpane').removeClass('active');
                 $(tab).addClass('active');
             }
         });
