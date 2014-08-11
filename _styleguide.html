@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="static/styleguide/prism.css"/>
     <link rel="stylesheet" media="screen and (min-width:0) and (max-width:767px)" href="static/css/styles-responsive.css"/>
     <!--[if lt IE 8 ]>
-        <link rel="stylesheet" type="text/css" href="static/css/mobile-styles.css"/>
+        <link rel="stylesheet" type="text/css" href="static/css/styles-responsive.css"/>
     <![endif]-->
 
     <link rel="shortcut icon" href="/favicon.ico">
@@ -43,6 +43,14 @@
 <!--[if IE 8 ]>					<body class="iex ie8"> <![endif]-->
 <!--[if IE 9 ]>					<body class="ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!-->	<body> <!--<![endif]-->
+
+<header class="header">
+    <div class="container">
+        <h1>styleguide</h1>
+    </div>
+</header>
+
+<main class="main">
     <div class="container">
 
         <div class="row">
@@ -68,10 +76,9 @@
             </div>
             <a href="#" id="shownav">Show menu</a>
         </div>
-        
+
         <div class="row">
             <div class="col12" id="stylesections">
-                <h1>styleguide</h1>
 
                 <section id="overview">
                     <h2>Overview</h2>
@@ -839,6 +846,14 @@
 
                 <section id="javascript">
                     <h2>Plugins and JavaScript</h2>
+                    <h3>Class naming and use conventions</h3>
+                    <p>All code on the site should adhere to the following convention for class naming and use with regard to JavaScript.</p>
+                    <ol class="standard">
+                        <li>IDs should only be used for JavaScript, not for styling.</li>
+                        <li>Any class used for JavaScript should be prefixed with "js-" and not have any styles associated with it.</li>
+                        <li>JavaScript can also be activated through the use of the data attribute on elements.</li>
+                    </ol>
+
                     <p>
                         <span class="fillin">
                             Note that the JS included with the house styles is meant as a starting point only. In its current form, the JS is in places inefficient or even inappropriate depending on how it will be used, and you are advised to tailor it specifically to your needs.
@@ -997,6 +1012,10 @@
         </div>
 
     </div>
+</main>
+
+<footer class="footer">
+</footer>
 
     <!-- Grab Google-hosted jQuery. Fall back to locally saved file if necessary. -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
