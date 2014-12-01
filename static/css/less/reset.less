@@ -8,9 +8,19 @@
     li,
     dl,
     dt,
-    dd {
+    dd,
+    button,
+    input,
+    address {
         padding:0px;
         margin:0px;
+        border:0;
+        background:none;
+        font-style:normal;
+        outline:0;
+    }
+    button {
+        -webkit-appearance: none;
     }
 
     li {
@@ -31,8 +41,11 @@
         display:block;
     }
 
-    //fixing firefox button sizing inconsistency
+    //fixing firefox sizing inconsistencies
+    input::-moz-focus-inner,
+    select::-moz-focus-inner,
+    textarea::-moz-focus-inner,
     button::-moz-focus-inner{
         padding:0;
-        border:none;
+        border:0;
     }
