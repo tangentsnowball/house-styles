@@ -1,0 +1,18 @@
+{
+  "name": "tangent-housestyles-grunt",
+  "version": "0.1.0",
+  "description": "Grunt capabilities for Tangent Snowballs house styles",
+  "author": "Ashley Firth <ashley.firth@tangentsnowball.com>",
+  "repository" : {
+  	"type": "git",
+  	"url": "https://github.com/tangentsnowball/house-styles.git"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "matchdep": "~0.1.2",
+    "grunt-express": "~1.0.0-beta2",
+    "grunt-contrib-watch": "~0.5.1",
+    "grunt-contrib-less": "^1.0.0",
+    "grunt-open": "~0.2.1"
+  }
+}
