@@ -1,14 +1,7 @@
 /*== GRID GENERATOR ==*/
 
-/* grid variables and calculation */
-    @gridWidth: 1024px; //set to maximum page width required
-    @gridSpacing: 20; //spacing between columns required
-    @numCols: 12; //number of columns required
-    @fixedspacing: 20px; //used for fixed spacing grid
-
-    @percentColGutter: percentage(@gridSpacing / @gridWidth);
-    @percentColWidth: percentage(((@gridWidth - (@gridSpacing * (@numCols - 1))) / @numCols) / @gridWidth);
-    @fixedColWidth: percentage((@gridWidth / @numCols) / @gridWidth);
+/* grid calculation mixins */
+    /* grid variables now stored in variables.less */
 
     /* indent calculation mixin */
     .offset(@multiply, @add:0){
@@ -20,8 +13,14 @@
         margin-left:(@fixedColWidth * @multiply);
     }
 
+    /* reverse indent - works in reverse, unsurprisingly */
+    .reverseOffset(@multiply, @add:0){
+        margin-right:(@percentColWidth * @multiply) + (@percentColGutter * @multiply) + (@percentColGutter * @add);
+    }
+
 
 /* base grid styles */
+    /* IE8 will ignore border box when max/min width applied, solution is to create a wrapper for container and give that the max width and margin below */
     .container {
         margin:0 auto;
         padding:0 10px;
@@ -107,9 +106,10 @@
         &.reverselayout {
             [class*="span"] {
                 float:right;
-                margin-left:@percentColGutter;
-                &:last-child {
-                    margin-left:0;
+                margin-right:@percentColGutter;
+                margin-left:0;
+                &:first-child {
+                    margin-right:0;
                 }
             }
 
@@ -117,9 +117,9 @@
             @reverseIndentIterations: @numCols - 1;
             .reverseIndentLoopingClass(@reverseIndentIndex) when (@reverseIndentIndex > 0){
                 .offset@{reverseIndentIndex}{
-                    .offset(@reverseIndentIndex,1);
-                    &:last-child {
-                        .offset(@reverseIndentIndex);
+                    .reverseOffset(@reverseIndentIndex,1);
+                    &:first-child {
+                        .reverseOffset(@reverseIndentIndex);
                     }
                 }
                 .reverseIndentLoopingClass(@reverseIndentIndex - 1);

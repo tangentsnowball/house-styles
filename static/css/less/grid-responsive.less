@@ -17,6 +17,27 @@
         .row {
             margin:0;
         }
+        
+        /* non-collapsing grid */
+        &.fix {
+            [class*="span"] {
+                float:left;
+                margin-left:@percentColGutter;
+                &:first-child {
+                    margin-left:0;
+                }
+            }
+            /* build all the columns */
+            @fixIterations: @numCols;
+            .fixLoopingClass(@fixIndex) when (@fixIndex > 0){
+                .span@{fixIndex}{
+                    width:@percentColWidth * @fixIndex + (@percentColGutter * (@fixIndex - 1));
+                }
+                .fixLoopingClass(@fixIndex - 1);
+            }
+            .fixLoopingClass(0){}
+            .fixLoopingClass(@fixIterations);
+        }
     }
     
     .row.reverselayout {
