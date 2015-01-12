@@ -41,5 +41,18 @@ Please follow these rules.
 
 - Don't use !important
 - Don't use IDs for styling, only classes
-- Don't use the * rule to apply a style to all elements, and avoid styling base elements such as DIV or LI
+- Don't use the * rule to apply a style to all elements, and avoid styling base elements such as DIV or LI  
+
+Use of Grunt
+------------  
+
+There is a standard Grunt installation within this repository to make rapid prototyping much quicker for the house styles. All you need to do is:  
+* Install Node & Grunt (http://gruntjs.com/getting-started)  
+* Run `npm install`  
+This will install all the Grunt dependences (The node_modules folder that is generated when you run this command should be created on a case-by-case basis and not pushed to a repository)  
+* Run `grunt server`  
+  
+This will open up a tab in your browser, running a server at `localhost:9000`. It will also be watching for any changes to the HTML, JS, and LESS files and will:  
+* Compile & compress CSS files  
+* Reload the page  
 
