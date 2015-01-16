@@ -51,7 +51,7 @@ module.exports = function(grunt) {
       },
       js : {
         files: ['static/js/*.js']
-      }
+      },
       options: {
         livereload: true
       }
@@ -72,4 +72,5 @@ module.exports = function(grunt) {
     'open',
     'watch'
   ]);
+  grunt.registerTask('default', ["server"]);
 };
