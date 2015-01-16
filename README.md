@@ -50,7 +50,7 @@ There is a standard Grunt installation within this repository to make rapid prot
 * Install Node & Grunt (http://gruntjs.com/getting-started)  
 * Run `npm install`  
 This will install all the Grunt dependences (The node_modules folder that is generated when you run this command should be created on a case-by-case basis and not pushed to a repository)  
-* Run `grunt server`  
+* Run `grunt`  
   
 This will open up a tab in your browser, running a server at `localhost:9000`. It will also be watching for any changes to the HTML, JS, and LESS files and will:  
 * Compile & compress CSS files  
