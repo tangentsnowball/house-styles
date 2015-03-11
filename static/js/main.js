@@ -70,6 +70,12 @@ $(function() {
             popupClose();
         }
     });
+    $('.mask').on('click', function(e) {
+        popupClose();
+    });
+    $('.popup').click(function(event){
+      event.stopPropagation();
+    });
     $('.popup .js-closepopup').click(function(e){
         e.preventDefault();
         popupClose(e);
