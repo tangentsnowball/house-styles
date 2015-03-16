@@ -1,22 +1,7 @@
 /*== GRID GENERATOR ==*/
 
-/* grid calculation mixins */
-    /* grid variables now stored in variables.less */
-
-    /* indent calculation mixin */
-    .offset(@multiply, @add:0){
-        margin-left:(@percentColWidth * @multiply) + (@percentColGutter * @multiply) + (@percentColGutter * @add);
-    }
-
-    /* fixed indent calculation mixin */
-    .fixedOffset(@multiply){
-        margin-left:(@fixedColWidth * @multiply);
-    }
-
-    /* reverse indent - works in reverse, unsurprisingly */
-    .reverseOffset(@multiply, @add:0){
-        margin-right:(@percentColWidth * @multiply) + (@percentColGutter * @multiply) + (@percentColGutter * @add);
-    }
+/* grid calculation mixins now stored in mixins.less */
+/* grid variables now stored in variables.less */
 
 
 /* base grid styles */

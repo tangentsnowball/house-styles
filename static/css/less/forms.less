@@ -2,14 +2,19 @@
 
     //note that iphone requires a font-size of 100% set manually on input elements to prevent the 'zoom' problem when focussing
     .form {
+        margin-bottom:20px;
+        
         fieldset {
             border:0;
+        }
+        legend {
+            margin-bottom:@formElementSpacing;
         }
         label,
         .faux_label {
             float:left;
             padding:0 0 @formElementSpacing 0;
-            width:@inputWidth;
+            width:@labelWidth;
             .border-box();
         }
         input[type="text"],
@@ -21,21 +26,22 @@
         select,
         textarea {
             padding:0.3em 0.4em;
-            margin:0 @formelementMargin @formElementSpacing 0;
+            margin:0 0 @formElementSpacing @formElementMargin;
             width:@inputWidth;
             .border-box();
             background:#FFFFFF;
             border:solid 1px #CCCCCC;
-            color:#888888;
-            font-size:90%;
+            color:#000000;
+            font-size:100%;
             font-family:Arial,Verdana;
             &:focus {
-                color:#666666;
             }
         }
-        textarea {
+        textarea,
+        select[multiple="multiple"]{
             height:80px;
         }
+
         .errormsg {
             display:none;
             .border-box();
@@ -43,14 +49,19 @@
             font-size:90%;
         }
         .helptext {
-            float:right;
+            display:block;
             width:@helpWidth;
-            color:#AAAAAA;
-            font-size:90%;
+            margin-left:@labelWidth + @formElementMargin;
+        }
+        
+        .buttons {
+            padding-left:@labelWidth + @formElementMargin;
         }
 
         .field {
             padding-bottom:@formElementSpacing * 2;
+            .clearfix();
+            
             &.error {
                 input[type="text"],
                 input[type="number"],
@@ -70,12 +81,13 @@
                 position:relative;
                 label {
                     position:relative;
+                    width:100%;
                     padding-left:30px;
                 }
                 input[type="checkbox"],
                 input[type="radio"]{
                     position:absolute;
-                    top:0;
+                    top:3px;
                     left:5px;
                 }
                 .errormsg {
@@ -86,7 +98,13 @@
                     label {
                         float:left;
                         width:auto;
+                        margin-right:1em;
                     }
+                }
+            }
+            &.required {
+                label:after {
+                    content:" *";
                 }
             }
         }
