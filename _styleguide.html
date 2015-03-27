@@ -66,9 +66,9 @@
                     <li><a href="#buttons">Buttons</a></li>
                     <li><a href="#icons">Icons</a></li>
                     <li><a href="#supporting">Supporting classes</a></li>
-                    <li><a href="#alerts">Alerts</a></li>
                     <li><a href="#javascript">Plugins and JS</a></li>
                     <li>Specific elements</li>
+                    <li><a href="#alerts">Alerts</a></li>
                     <li><a href="#tabs">Tabs</a></li>
                     <li><a href="#popups">Popups</a></li>
                     <li><a href="#all">Show all</a></li>
@@ -479,100 +479,180 @@
                 <section id="forms">
                     <h2>Forms</h2>
                     <p>Form styles are controlled through the <code>.form</code> parent class on a form.</p>
+
+                    <h3>Regular inputs</h3>
                     <form class="form" action="POST">
                         <fieldset>
-                            <!-- text field -->
-                            <div class="field clearfix">
+                            <div class="field">
                                 <label for="text1">This is a text field</label>
-                                <span class="helptext">This is some help text that has been put here to be helpful</span>
                                 <input type="text" id="text1"/>
-                            </div>
-                            <div class="field clearfix error">
-                                <label for="text2">This is a text field with an error</label>
-                                <span class="helptext">This is some help text that has been put here</span>
-                                <input type="text" id="text2"/>
-                                <span class="errormsg">This field is required</span>
+                                <span class="helptext">This is some help text that has been put here to be helpful</span>
                             </div>
 
-                            <!-- textarea -->
-                            <div class="field clearfix">
+                            <div class="field">
                                 <label for="textarea1">This is a textarea</label>
-                                <span class="helptext">This is some help text that has been put here to be helpful</span>
                                 <textarea id="textarea1"></textarea>
-                            </div>
-                            <div class="field error clearfix">
-                                <label for="textarea2">This is a textarea with an error</label>
                                 <span class="helptext">This is some help text that has been put here to be helpful</span>
-                                <textarea id="textarea2"></textarea>
-                                <span class="errormsg">This field is required</span>
                             </div>
 
-                            <!-- select -->
-                            <div class="field clearfix">
+                            <div class="field">
                                 <label for="select1">This is a select</label>
-                                <span class="helptext">This is some help text that has been put here to be helpful</span>
                                 <select id="select1">
                                     <option>Please choose</option>
                                     <option>Option 1</option>
                                     <option>Option 2</option>
                                 </select>
-                            </div>
-                            <div class="field error clearfix">
-                                <label for="select2">This is a select with an error</label>
                                 <span class="helptext">This is some help text that has been put here to be helpful</span>
+                            </div>
+
+                            <div class="field">
+                                <label for="selectm1">This is a select multiple</label>
+                                <select id="selectm1" multiple>
+                                    <option>Option 1</option>
+                                    <option>Option 2</option>
+                                    <option>Option 3</option>
+                                    <option>Option 4</option>
+                                    <option>Option 5</option>
+                                </select>
+                                <span class="helptext">This is some help text that has been put here to be helpful</span>
+                            </div>
+
+                            <div class="field">
+                                <label for="file1">This is a file input</label>
+                                <input type="file" id="file1"/>
+                                <span class="helptext">This is some help text that has been put here to be helpful</span>
+                            </div>
+                            
+                            <div class="buttons">
+                                <button type="submit" class="btn">Submit</button>
+                            </div>
+                        </fieldset>
+                    </form>
+
+                    <h3>Code</h3>
+<pre class="language-markup clear"><code>
+&lt;div class="field"&gt;
+    &lt;label for="text1"&gt;This is a text field&lt;/label&gt;
+    &lt;input type="text" id="text1"/&gt;
+    &lt;span class="helptext"&gt;This is some help text that has been put here to be helpful&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="buttons"&gt;
+    &lt;button type="submit" class="btn"&gt;Submit&lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
+
+                    <h3>Regular inputs with error states</h3>
+                    <p>Add the <code>.required</code> class to a field to make it required. Add the <code>.error</code> class to a field for error states.</p>
+
+                    <form class="form" action="POST">
+                        <fieldset>
+                            <div class="field error required">
+                                <label for="text2">This is a text field</label>
+                                <input type="text" id="text2"/>
+                                <span class="errormsg">This field is required</span>
+                                <span class="helptext">This is some help text that has been put here to be helpful</span>
+                            </div>
+
+                            <div class="field error required">
+                                <label for="textarea2">This is a textarea</label>
+                                <textarea id="textarea2"></textarea>
+                                <span class="errormsg">This field is required</span>
+                                <span class="helptext">This is some help text that has been put here to be helpful</span>
+                            </div>
+
+                            <div class="field error required">
+                                <label for="select2">This is a select</label>
                                 <select id="select2">
                                     <option>Please choose</option>
                                     <option>Option 1</option>
                                     <option>Option 2</option>
                                 </select>
                                 <span class="errormsg">This field is required</span>
+                                <span class="helptext">This is some help text that has been put here to be helpful</span>
                             </div>
-                            <!-- file -->
-                            <div class="field clearfix">
-                                <label for="file1">This is a file input</label>
-                                <input type="file" id="file1"/>
+
+                            <div class="field error required">
+                                <label for="selectm2">This is a select multiple</label>
+                                <select id="selectm2" multiple>
+                                    <option>Option 1</option>
+                                    <option>Option 2</option>
+                                    <option>Option 3</option>
+                                    <option>Option 4</option>
+                                    <option>Option 5</option>
+                                </select>
+                                <span class="errormsg">This field is required</span>
+                                <span class="helptext">This is some help text that has been put here to be helpful</span>
                             </div>
-                            <div class="field clearfix error">
+
+                            <div class="field error required">
                                 <label for="file2">This is a file input</label>
                                 <input type="file" id="file2"/>
                                 <span class="errormsg">This field is required</span>
+                                <span class="helptext">This is some help text that has been put here to be helpful</span>
                             </div>
 
-                            <p>Checkboxes and radio buttons are controlled by the same parent class, plus additional classes for layout variations. Note also that the layouts allow for both input in the label and input beside the label (input beside will only work for single input per field).</p>
+                            <div class="buttons">
+                                <button type="submit" class="btn">Submit</button>
+                            </div>
+                        </fieldset>
+                    </form>
+                    
+                    <h3>Code</h3>
+<pre class="language-markup clear"><code>
+&lt;div class="field error"&gt;
+    &lt;label for="text1"&gt;This is a text field&lt;/label&gt;
+    &lt;input type="text" id="text1"/&gt;
+    &lt;span class="errormsg"&gt;This field is required&lt;/span&gt;
+    &lt;span class="helptext"&gt;This is some help text that has been put here to be helpful&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="buttons"&gt;
+    &lt;button type="submit" class="btn"&gt;Submit&lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
 
+
+                    <h3>Checkboxes</h3>
+                    <p>Checkboxes and radio buttons are controlled by the same parent class, plus additional classes for layout variations. Note also that the layouts allow for both input in the label and input beside the label (input beside will only work for single input per field).</p>
+
+                    <form class="form" action="POST">
+                        <fieldset>
                             <!-- checkbox -->
-                            <div class="field radiocheck clearfix">
+                            <div class="field radiocheck">
                                 <label for="cb1">This is a checkbox</label>
                                 <input type="checkbox" id="cb1"/>
                             </div>
-                            <div class="field radiocheck clearfix">
+                            <div class="field radiocheck">
                                 <label>
                                     <input type="checkbox" id="cb2"/>
                                     This is a checkbox where the input is inside the label
                                 </label>
                             </div>
-                            <div class="field radiocheck error clearfix">
+                            <div class="field radiocheck error">
                                 <label for="cb3">This is a checkbox with an error</label>
                                 <input type="checkbox" id="cb3"/>
                                 <span class="errormsg">This field is required</span>
                             </div>
-                            <div class="field radiocheck clearfix horizontal error">
+                            <div class="field radiocheck horizontal error">
                                 <span class="faux_label">Are these checkboxes?</span>
                                 <span class="helptext">The additional class of <code>.horizontal</code> is applied here. This might only work where the label text is short</span>
                                 <label><input type="checkbox" name="cb4"/>Yes</label>
                                 <label><input type="checkbox" name="cb5"/>No</label>
                                 <label><input type="checkbox" name="cb6"/>Maybe</label>
                             </div>
+                        </fieldset>
+                        
+                        <h3>Radio buttons</h3>
 
+                        <fieldset>
                             <!-- radio -->
-                            <div class="field radiocheck clearfix error">
+                            <div class="field radiocheck error">
                                 <span class="faux_label">These are some radio buttons</span>
                                 <label><input type="radio" name="rad1"/>This is a radio button</label>
                                 <label><input type="radio" name="rad1"/>This is a radio button</label>
                                 <label><input type="radio" name="rad1"/>This is a radio button</label>
                                 <span class="errormsg">This field is required</span>
                             </div>
-                            <div class="field radiocheck clearfix horizontal error">
+                            <div class="field radiocheck horizontal error">
                                 <span class="faux_label">Are these radio buttons?</span>
                                 <span class="helptext">The additional class of <code>.horizontal</code> is applied here. This might only work where the label text is short</span>
                                 <label><input type="radio" name="rad2"/>Yes</label>
@@ -587,13 +667,13 @@
 <pre class="language-markup clear"><code>
 &lt;form class="form" action=""&gt;
     &lt;fieldset&gt;
-        &lt;div class="field clearfix"&gt;
+        &lt;div class="field"&gt;
             &lt;label for="text"&gt;Text field&lt;/label&gt;
             &lt;span class="helptext"&gt;Help text, optional&lt;/span&gt;
             &lt;input type="text" id="text"/&gt;
             &lt;span class="errormsg"&gt;Error, only visible if parent has error class&lt;/span&gt;
         &lt;/div&gt;
-        &lt;div class="field clearfix error"&gt;
+        &lt;div class="field error"&gt;
             &lt;label for="text"&gt;Text field&lt;/label&gt;
             &lt;span class="helptext"&gt;Help text, optional&lt;/span&gt;
             &lt;input type="text" id="text"/&gt;
@@ -822,6 +902,25 @@
                 </section>
 
 
+
+                <section id="javascript">
+                    <h2>Plugins and JavaScript</h2>
+                    <h3>Class naming and use conventions</h3>
+                    <p>All code on the site should adhere to the following convention for class naming and use with regard to JavaScript.</p>
+                    <ol class="standard">
+                        <li>IDs should only be used for JavaScript, not for styling.</li>
+                        <li>Any class used for JavaScript should be prefixed with "js-" and not have any styles associated with it.</li>
+                        <li>JavaScript can also be activated through the use of the data attribute on elements.</li>
+                    </ol>
+
+                    <p>
+                        <span class="fillin">
+                            Note that the JS included with the house styles is meant as a starting point only. In its current form, the JS is in places inefficient or even inappropriate depending on how it will be used, and you are advised to tailor it specifically to your needs.
+                        </span>
+                    </p>
+                </section>
+
+
                 <section id="alerts">
                     <h2>Alerts</h2>
                     <p>Controlled with the <code>.alert</code> class, with an optional class to control type.</p>
@@ -854,24 +953,8 @@
 &lt;/div&gt;
 </code></pre>
                 </section>
-
-
-                <section id="javascript">
-                    <h2>Plugins and JavaScript</h2>
-                    <h3>Class naming and use conventions</h3>
-                    <p>All code on the site should adhere to the following convention for class naming and use with regard to JavaScript.</p>
-                    <ol class="standard">
-                        <li>IDs should only be used for JavaScript, not for styling.</li>
-                        <li>Any class used for JavaScript should be prefixed with "js-" and not have any styles associated with it.</li>
-                        <li>JavaScript can also be activated through the use of the data attribute on elements.</li>
-                    </ol>
-
-                    <p>
-                        <span class="fillin">
-                            Note that the JS included with the house styles is meant as a starting point only. In its current form, the JS is in places inefficient or even inappropriate depending on how it will be used, and you are advised to tailor it specifically to your needs.
-                        </span>
-                    </p>
-                </section>
+                
+                
 
                 <section id="tabs">
                     <h2>Tabs</h2>

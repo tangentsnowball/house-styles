@@ -107,19 +107,57 @@
     }
 
 	/* --box sizing */
-    	.border-box {
-    		-moz-box-sizing   : border-box;
-    		-webkit-box-sizing: border-box;
-    		-ms-box-sizing    : border-box;
-    		box-sizing        : border-box;
-    		// < IE7 fallback
-    		*behavior: url('static/css/boxsizing.htc'); //must be set per-project
-    	}
-    	.content-box {
-    		-moz-box-sizing   : content-box;
-    		-webkit-box-sizing: content-box;
-    		-ms-box-sizing    : content-box;
-    		box-sizing        : content-box;
-    		*behavior         : none;
-    	}
+	.border-box {
+		-moz-box-sizing   : border-box;
+		-webkit-box-sizing: border-box;
+		-ms-box-sizing    : border-box;
+		box-sizing        : border-box;
+		// < IE7 fallback
+		*behavior: url('static/css/boxsizing.htc'); //must be set per-project
+	}
+	.content-box {
+		-moz-box-sizing   : content-box;
+		-webkit-box-sizing: content-box;
+		-ms-box-sizing    : content-box;
+		box-sizing        : content-box;
+		*behavior         : none;
+	}
 
+
+    /* GRID MIXINS - used to construct the grid */
+    /* indent calculation mixin */
+    .offset(@multiply, @add:0){
+        margin-left:(@percentColWidth * @multiply) + (@percentColGutter * @multiply) + (@percentColGutter * @add);
+    }
+
+    /* fixed indent calculation mixin */
+    .fixedOffset(@multiply){
+        margin-left:(@fixedColWidth * @multiply);
+    }
+
+    /* reverse indent - works in reverse, unsurprisingly */
+    .reverseOffset(@multiply, @add:0){
+        margin-right:(@percentColWidth * @multiply) + (@percentColGutter * @multiply) + (@percentColGutter * @add);
+    }
+
+
+    /* make an element invisible to sighted users but still visible to screen readers */
+    /* http://webaim.org/techniques/css/invisiblecontent/ */
+    .invisible,
+    .totallyinvisible {
+        position:absolute;
+        left:-100000px;
+        width:1px;
+        height:1px;
+        overflow:hidden;
+        outline:0;
+
+    }
+
+    .invisible {
+        &:focus {
+            position:static;
+            width:auto;
+            height:auto;
+        }
+    }

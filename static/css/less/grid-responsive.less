@@ -37,6 +37,20 @@
             }
             .fixLoopingClass(0){}
             .fixLoopingClass(@fixIterations);
+            
+            /* build all the indents - need to use new variables for this loop */
+            @indentIterations: @numCols - 1;
+            .indentLoopingClass(@indentIndex) when (@indentIndex > 0){
+                .offset@{indentIndex}{
+                    .offset(@indentIndex,1);
+                    &:first-child {
+                        .offset(@indentIndex);
+                    }
+                }
+                .indentLoopingClass(@indentIndex - 1);
+            }
+            .indentLoopingClass(0){}
+            .indentLoopingClass(@indentIterations);            
         }
     }
     
