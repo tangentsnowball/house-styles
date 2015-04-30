@@ -40,6 +40,17 @@ module.exports = function(grunt) {
         }
     },
 
+    uglify: {
+      options: {
+        mangle: false
+      },
+      my_target: {
+        files: {
+          'static/js/dist/main.min.js': ['static/js/main.js']
+        }
+      }
+    },
+
     // grunt-watch will monitor the projects files
     watch: {
       less : {
@@ -50,7 +61,8 @@ module.exports = function(grunt) {
         files: ['*.html']
       },
       js : {
-        files: ['static/js/*.js']
+        files: ['static/js/*.js'],
+        tasks: ['uglify']
       },
       options: {
         livereload: true
