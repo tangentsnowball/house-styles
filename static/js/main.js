@@ -66,7 +66,7 @@ $(function() {
         $target.fadeIn().addClass('js-enabledpopup');
     });
     $('body').on('keyup', function(e) {
-        if(e.keyCode == 27) {
+        if(e.keyCode === 27) {
             popupClose();
         }
     });
