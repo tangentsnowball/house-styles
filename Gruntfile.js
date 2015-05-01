@@ -6,7 +6,8 @@ module.exports = function(grunt) {
 
   var fs = require('fs');
   var path = require('path');
-   
+  
+  /* Custom function for checking newer for saved less files that import to other less files */
   function checkForNewerImports(lessFile, mTime, include) {
       fs.readFile(lessFile, "utf8", function(err, data) {
           var lessDir = path.dirname(lessFile),
@@ -30,9 +31,14 @@ module.exports = function(grunt) {
       });
   }
 
+  var config = {
+    dev: 'static',
+    dist: 'static/dist'
+  }
+
   // Configure Grunt 
   grunt.initConfig({
-
+    config: config,
 
     // grunt-express will serve the files from the folders listed in `bases`
     // on specified `port` and `hostname`
@@ -60,8 +66,8 @@ module.exports = function(grunt) {
             },
             files: {
               /*Target - Destination*/
-              "static/css/styles.css": "static/css/less/styles.less",
-              "static/css/styles-responsive.css": "static/css/less/styles-responsive.less"
+              "<%= config.dev %>/css/styles.css": "<%= config.dev %>/css/less/styles.less",
+              "<%= config.dev %>/css/styles-responsive.css": "<%= config.dev %>/css/less/styles-responsive.less"
             }
         }
     },
@@ -72,7 +78,7 @@ module.exports = function(grunt) {
       },
       all: {
         files: {
-          'static/dist/js/main.min.js': ['static/js/main.js']
+          '<%= config.dist %>/js/main.min.js': ['<%= config.dev %>/js/main.js']
         }
       }
     },
@@ -93,14 +99,14 @@ module.exports = function(grunt) {
     // grunt-watch will monitor the projects files
     watch: {
       less : {
-        files: ['static/css/less/*.less'],
+        files: ['<%= config.dev %>/css/less/*.less'],
         tasks: ['newer:less']
       },
       html : {
         files: ['*.html']
       },
       js : {
-        files: ['static/js/*.js', '!static/dist/js/*.js'],
+        files: ['<%= config.dev %>/js/*.js', '!<%= config.dist %>/js/*.js'],
         tasks: ['newer:uglify:all']
       },
       options: {
