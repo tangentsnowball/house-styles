@@ -4,6 +4,32 @@ module.exports = function(grunt) {
   // Load Grunt tasks declared in the package.json file
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
+  var fs = require('fs');
+  var path = require('path');
+   
+  function checkForNewerImports(lessFile, mTime, include) {
+      fs.readFile(lessFile, "utf8", function(err, data) {
+          var lessDir = path.dirname(lessFile),
+              regex = /@import "(.+?)(\.less)?";/g,
+              shouldInclude = false,                
+              match;
+   
+          while ((match = regex.exec(data)) !== null) {
+              // All of my less files are in the same directory,
+              // other paths may need to be traversed for different setups...
+              var importFile = lessDir + '/' + match[1] + '.less';
+              if (fs.existsSync(importFile)) {
+                  var stat = fs.statSync(importFile);
+                  if (stat.mtime > mTime) {
+                      shouldInclude = true;
+                      break;
+                  }
+              }
+          }
+          include(shouldInclude);
+      });
+  }
+
   // Configure Grunt 
   grunt.initConfig({
 
@@ -44,25 +70,38 @@ module.exports = function(grunt) {
       options: {
         mangle: false
       },
-      my_target: {
+      all: {
         files: {
-          'static/js/dist/main.min.js': ['static/js/main.js']
+          'static/dist/js/main.min.js': ['static/js/main.js']
         }
       }
+    },
+
+    newer: {
+        options: {
+            override: function(details, include) {
+                if (details.task === 'less') {
+                    checkForNewerImports(details.path, details.time, include);
+                }
+                else {
+                    include(false);
+                }
+            }
+        }
     },
 
     // grunt-watch will monitor the projects files
     watch: {
       less : {
         files: ['static/css/less/*.less'],
-        tasks: ['less']
+        tasks: ['newer:less']
       },
       html : {
         files: ['*.html']
       },
       js : {
-        files: ['static/js/*.js'],
-        tasks: ['uglify']
+        files: ['static/js/*.js', '!static/dist/js/*.js'],
+        tasks: ['newer:uglify:all']
       },
       options: {
         livereload: true
@@ -82,7 +121,8 @@ module.exports = function(grunt) {
   grunt.registerTask('server', [
     'express',
     'open',
-    'watch'
+    'watch',
+    'uglify'
   ]);
   grunt.registerTask('default', ["server"]);
 };
