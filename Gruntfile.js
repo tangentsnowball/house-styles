@@ -113,6 +113,9 @@ module.exports = function(grunt) {
         dev: {
             options: {
                 server: './',
+                //Should you need to hook this up to another server already running, 
+                //replace the line above with:
+                //proxy: "ADDRESS HERE"
                 background: true
             }
         }
