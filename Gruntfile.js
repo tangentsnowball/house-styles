@@ -47,7 +47,7 @@ module.exports = function(grunt) {
       },
       less : {
         files: ['<%= config.dev %>/css/less/*.less'],
-        tasks: ['newer:less', 'autoprefixer:dist', 'bsReload:css']
+        tasks: ['newer:less', 'bsReload:css']
       },
       html : {
         files: ['*.html'],
@@ -95,19 +95,6 @@ module.exports = function(grunt) {
           '<%= config.dist %>/js/main.min.js': ['<%= config.dev %>/js/main.js']
         }
       }
-    },
-
-    autoprefixer: {
-        options: {
-            browsers: ['last 5 versions', 'ie 8', 'ie 9']
-            //Can also set support for browsers with over a certain % of browser share
-            //i.e '> 5%'
-        },
-        dist: { // Target
-          files: {
-            '<%= config.dev %>/css/styles.css': '<%= config.dev %>/css/styles.css'
-          }
-        }
     },
 
     newer: {
