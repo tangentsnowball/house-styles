@@ -40,22 +40,24 @@ module.exports = function(grunt) {
   grunt.initConfig({
     config: config,
 
-    // grunt-express will serve the files from the folders listed in `bases`
-    // on specified `port` and `hostname`
-    express: {
-      all: {
-        options: {
-          port: 9000,
-          hostname: '0.0.0.0',
-          bases: [__dirname], // Replace with the directory you want the files served from
-                              // Make sure you don't use `.` or `..` in the path as Express
-                              // is likely to return 403 Forbidden responses if you do
-                              // http://stackoverflow.com/questions/14594121/express-res-sendfile-throwing-forbidden-error
-          livereload: true
-        }
+    // grunt-watch will monitor the projects files
+    watch: {
+      options: {
+        spawn: false
+      },
+      less : {
+        files: ['<%= config.dev %>/css/less/*.less'],
+        tasks: ['newer:less', 'bsReload:css']
+      },
+      html : {
+        files: ['*.html'],
+        tasks: ['bsReload:all']
+      },
+      js : {
+        files: ['<%= config.dev %>/js/*.js', '!<%= config.dist %>/js/*.js'],
+        tasks: ['newer:jshint', 'newer:uglify:all', 'bsReload:js']
       }
     },
-
     less: {
         development: {
              options: {
@@ -107,41 +109,27 @@ module.exports = function(grunt) {
             }
         }
     },
-
-    // grunt-watch will monitor the projects files
-    watch: {
-      less : {
-        files: ['<%= config.dev %>/css/less/*.less'],
-        tasks: ['newer:less']
-      },
-      html : {
-        files: ['*.html']
-      },
-      js : {
-        files: ['<%= config.dev %>/js/*.js', '!<%= config.dist %>/js/*.js'],
-        tasks: ['newer:jshint', 'newer:uglify:all']
-      },
-      options: {
-        livereload: true
-      }
+    browserSync: {
+        dev: {
+            options: {
+                server: './',
+                background: true
+            }
+        }
     },
-
-    // grunt-open will open your browser at the project's URL
-    open: {
-      all: {
-        // Gets the port from the connect configuration
-        path: 'http://localhost:<%= express.all.options.port%>'
-      }
+    bsReload: {
+        css: {
+            reload: ['styles.css', 'styles-responsive.css']
+        },
+        js: {
+            reload: 'main.min.js'
+        },
+        all: {
+            reload: true
+        }
     }
+
   });
 
-  // Creates the `server` task
-  grunt.registerTask('server', [
-    'express',
-    'open',
-    'watch',
-    'newer:jshint',
-    'uglify'
-  ]);
-  grunt.registerTask('default', ['server']);
+  grunt.registerTask('default', ['browserSync', 'watch', 'newer:jshint', 'uglify']);
 };
