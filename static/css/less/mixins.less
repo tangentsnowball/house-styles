@@ -75,7 +75,7 @@
 	/* --transforms */
     	.transform ( @trans ){
             transform: @trans;
-            ms-transform: @trans;
+            -ms-transform: @trans;
             -moz-tranform: @trans;
             -webkit-transform: @trans;
             -o-transform: @trans;
@@ -112,8 +112,6 @@
 		-webkit-box-sizing: border-box;
 		-ms-box-sizing    : border-box;
 		box-sizing        : border-box;
-		// < IE7 fallback
-		*behavior: url('static/css/boxsizing.htc'); //must be set per-project
 	}
 	.content-box {
 		-moz-box-sizing   : content-box;
