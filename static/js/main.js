@@ -92,5 +92,21 @@ $(function() {
         }
     }
 
+    var queryString = document.getElementsByTagName('link')[1].media,
+        str = queryString,
+        regex = /\d+/g,
+        numbers = str.match(regex);
+
+    $( window ).resize(function() {
+        var width = $( window ).width(),
+            queryText;
+        if(width > numbers[0] && width < numbers[1]) {
+            queryText = 'Responsive';
+        } else {
+            queryText = 'Desktop';
+        }
+        $('.mediaquery').text(queryText);
+    });
+ 
 
 });
