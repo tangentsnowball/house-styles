@@ -52,7 +52,16 @@ There is a standard Grunt installation within this repository to make rapid prot
 This will install all the Grunt dependences (The node_modules folder that is generated when you run this command should be created on a case-by-case basis and not pushed to a repository)  
 * Run `grunt`  
   
-This will open up a tab in your browser, running a server at `localhost:9000`. It will also be watching for any changes to the HTML, JS, and LESS files and will:  
+This will open up a tab in your browser, running a server at `localhost:3000` (unless you have set up a proxy server address - details on how to change this are in the `Gruntfile.js` file). It will also be watching for any changes to the HTML, JS, and LESS files and will:  
+* Run jsHinting on the JavaScript  
+* Uglify the JavaScript files
 * Compile & compress CSS files  
 * Reload the page  
+
+### BrowserSync  
+  
+The main component of this Grunt setup is BrowserSync. This plugin provides the following advantages for development:  
+* Simultaneous page scrolling for all devices connected to the same link  
+* Clicking links or populating form fields on one device will duplicate this behaviour on all other linked devices  
+* A dashboard at `localhost:3001` where you can send commands to all connected devices, perform actions and do network throttle testing.
 
