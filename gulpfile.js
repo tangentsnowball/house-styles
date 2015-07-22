@@ -18,7 +18,6 @@ gulp.task('styles', ['less:main', 'less:responsive']);
 gulp.task('less:main', function() {
     return gulp.src('static/css/less/styles.less')
         .pipe(less({ paths: [path.join(__dirname, 'less', 'includes')] }))
-        //.pipe(gulp.dest('static/dist/css/'))
         .pipe(rename({suffix: '.min'}))
         .pipe(minifycss())
         .pipe(gulp.dest('static/dist/css/'))
@@ -28,7 +27,6 @@ gulp.task('less:main', function() {
 gulp.task('less:responsive', function() {
     return gulp.src('static/css/less/styles-responsive.less')
         .pipe(less({ paths: [path.join(__dirname, 'less', 'includes')] }))
-        //.pipe(gulp.dest('static/dist/css/'))
         .pipe(rename({suffix: '.min'}))
         .pipe(minifycss())
         .pipe(gulp.dest('static/dist/css/'))
@@ -42,7 +40,6 @@ gulp.task('scripts', function() {
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter('default'))
     .pipe(concat('main.js'))
-    //.pipe(gulp.dest('static/dist/js'))
     .pipe(rename({suffix: '.min'}))
     .pipe(uglify())
     .pipe(gulp.dest('static/dist/js'))
@@ -65,6 +62,10 @@ gulp.task('browser-sync', function() {
         server: {
             baseDir: "./"
         }
+        //Use if you don't want BS to open a tab in your browser when it starts up
+        //open: false
+        // Will not attempt to determine your network status, assumes you're OFFLINE
+        //online: false
     });
 
     gulp.watch('static/css/less/*.less', ['styles']);

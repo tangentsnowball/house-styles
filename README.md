@@ -43,24 +43,27 @@ Please follow these rules.
 - Don't use IDs for styling, only classes
 - Don't use the * rule to apply a style to all elements, and avoid styling base elements such as DIV or LI  
 
-Use of Grunt
+Use of Gulp
 ------------  
 
-There is a standard Grunt installation within this repository to make rapid prototyping much quicker for the house styles. All you need to do is:  
-* Install Node & Grunt (http://gruntjs.com/getting-started)  
+There is a `gulpfile.js` within this repository to make development much quicker for the house styles. All you need to do is:  
+* Install Node (http://nodejs.org) & Gulp (https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md)  
 * Run `npm install`  
-This will install all the Grunt dependences (The node_modules folder that is generated when you run this command should be created on a case-by-case basis and not pushed to a repository)  
-* Run `grunt`  
+This will install all the dependencies found in `package.json` (The `node_modules` folder that is generated when you run this command should be created on a case-by-case basis and not pushed to a repository)  
+* Run `gulp`  
   
-This will open up a tab in your browser, running a server at `localhost:3000` (unless you have set up a proxy server address - details on how to change this are in the `Gruntfile.js` file). It will also be watching for any changes to the HTML, JS, and LESS files and will:  
+This will open up a tab in your browser, running a server at `localhost:3000` (unless you have set up a proxy server address - details on how to change this are in the `gulpfile.js` file). It will also be watching for any changes to the HTML, JS, and LESS files and will:  
 * Run jsHinting on the JavaScript  
-* Uglify the JavaScript files
-* Compile & compress CSS files  
-* Reload the page  
+* Uglify & compress the JavaScript files
+* Optimise images if possible
+* Compile & compress CSS files
+* Create `.min` versions of CSS & JS files, and move these and compressed images to the `dist` directory.
+* Use native notifications to tell you when these tasks have been completed.  
+* Reload the page if an HTML file has been changed, or inject the changes directly into the browser window if a CSS or JS file has been changed.
 
 ### BrowserSync  
   
-The main component of this Grunt setup is BrowserSync. This plugin provides the following advantages for development:  
+The main component of this Gulp setup is BrowserSync. This plugin provides the following advantages for development:  
 * Simultaneous page scrolling for all devices connected to the same link  
 * Clicking links or populating form fields on one device will duplicate this behaviour on all other linked devices  
 * A dashboard at `localhost:3001` where you can send commands to all connected devices, perform actions and do network throttle testing.
