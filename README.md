@@ -52,14 +52,30 @@ There is a `gulpfile.js` within this repository to make development much quicker
 This will install all the dependencies found in `package.json` (The `node_modules` folder that is generated when you run this command should be created on a case-by-case basis and not pushed to a repository)  
 * Run `gulp`  
   
-This will open up a tab in your browser, running a server at `localhost:3000` (unless you have set up a proxy server address - details on how to change this are in the `gulpfile.js` file). It will also be watching for any changes to the HTML, JS, and LESS files and will:  
-* Run jsHinting on the JavaScript  
-* Uglify & compress the JavaScript files
-* Optimise images if possible
-* Compile & compress CSS files
-* Create `.min` versions of CSS & JS files, and move these and compressed images to the `dist` directory.
-* Use native notifications to tell you when these tasks have been completed.  
-* Reload the page if an HTML file has been changed, or inject the changes directly into the browser window if a CSS or JS file has been changed.
+This will open up a tab in your browser, running a server at `localhost:3000` (unless you have set up a proxy server address - details on how to change this are in the `gulpfile.js` file).
+
+Gulp features
+-------------
+
+Name | Version | Description
+--- | --- | ---
+**gulp** | ^3.9.0 | Task runner to automate various tasks
+**browser-sync** | ^2.8.0 | Local server enabling instant DOM injection to all devices connected when a file is changed
+**gulp-concat** | ^2.6.0 | Concatenates multiple files into one
+**gulp-cache** | ^0.2.10 | Enables caching of piped files to prevent tasks being run unnecessarily
+**gulp-imagemin** | ^2.3.0 | Compresses images - packaged with gifsicle, jpegtran, optipng, and svgo
+**gulp-jshint** | ^1.11.2 | Provides JS validation and hinting. Settings for this are in the `.jshintrc` file
+**gulp-less** | ^3.0.3 | Cobverts LESS files in CSS
+**gulp-load-plugins** | ^1.0.0-rc.1 | Handles the `require()` functions for all plugins in `package.json`
+**gulp-minify-css** | ^1.2.0 | Minifies CSS files to reduce file sizes
+**gulp-notify** | ^2.2.0 | Enables the use of native notifications to display when tasks are complete
+**gulp-plumber** | ^1.0.1 | Prevent pipe breaking caused by errors from gulp plugins
+**gulp-rename** | ^1.2.2 | Allows files to be renamed via JS
+**gulp-uglify** | ^1.2.0 | Minifies JS files
+**gulp-util** | ^3.0.6 | Utility functions for gulp plugins
+**jshint-stylish** | ^1.0.1 | Stylish reporter for JSHint
+**path** | ^0.11.14 | Copy of Node.JS path module
+**del** | ^1.2.0 | Enables the deleting of files
 
 ### BrowserSync  
   
