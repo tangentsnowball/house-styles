@@ -1,11 +1,11 @@
 {
-  "name": "tangent-housestyles-grunt",
+  "name": "tangent-housestyles-gulp",
   "version": "0.1.0",
-  "description": "Grunt capabilities for Tangent Snowballs house styles",
+  "description": "Gulp capabilities for Tangent Snowballs house styles",
   "author": "Ashley Firth <ashley.firth@tangentsnowball.com>",
-  "main": "Gruntfile.js",
+  "main": "gulpfile.js",
   "scripts": {
-    "start": "grunt"
+    "start": "gulp"
   },
   "repository": {
     "type": "git",
