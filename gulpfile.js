@@ -1,3 +1,26 @@
+var basePaths = {
+        src: 'static/',
+        dest: 'static/dist/'
+    },
+    paths = {
+        images: {
+            src: basePaths.src + 'img/',
+            dest: basePaths.dest + 'img/'
+        },
+        scripts: {
+            src: basePaths.src + 'js/',
+            dest: basePaths.dest + 'js/'
+        },
+        styles: {
+            src: basePaths.src + 'css/less/',
+            dest: basePaths.dest + 'css/'
+        },
+        templates: {
+            src: basePaths.src + '',
+            dest: basePaths.dest + ''
+        }
+    };
+
 var gulp = require('gulp'),
     plugins = require('gulp-load-plugins')({
         pattern: '*',
@@ -12,39 +35,39 @@ function processCss(inputStream, taskType) {
         .pipe(plugins.less({ paths: [plugins.path.join(__dirname, 'less', 'includes')] }))
         .pipe(plugins.rename({suffix: '.min'}))
         .pipe(plugins.minifyCss())
-        .pipe(gulp.dest('static/dist/css/'))
+        .pipe(gulp.dest(paths.styles.dest))
         .pipe(browserSync.stream())
         .pipe(plugins.notify({ message: taskType + ' task complete' }));
 }
 
 gulp.task('styles', ['less:main', 'less:responsive']);
 gulp.task('less:main', function() {
-    return processCss(gulp.src('static/css/less/styles.less'), 'Styles');
+    return processCss(gulp.src(paths.styles.src + 'styles.less'), 'Styles');
 });
 gulp.task('less:responsive', function() {
-    return processCss(gulp.src('static/css/less/styles-responsive.less'), 'Responsive styles');
+    return processCss(gulp.src(paths.styles.src + 'styles-responsive.less'), 'Responsive styles');
 });
 
 /* JS */
 gulp.task('scripts', function() {
-  return gulp.src('static/js/*.js')
+  return gulp.src(paths.scripts.src + '*.js')
     .pipe(plugins.plumber())
     .pipe(plugins.jshint('.jshintrc'))
     .pipe(plugins.jshint.reporter('default'))
     .pipe(plugins.concat('main.js'))
     .pipe(plugins.rename({suffix: '.min'}))
     .pipe(plugins.uglify())
-    .pipe(gulp.dest('static/dist/js'))
+    .pipe(gulp.dest(paths.scripts.dest))
     .pipe(browserSync.stream())
     .pipe(plugins.notify({ message: 'Scripts task complete' }));
 });
 
 /* Images */
 gulp.task('images', function() {
-  return gulp.src('static/img/**/*')
+  return gulp.src(paths.images.src + '**/*')
     .pipe(plugins.plumber())
     .pipe(plugins.cache(plugins.imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
-    .pipe(gulp.dest('static/dist/img'))
+    .pipe(gulp.dest(paths.images.dest))
     .pipe(browserSync.stream())
     .pipe(plugins.notify({ message: 'Images task complete' }));
 });
@@ -61,15 +84,15 @@ gulp.task('browser-sync', function() {
         //online: false
     });
 
-    gulp.watch('static/css/less/*.less', ['styles']);
-    gulp.watch('static/js/*.js', ['scripts']);
-    gulp.watch('static/img/**/*', ['images']);
-    gulp.watch('*.html').on('change', browserSync.reload);
+    gulp.watch(paths.styles.src + '*.less', ['styles']);
+    gulp.watch(paths.scripts.src + '*.js', ['scripts']);
+    gulp.watch(paths.images.src + '**/*', ['images']);
+    gulp.watch(paths.templates.src + '*.html').on('change', browserSync.reload);
 });
 
 /* Clean up stray files */
 gulp.task('clean', function(cb) {
-    plugins.del(['static/dist/css', 'static/dist/js', 'static/dist/img'], cb)
+    plugins.del([paths.styles.dest, paths.scripts.dest, paths.images.dest], cb)
 });
 
 
