@@ -26,12 +26,16 @@ var gulp = require('gulp'),
         pattern: '*',
         camelize: true
     }),
-    browserSync = plugins.browserSync.create();
+    browserSync = plugins.browserSync.create(),
+    copyFiles = [
+        paths.scripts.src + 'vendor/**/*'
+    ];
 
 /* CSS - LESS */
 function processCss(inputStream, taskType) {
     return inputStream
         .pipe(plugins.plumber())
+        .pipe(plugins.newer(paths.styles.dest))
         .pipe(plugins.less({ paths: [plugins.path.join(__dirname, 'less', 'includes')] }))
         .pipe(plugins.rename({suffix: '.min'}))
         .pipe(plugins.minifyCss())
@@ -49,9 +53,10 @@ gulp.task('less:responsive', function() {
 });
 
 /* JS */
-gulp.task('scripts', function() {
+gulp.task('scripts', ['moveScripts'], function() {
   return gulp.src(paths.scripts.src + '*.js')
     .pipe(plugins.plumber())
+    .pipe(plugins.newer(paths.scripts.dest))
     .pipe(plugins.jshint('.jshintrc'))
     .pipe(plugins.jshint.reporter('default'))
     .pipe(plugins.concat('main.js'))
@@ -62,10 +67,17 @@ gulp.task('scripts', function() {
     .pipe(plugins.notify({ message: 'Scripts task complete' }));
 });
 
+/* Move JS files that are already minified to dist/js/ folder */
+gulp.task('moveScripts', function() {
+    gulp.src(copyFiles, { base: './static/js/' })
+    .pipe(gulp.dest(paths.scripts.dest));
+});
+
 /* Images */
 gulp.task('images', function() {
   return gulp.src(paths.images.src + '**/*')
     .pipe(plugins.plumber())
+    .pipe(plugins.newer(paths.images.dest))
     .pipe(plugins.cache(plugins.imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
     .pipe(gulp.dest(paths.images.dest))
     .pipe(browserSync.stream())
