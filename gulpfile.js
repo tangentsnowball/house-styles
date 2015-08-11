@@ -58,7 +58,7 @@ gulp.task('scripts', ['moveScripts'], function() {
     .pipe(plugins.plumber())
     .pipe(plugins.newer(paths.scripts.dest))
     .pipe(plugins.jshint('.jshintrc'))
-    .pipe(plugins.jshint.reporter('default'))
+    .pipe(plugins.jshint.reporter('jshint-stylish'))
     .pipe(plugins.concat('main.js'))
     .pipe(plugins.rename({suffix: '.min'}))
     .pipe(plugins.uglify())
