@@ -73,7 +73,7 @@ Name | Version | Description
 **gulp-rename** | ^1.2.2 | Allows files to be renamed via JS
 **gulp-uglify** | ^1.2.0 | Minifies JS files
 **gulp-util** | ^3.0.6 | Utility functions for gulp plugins
-**jshint-stylish** | ^1.0.1 | Stylish reporter for JSHint
+**jshint-stylish** | ^2.0.1 | Stylish reporter for JSHint
 **path** | ^0.11.14 | Copy of Node.JS path module
 **del** | ^1.2.0 | Enables the deleting of files
 
