@@ -58,12 +58,14 @@ gulp.task('less:responsive', function() {
 gulp.task('scripts', ['scripts:moveFiles'], function() {
   return gulp.src(paths.scripts.src + '*.js')
     .pipe(plugins.plumber())
+    .pipe(plugins.bytediff.start())
     .pipe(plugins.newer(paths.scripts.dest))
     .pipe(plugins.jshint('.jshintrc'))
     .pipe(plugins.jshint.reporter('jshint-stylish'))
     .pipe(plugins.concat('main.js'))
     .pipe(plugins.rename({suffix: '.min'}))
     .pipe(plugins.uglify())
+    .pipe(plugins.bytediff.stop())
     .pipe(gulp.dest(paths.scripts.dest))
     .pipe(browserSync.stream())
     .pipe(plugins.notify({ message: 'Scripts task complete' }));
@@ -79,8 +81,10 @@ gulp.task('scripts:moveFiles', function() {
 gulp.task('images', function() {
   return gulp.src(paths.images.src + '**/*')
     .pipe(plugins.plumber())
+    .pipe(plugins.bytediff.start())
     .pipe(plugins.newer(paths.images.dest))
     .pipe(plugins.cache(plugins.imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
+    .pipe(plugins.bytediff.stop())
     .pipe(gulp.dest(paths.images.dest))
     .pipe(browserSync.stream())
     .pipe(plugins.notify({ message: 'Images task complete' }));
