@@ -12,6 +12,7 @@
     "url": "https://github.com/tangentsnowball/house-styles.git"
   },
   "devDependencies": {
+    "bower": "^1.5.2",
     "browser-sync": "^2.8.0",
     "del": "^1.2.0",
     "gulp": "^3.9.0",

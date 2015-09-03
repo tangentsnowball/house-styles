@@ -28,9 +28,7 @@ var gulp = require('gulp'),
     }),
     browserSync = $.browserSync.create(),
     copyFiles = {
-        scripts: [
-            paths.scripts.src + 'vendor/**/*'
-        ]
+        scripts: []
     };
 
 /* CSS - LESS */
