@@ -12,7 +12,7 @@ var basePaths = {
             dest: basePaths.dest + 'js/'
         },
         styles: {
-            src: basePaths.src + 'css/less/',
+            src: basePaths.src + 'less/',
             dest: basePaths.dest + 'css/'
         },
         templates: {
