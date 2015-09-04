@@ -106,8 +106,12 @@ gulp.task('browser-sync', ['styles', 'scripts', 'images'], function() {
     gulp.watch(paths.templates.src + '*.html').on('change', browserSync.reload);
 });
 
+gulp.task('clear', function (done) {
+  return $.cache.clearAll(done);
+});
+
 /* Clean up stray files */
-gulp.task('clean', function(cb) {
+gulp.task('clean', ['clear'], function(cb) {
     $.del([paths.styles.dest, paths.scripts.dest, paths.images.dest], cb)
 });
 
