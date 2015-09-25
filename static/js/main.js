@@ -10,7 +10,7 @@ $(function() {
     */
 
     //put here any generic functions for body clicks e.g. dropdowns should disappear
-    $('html').click(function(){
+    $('html').on('click touchstart', function(){
         $('.btn-group').removeClass('open'); //button dropdowns
     });
 
