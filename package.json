@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "bower": "^1.5.2",
-    "browser-sync": "^2.8.0",
+    "browser-sync": "^2.9.6",
     "del": "^1.2.0",
     "gulp": "^3.9.0",
     "gulp-bytediff": "^0.2.1",
@@ -32,5 +32,11 @@
     "gulp-util": "^3.0.6",
     "jshint-stylish": "^2.0.1",
     "path": "^0.11.14"
+  },
+  "scripts": {
+    "run-npm-install": "npm install",
+    "run-bower-install": "bower install",
+    "run-gulp": "gulp",
+    "setup": "npm run run-npm-install && npm run run-bower-install && npm run run-gulp"
   }
 }
