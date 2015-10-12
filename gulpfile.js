@@ -34,7 +34,10 @@ var gulp = require('gulp'),
 /* CSS - LESS */
 function processCss(inputStream, taskType) {
     return inputStream
-        .pipe($.plumber())
+        .pipe($.plumber(function(error) {
+            $.util.log($.util.colors.red('Error (' + error.plugin + '): ' + error.message));
+            this.emit('end');
+        }))
         .pipe($.newer(paths.styles.dest))
         .pipe($.less({ paths: [$.path.join(__dirname, 'less', 'includes')] }))
         .pipe($.rename({suffix: '.min'}))
@@ -55,7 +58,10 @@ gulp.task('less:responsive', function() {
 /* JS */
 gulp.task('scripts', ['scripts:moveFiles'], function() {
   return gulp.src(paths.scripts.src + '*.js')
-    .pipe($.plumber())
+    .pipe($.plumber(function(error) {
+        $.util.log($.util.colors.red('Error (' + error.plugin + '): ' + error.message));
+        this.emit('end');
+    }))
     .pipe($.bytediff.start())
     .pipe($.newer(paths.scripts.dest))
     .pipe($.jshint('.jshintrc'))
@@ -78,7 +84,10 @@ gulp.task('scripts:moveFiles', function() {
 /* Images */
 gulp.task('images', function() {
   return gulp.src(paths.images.src + '**/*')
-    .pipe($.plumber())
+    .pipe($.plumber(function(error) {
+        $.util.log($.util.colors.red('Error (' + error.plugin + '): ' + error.message));
+        this.emit('end');
+    }))
     .pipe($.bytediff.start())
     .pipe($.newer(paths.images.dest))
     .pipe($.cache($.imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
