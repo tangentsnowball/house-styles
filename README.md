@@ -41,16 +41,16 @@ Please follow these rules.
 
 - Don't use !important
 - Don't use IDs for styling, only classes
-- Don't use the * rule to apply a style to all elements, and avoid styling base elements such as DIV or LI  
+- Don't use the * rule to apply a style to all elements, and avoid styling base elements such as DIV or LI
 
 Use of Gulp
-------------  
+------------
 
-There is a `gulpfile.js` within this repository to make development much quicker for the house styles. All you need to do is:  
-* Install Node (http://nodejs.org) & Gulp (https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md)  
-* Run `npm run setup`  
-This will install all the dependencies found in `package.json` (The `node_modules` folder that is generated when you run this command should be created on a case-by-case basis and not pushed to a repository), install the Bower dependencies found in `package.json` and run the local server through the `gulp` command. 
-  
+There is a `gulpfile.js` within this repository to make development much quicker for the house styles. All you need to do is:
+* Install [Node](http://nodejs.org) & [Gulp](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md)
+* Run `npm run setup`
+This will install all the dependencies found in `package.json` (The `node_modules` folder that is generated when you run this command should be created on a case-by-case basis and not pushed to a repository), install the Bower dependencies found in `package.json` and run the local server through the `gulp` command.
+
 This will open up a tab in your browser, running a server at `localhost:3000` (unless you have set up a proxy server address - details on how to change this are in the `gulpfile.js` file).
 
 Gulp features
@@ -58,11 +58,12 @@ Gulp features
 
 Name | Version | Description
 --- | --- | ---
-**gulp** | ^3.9.0 | Task runner to automate various tasks
 **browser-sync** | ^2.8.0 | Local server enabling instant DOM injection to all devices connected when a file is changed
-**gulp-byetdiff | ^1.0.0 | Shows a the difference between file sizes before and after gulp tasks have run.
-**gulp-concat** | ^2.6.0 | Concatenates multiple files into one
+**del** | ^1.2.0 | Enables the deleting of files
+**gulp** | ^3.9.0 | Task runner to automate various tasks
+**gulp-byetdiff** | ^1.0.0 | Shows a the difference between file sizes before and after gulp tasks have run.
 **gulp-cache** | ^0.2.10 | Enables caching of piped files to prevent tasks being run unnecessarily
+**gulp-concat** | ^2.6.0 | Concatenates multiple files into one
 **gulp-imagemin** | ^2.3.0 | Compresses images - packaged with gifsicle, jpegtran, optipng, and svgo
 **gulp-jshint** | ^1.11.2 | Provides JS validation and hinting. Settings for this are in the `.jshintrc` file
 **gulp-less** | ^3.0.3 | Converts LESS files in CSS
@@ -75,13 +76,18 @@ Name | Version | Description
 **gulp-uglify** | ^1.2.0 | Minifies JS files
 **gulp-util** | ^3.0.6 | Utility functions for gulp plugins
 **jshint-stylish** | ^2.0.1 | Stylish reporter for JSHint
+**main-bower-files** | ^2.9.0 | Iterates through the components in `bower.json` and grabs the specified main file of each
+**merge-stream** | ^1.0.0 | Merges multiple streams into one
 **path** | ^0.11.14 | Copy of Node.JS path module
-**del** | ^1.2.0 | Enables the deleting of files
 
-### BrowserSync  
-  
-The main component of this Gulp setup is BrowserSync. This plugin provides the following advantages for development:  
-* Simultaneous page scrolling for all devices connected to the same link  
-* Clicking links or populating form fields on one device will duplicate this behaviour on all other linked devices  
+Bower
+-------------
+[Bower](_http://bower.io/) is used alongside Gulp to manage front-end library dependencies - jQuery, HTML5Shiv, etc. Gulp will handle moving/minifying these packages into their appropriate directories.
+
+### BrowserSync
+
+The main component of this Gulp setup is BrowserSync. This plugin provides the following advantages for development:
+* Simultaneous page scrolling for all devices connected to the same link
+* Clicking links or populating form fields on one device will duplicate this behaviour on all other linked devices
 * A dashboard at `localhost:3001` where you can send commands to all connected devices, perform actions and do network throttle testing.
 
