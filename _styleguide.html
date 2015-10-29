@@ -15,6 +15,7 @@
     <link rel="stylesheet" media="screen and (min-width:0) and (max-width:767px)" href="static/dist/css/styles-responsive.min.css"/>
     <!--[if lt IE 8 ]>
         <link rel="stylesheet" type="text/css" href="static/dist/css/styles-responsive.min.css"/>
+        <script src="static/dist/js/ie8.min.js"/>
     <![endif]-->
 
     <style>
@@ -80,14 +81,14 @@
                     <p>CSS is written in LESS.</p>
                     <p>LESS is located <span class="fillin">here</span></p>
                     <p>Browser support is included for <span class="fillin">IE8 and above</span>.</p>
-                    
+
                     <h3>Responsiveness</h3>
                     <p><span class="fillin">Notes on any responsiveness e.g. is there some, what devices, where is responsive CSS</span></p>
                     <p>Responsive styles are included in a separate stylesheet (styles-responsive.css), also compiled from LESS. Responsive styles have been separated out so that the mobile stylesheet can be easily served to older browsers if required.</p>
-                    
+
                     <h3>HTML flats</h3>
                     <p><span class="fillin">Location/links to HTML flats</span></p>
-                    
+
                     <h3>Additional</h3>
                     <p><span class="fillin">Any other relevant notes e.g. if compiled CSS is not included in repo or output on page load</span></p>
 
@@ -96,9 +97,9 @@
 
                 <section id="typography">
                     <h2>Typography</h2>
-                    
+
                     <h3>Headings</h3>
-                    
+
                     <span class="faux_h1">Heading 1</span>
                     <span class="faux_h2">Heading 2</span>
                     <span class="faux_h3">Heading 3</span>
@@ -109,7 +110,7 @@
                     <p>This is a paragraph of text. This is a paragraph of text. This is a paragraph of text. This is a paragraph of text. This is a paragraph of text. This is a paragraph of text. This is a paragraph of text. This is a paragraph of text. This is a <a href="#">link example</a>.</p>
                     <p><small>This is smalltext. This is smalltext. This is smalltext.</small></p>
                     <p>This paragraph demonstrates <strong>strong</strong>, <em>italic</em>.</p>
-                    
+
                     <h3>Lists</h3>
                     <ul>
                         <li>This is an unstyled ul</li>
@@ -295,7 +296,7 @@
                     <div class="row">
                         <div class="span1 offset11">1</div>
                     </div>
-            
+
 
 
                     <h3>Code</h3>
@@ -456,7 +457,7 @@
 
                     <h2>Non-collapsing grid</h2>
                     <p>Occasionally it can be useful to have grid elements that do not collapse with the rest of the grid on a narrow screen. To achieve this add the class of <code>.fix</code> to the <code>row</code> element you do not wish to collapse.</p>
-                    
+
                     <div class="row fix">
                         <div class="span6">
                             This row
@@ -517,7 +518,7 @@
                                 <input type="file" id="file1"/>
                                 <span class="helptext">This is some help text that has been put here to be helpful</span>
                             </div>
-                            
+
                             <div class="buttons">
                                 <button type="submit" class="btn">Submit</button>
                             </div>
@@ -591,7 +592,7 @@
                             </div>
                         </fieldset>
                     </form>
-                    
+
                     <h3>Code</h3>
 <pre class="language-markup clear"><code>
 &lt;div class="field error"&gt;
@@ -635,7 +636,7 @@
                                 <label><input type="checkbox" name="cb6"/>Maybe</label>
                             </div>
                         </fieldset>
-                        
+
                         <h3>Radio buttons</h3>
 
                         <fieldset>
@@ -701,7 +702,7 @@
                     </table>
                 </section>
 
-                
+
 
                 <section id="buttons">
                     <h2>Buttons</h2>
@@ -949,8 +950,8 @@
 &lt;/div&gt;
 </code></pre>
                 </section>
-                
-                
+
+
 
                 <section id="tabs">
                     <h2>Tabs</h2>
@@ -1031,7 +1032,7 @@
 &lt;/div&gt;
 </code></pre>
                 </section>
-                
+
                 <section id="popups">
                     <h2>Popups</h2>
                     <p>Popups are hidden elements at the foot of the page revealed by a click action on a specific element. By default popups are positioned 10% from the top of the current window position, unless the <code>data-position="fixed"</code> attribute is added to the link.</p>
@@ -1048,7 +1049,7 @@
                             (<a href="#" class="js-openpopup" data-target="4" data-position="fixed">large version</a>)
                         </li>
                     </ul>
-                    
+
                     <h3>Code</h3>
 <pre class="language-markup clear"><code>
 &lt;a href="#" class="js-openpopup" data-target="1"&gt;Standard popup&lt;/a&gt;
@@ -1108,8 +1109,8 @@
 <footer class="footer">
 </footer>
 
-    <script src="static/dist/bower_components/jquery/dist/jquery.min.js"></script>
-    <!--[if lt IE 9 ]> 
+    <script src="static/dist/js/vendor.min.js"></script>
+    <!--[if lt IE 9 ]>
     <script>(function() {$('body').addClass('iex');})();</script>
     <![endif]-->
     <script src="static/dist/js/main.min.js"></script>
