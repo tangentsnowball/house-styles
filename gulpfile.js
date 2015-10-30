@@ -13,7 +13,11 @@ var basePaths = {
         },
         styles: {
             src: basePaths.src + 'less/',
-            dest: basePaths.dest + 'css/'
+            dest: basePaths.dest + 'css/',
+            vendor: {
+                src: basePaths.src + 'css/',
+                dest: basePaths.dest + 'css/'
+            }
         },
         templates: {
             src: basePaths.src + '',
@@ -35,16 +39,30 @@ var gulp = require('gulp'),
     };
 
 /* CSS - LESS */
-function processCss(inputStream, taskType) {
-    return inputStream
+function processCss(inputStream, filename, taskType) {
+    // Grab vendor CSS
+    var vendorStream = gulp.src(paths.styles.vendor.src + '*.css')
         .pipe($.plumber(function(error) {
             $.util.log($.util.colors.red('Error (' + error.plugin + '): ' + error.message));
             this.emit('end');
+        }));
+
+    // Compile LESS stream
+    inputStream = inputStream
+        .pipe($.plumber(function(error) {
+            $.util.log($.util.colors.red('Error (' + error.plugin + '): ' + error.message + '\n'));
+            this.emit('end');
         }))
         .pipe($.newer(paths.styles.dest))
-        .pipe($.less({ paths: [$.path.join(__dirname, 'less', 'includes')] }))
-        .pipe($.rename({suffix: '.min'}))
-        .pipe($.minifyCss({advanced: false}))
+        .pipe($.less({ paths: [$.path.join(__dirname, 'less', 'includes')] }));
+
+    // Merge vendor css with compiled LESS streams
+    return $.mergeStream(vendorStream, inputStream)
+        // concat into supplied filename
+        .pipe($.concat(filename))
+        .pipe(gulp.dest(paths.styles.dest))
+        .pipe($.minifyCss({ advanced: false }))
+        .pipe($.rename({ suffix: '.min' }))
         .pipe(gulp.dest(paths.styles.dest))
         .pipe(browserSync.stream())
         .pipe($.notify({ message: taskType + ' task complete' }));
@@ -56,6 +74,10 @@ function processCss(inputStream, taskType) {
  */
 function minifyJS (sourceStream, uglifyOptions, filename) {
     return sourceStream
+        .pipe($.plumber(function(error) {
+            $.util.log($.util.colors.red('Error (' + error.plugin + '): ' + error.message));
+            this.emit('end');
+        }))
         .pipe($.concat(filename))
         .pipe(gulp.dest(paths.scripts.src))
         // Minify with safe mangling, preserve licenses
@@ -64,12 +86,12 @@ function minifyJS (sourceStream, uglifyOptions, filename) {
         .pipe(gulp.dest(paths.scripts.dest));
 } // /function minifyJS
 
-gulp.task('styles', ['less:main', 'less:responsive']);
-gulp.task('less:main', function() {
-    return processCss(gulp.src(paths.styles.src + 'styles.less'), 'Styles');
+gulp.task('styles', ['bower:css', 'less:main', 'less:responsive']);
+gulp.task('less:main', ['bower:css'], function() {
+    return processCss(gulp.src(paths.styles.src + 'styles.less'), 'styles.css', 'Styles');
 });
-gulp.task('less:responsive', function() {
-    return processCss(gulp.src(paths.styles.src + 'styles-responsive.less'), 'Responsive styles');
+gulp.task('less:responsive', ['bower:css'], function() {
+    return processCss(gulp.src(paths.styles.src + 'styles-responsive.less'), 'styles-responsive.css', 'Responsive styles');
 });
 
 /* JS */
@@ -114,30 +136,36 @@ gulp.task('images', function() {
 });
 
 /*
- * Grab main bower files JS, package them up into vendor.js
+ * Grab main bower files JS, chuck them exactly where we specify
  */
-gulp.task('bowerTask', function(){
+gulp.task('bower:js', function() {
     // Grab the main bower files
-    var bowerFilesJS = gulp.src($.mainBowerFiles({
-        filter: '**/*.js'
-    }), { base: paths.bower.src });
+    // -------------------------------------------------------------
+    var bowerFiles = gulp.src($.mainBowerFiles({ filter: '**/*.js' }), { base: paths.bower.src });
 
-    // Set up vendor filters
-    var filterHtml5shiv = 'html5shiv/**/*',
-        filterJquery    = 'jquery/**/*';
+    // Filters
+    // -------------------------------------------------------------
+    var filterHtml5shiv    = 'html5shiv/**/*',
+        filterJquery       = 'jquery/**/*';
 
-    // Set up vendor streams - process each library separately
-    var streamHtml5shiv = bowerFilesJS
+    // Vendor streams - process each library separately
+    // -------------------------------------------------------------
+        // html5shiv
+    var streamHtml5shiv = bowerFiles
             .pipe($.filter(filterHtml5shiv)),
-        streamJquery = bowerFilesJS
-            .pipe($.filter(filterJquery)),
-    // IE8 stream, for libs only included in specific IE versions (respond, html5shiv, etc.)
-        streamIE8 = minifyJS($.mergeStream(streamHtml5shiv), {
+        // jQuery
+        streamJquery = bowerFiles
+            .pipe($.filter(filterJquery));
+
+    // Package streams - group certain libs into single packages
+    // -------------------------------------------------------------
+    // IE8 JS stream
+    var streamIE8JS = minifyJS($.mergeStream(streamHtml5shiv), {
                 mangle: { keep_fnames: true },
                 preserveComments: 'license'
             }, 'ie8.js' ),
-    // Vendor stream, for all other 3rd-party JS
-        streamVendor = minifyJS($.mergeStream(streamJquery), {
+    // Vendor JS stream, for all other 3rd-party JS
+        streamVendorJS = minifyJS($.mergeStream(streamJquery), {
             mangle: {
                 except: ['jQuery'],
                 keep_fnames: true
@@ -145,14 +173,42 @@ gulp.task('bowerTask', function(){
             preserveComments: 'license'
         }, 'vendor.js' );
 
-    /* return merged 'completed' streams to allow the task to register as done
-     * once all streams resolve
-     */
-    return $.mergeStream(streamJquery, streamIE8);
-}); // /bowerTask
+    /* return merged 'completed' streams to allow the task to
+     * register as done once all streams resolve
+     * ----------------------------------------------------------- */
+    return $.mergeStream(streamVendorJS, streamIE8JS);
+}); // /bower:js
+
+/*
+ * Grab main bower files CSS, chuck them exactly where we specify
+ */
+gulp.task('bower:css', function() {
+    // Grab the main bower files
+    // -------------------------------------------------------------
+    var bowerFiles = gulp.src($.mainBowerFiles({ filter: '**/*.css' }), { base: paths.bower.src });
+
+    // Filters
+    // -------------------------------------------------------------
+    var filterNormalizeCss = 'normalize-css/**/*';
+
+    // Vendor streams - process each library separately
+    // -------------------------------------------------------------
+        // normalize-css
+    var streamNormalizeCss = bowerFiles
+            .pipe($.filter(filterNormalizeCss));
+
+    // Package streams - group certain libs into single packages
+    // -------------------------------------------------------------
+
+    // Return vendor CSS stream, for all other 3rd-party CSS
+    return $.mergeStream(streamNormalizeCss)
+        .pipe($.plumber())
+        .pipe($.concat('vendor.css'))
+        .pipe(gulp.dest(paths.styles.vendor.src));
+}); // /bower:css
 
 /* BrowserSync */
-gulp.task('browser-sync', ['bowerTask', 'styles', 'scripts', 'images'], function() {
+gulp.task('browser-sync', ['bower:js', 'styles', 'scripts', 'images'], function() {
     browserSync.init({
         server: {
             baseDir: './'
