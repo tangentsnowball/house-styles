@@ -1,161 +1,89 @@
-/* --mixins */
-	/* border radius */
-	.border-radius(@radius: 0.3em) {
-		-webkit-border-radius: @radius;
-		-moz-border-radius   : @radius;
-		border-radius        : @radius;
-	}
+/* -------------------------------------------------------------
+ * Global mixins
+ * ---------------------------------------------------------- */
 
-    /* --gradients */
-    	/* vertical, two colour */
-    	.vertical-gradient( @startcolor, @startpoint, @endcolor, @endpoint ) {
-    		background: @endcolor;
-    		background: -webkit-gradient(linear, left top, left bottom, color-stop(@startpoint, @startcolor), color-stop(@endpoint,@endcolor)); /* Chrome,Safari4+ */
-    		background: -moz-linear-gradient(top, @startcolor @startpoint, @endcolor @endpoint); /* FF3.6+ */
-    		background: -o-gradient(top, @startcolor @startpoint, @endcolor @endpoint); /* Opera 11.10+ */
-    		background: -ms-linear-gradient(top, @startcolor @startpoint, @endcolor @endpoint); /* IE10+ */
-    		background: linear-gradient(top, @startcolor @startpoint, @endcolor @endpoint);
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=@startcolor, endColorstr=@endcolor,GradientType=0 ); /* IE6-9 */
-    	}
-        /* vertical, four colours */
-    	.vertical-multi-gradient( @color1, @pos1, @color2, @pos2, @color3, @pos3, @color4, @pos4 ){
-    		background: @pos4;
-    		background: -webkit-gradient(linear, left top, left bottom, color-stop(@pos1, @color1), color-stop(@pos2,@color2), color-stop(@pos3,@color3), color-stop(@pos4,@color4)); /* Chrome,Safari4+ */
-    		background: -moz-linear-gradient(top, @color1 @pos1, @color2 @pos2, @color3 @pos3, @color4 @pos4); /* FF3.6+ */
-    		background: -o-gradient(top, @color1 @pos1, @color2 @pos2, @color3 @pos3, @color4 @pos4 ); /* Opera 11.10+ */
-    		background: -ms-linear-gradient(top, @color1 @pos1, @color2 @pos2, @color3 @pos3, @color4 @pos4); /* IE10+ */
-    		background: linear-gradient(top, @color1 @pos1, @color2 @pos2, @color3 @pos3, @color4 @pos4);
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=@color1, endColorstr=@color4,GradientType=0 ); /* IE6-9 */
-        }
-		/* Only for modern browsers. IE8 and 9 will only show the background image and one colour, IE7 will fail to show anything, so fallbacks will be needed */
-		/* note also that this defaults to no-repeat, top left, but this can be overridden */
-        .vertical-image-gradient( @startcolor, @startpoint, @endcolor, @endpoint, @image ){
-    		background: @endcolor url(@image) no-repeat 0 0;
-    		background: url(@image), -webkit-gradient(linear, left top, left bottom, color-stop(@startpoint, @startcolor), color-stop(@endpoint,@endcolor)); /* Chrome,Safari4+ */
-    		background: url(@image), -moz-linear-gradient(top, @startcolor @startpoint, @endcolor @endpoint); /* FF3.6+ */
-    		background: url(@image), -o-gradient(top, @startcolor @startpoint, @endcolor @endpoint); /* Opera 11.10+ */
-    		background: url(@image), -ms-linear-gradient(top, @startcolor @startpoint, @endcolor @endpoint); /* IE10+ */
-    		background: url(@image), linear-gradient(top, @startcolor @startpoint, @endcolor @endpoint);
-        }
+// Gradients
+// -------------------------------------------------------------
 
-        /* horizontal, two colour */
-    	.horizontal-gradient( @startcolor, @startpoint, @endcolor, @endpoint ) {
-            background: @endcolor; /* Old browsers */
-            background: -moz-linear-gradient(left,  @startcolor @startpoint, @endcolor @endpoint); /* FF3.6+ */
-            background: -webkit-gradient(linear, left top, right top, color-stop(@startpoint,@startcolor), color-stop(@endpoint,@endcolor)); /* Chrome,Safari4+ */
-            background: -webkit-linear-gradient(left,  @startcolor @startpoint,@endcolor @endpoint); /* Chrome10+,Safari5.1+ */
-            background: -o-linear-gradient(left,  @startcolor @startpoint,@endcolor @endpoint); /* Opera 11.10+ */
-            background: -ms-linear-gradient(left,  @startcolor @startpoint,@endcolor @endpoint); /* IE10+ */
-            background: linear-gradient(to right,  @startcolor @startpoint,@endcolor @endpoint); /* W3C */
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=@startcolor, endColorstr=@endcolor,GradientType=1 ); /* IE6-9 */
-    	}        
-        /* radial */
-        /* limited support for IE, will only work in 10 */
-        /*  @shape can be circle or ellipse (ellipse untested)
-            @size can be closest-side, closest-corner, farthest-side, farthest-corner, contain, cover
-            @position can be any value that background-position would accept, e.g. 10% 50%
-        */
-        .radial-gradient(@inner-color: #0058a1, @outer-color: #040505, @shape: ellipse, @size: cover, @position: center center ){
-            background-color: @outer-color; /* Old browsers */
-            background-image: -webkit-gradient(radial, @position, 0px, @position, 100%, color-stop(0%,@inner-color), color-stop(100%,@outer-color)); /* Chrome,Safari4+ */
-            background-image: -webkit-radial-gradient(@position, @shape @size,  @inner-color 0%,@outer-color 100%); /* Chrome10+,Safari5.1+ */
-            background-image: -moz-radial-gradient(@position, @shape @size,  @inner-color 0%, @outer-color 100%); /* FF3.6+ */
-            background-image: -ms-radial-gradient(@position, @shape @size,  @inner-color 0%,@outer-color 100%); /* IE10+ */
-            background-image: -o-radial-gradient(@position, @shape @size,  @inner-color 0%,@outer-color 100%); /* Opera 12+ */
-        }
+// Vertical, two colour
+// -------------------------------------------------------------
+.vertical-gradient( @startcolor, @startpoint, @endcolor, @endpoint ) {
+	background: @endcolor;
+	background: linear-gradient(top, @startcolor @startpoint, @endcolor @endpoint);
+}
 
+// Vertical, four colours
+// -------------------------------------------------------------
+.vertical-multi-gradient( @color1, @pos1, @color2, @pos2, @color3, @pos3, @color4, @pos4 ){
+	background: @pos4;
+	background: linear-gradient(top, @color1 @pos1, @color2 @pos2, @color3 @pos3, @color4 @pos4);
+}
 
-	/* shadow */
-	/* usage: .box-shadow( ~"0 1px 0 red, 0 -1px 0 green" ); */
-	.box-shadow( @shadow ) {
-		-webkit-box-shadow: @shadow;
-		box-shadow        : @shadow;
-	}
+// Vertical image-gradient
+// -------------------------------------------------------------
+/* Only for modern browsers. IE8 and 9 will only show the background image and one colour, IE7 will fail to show anything, so fallbacks will be needed.
+ * Note also that this defaults to no-repeat, top left, but this can be overridden
+ */
+.vertical-image-gradient( @startcolor, @startpoint, @endcolor, @endpoint, @image ){
+	background: @endcolor url(@image) no-repeat 0 0;
+	background: url(@image), linear-gradient(top, @startcolor @startpoint, @endcolor @endpoint);
+}
 
-	/* --transforms */
-    	.transform ( @trans ){
-            transform: @trans;
-            -ms-transform: @trans;
-            -moz-tranform: @trans;
-            -webkit-transform: @trans;
-            -o-transform: @trans;
-        }
-    
-    	.transform-point ( @trans ) {
-            transform-origin: @trans;
-            -ms-transform-origin: @trans;
-            -moz-transform-origin: @trans;
-            -o-transform-origin: @trans;
-            -webkit-transform-origin: @trans;
-        }
+// Horizontal, two colour
+// -------------------------------------------------------------
+.horizontal-gradient( @startcolor, @startpoint, @endcolor, @endpoint ) {
+    background: @endcolor;
+    background: linear-gradient(to right,  @startcolor @startpoint,@endcolor @endpoint);
+}
 
-	/* usage: .transition( ~"transition, another transition" ); */
-    .transition( @trans ){
-        transition: @trans;
-        -moz-transition: @trans;
-        -webkit-transition: @trans;
-        -o-transition: @trans;
+// Radial
+// -------------------------------------------------------------
+/* limited support for IE, will only work in IE10+.
+ * @shape can be circle or ellipse (ellipse untested)
+ * @size can be closest-side, closest-corner, farthest-side, farthest-corner
+ * @position can be any value that background-position would accept, e.g. 10% 50%
+*/
+.radial-gradient(@inner-color: #0058a1, @outer-color: #040505, @shape: ellipse, @size: farthest-corner, @position: center center ){
+    background-color: @outer-color;
+    background-image: radial-gradient(@shape @size at @position , @inner-color 0%, @outer-color 100%);
+}
+
+/* GRID MIXINS - used to construct the grid */
+/* indent calculation mixin */
+.offset(@multiply, @add:0){
+    margin-left:(@percentColWidth * @multiply) + (@percentColGutter * @multiply) + (@percentColGutter * @add);
+}
+
+/* fixed indent calculation mixin */
+.fixedOffset(@multiply){
+    margin-left:(@fixedColWidth * @multiply);
+}
+
+/* reverse indent - works in reverse, unsurprisingly */
+.reverseOffset(@multiply, @add:0){
+    margin-right:(@percentColWidth * @multiply) + (@percentColGutter * @multiply) + (@percentColGutter * @add);
+}
+
+// Content hiding
+// -------------------------------------------------------------
+/* Make an element invisible to sighted users, but still visible to screen readers
+ * See: http://webaim.org/techniques/css/invisiblecontent/
+ */
+.invisible,
+.totally-invisible {
+    position: absolute;
+    left: -100000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    outline: 0;
+
+}
+
+.invisible {
+    &:focus {
+        position: static;
+        width: auto;
+        height: auto;
     }
-
-    .transparency( @trans ){
-        @mstrans: @trans * 100;
-        filter: alpha(opacity=@mstrans);
-        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity="@mstrans")"; /* IE 8 */
-        -moz-opacity: @trans; /* Netscape */
-        -khtml-opacity: @trans; /* Safari 1.x */
-        opacity: @trans; /* Good browsers */
-    }
-
-	/* --box sizing */
-	.border-box {
-		-moz-box-sizing   : border-box;
-		-webkit-box-sizing: border-box;
-		-ms-box-sizing    : border-box;
-		box-sizing        : border-box;
-	}
-	.content-box {
-		-moz-box-sizing   : content-box;
-		-webkit-box-sizing: content-box;
-		-ms-box-sizing    : content-box;
-		box-sizing        : content-box;
-		*behavior         : none;
-	}
-
-
-    /* GRID MIXINS - used to construct the grid */
-    /* indent calculation mixin */
-    .offset(@multiply, @add:0){
-        margin-left:(@percentColWidth * @multiply) + (@percentColGutter * @multiply) + (@percentColGutter * @add);
-    }
-
-    /* fixed indent calculation mixin */
-    .fixedOffset(@multiply){
-        margin-left:(@fixedColWidth * @multiply);
-    }
-
-    /* reverse indent - works in reverse, unsurprisingly */
-    .reverseOffset(@multiply, @add:0){
-        margin-right:(@percentColWidth * @multiply) + (@percentColGutter * @multiply) + (@percentColGutter * @add);
-    }
-
-
-    /* make an element invisible to sighted users but still visible to screen readers */
-    /* http://webaim.org/techniques/css/invisiblecontent/ */
-    .invisible,
-    .totallyinvisible {
-        position:absolute;
-        left:-100000px;
-        width:1px;
-        height:1px;
-        overflow:hidden;
-        outline:0;
-
-    }
-
-    .invisible {
-        &:focus {
-            position:static;
-            width:auto;
-            height:auto;
-        }
-    }
+}
