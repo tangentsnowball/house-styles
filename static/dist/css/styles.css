@@ -1,10 +1,20 @@
-/* the style guide should reflect the structure of the less */
-/* --variables */
-/* colours */
-/* forms */
-/* grid */
+/* -------------------------------------------------------------
+ * Application CSS tree
+ * NOTE - The styleguide should directly reflect the structure
+ * of this LESS file, for clarity
+ * ---------------------------------------------------------- */
+/* -------------------------------------------------------------
+ * Global application variables
+ * ---------------------------------------------------------- */
 /* -------------------------------------------------------------
  * Global mixins
+ * ---------------------------------------------------------- */
+/* -------------------------------------------------------------
+ * Mixin set - Grid construction
+ * Used to construct the responsive grid
+ * ---------------------------------------------------------- */
+/* -------------------------------------------------------------
+ * Mixin set - Gradients
  * ---------------------------------------------------------- */
 /* Only for modern browsers. IE8 and 9 will only show the background image and one colour, IE7 will fail to show anything, so fallbacks will be needed.
  * Note also that this defaults to no-repeat, top left, but this can be overridden
@@ -14,28 +24,11 @@
  * @size can be closest-side, closest-corner, farthest-side, farthest-corner
  * @position can be any value that background-position would accept, e.g. 10% 50%
 */
-/* GRID MIXINS - used to construct the grid */
-/* indent calculation mixin */
-/* fixed indent calculation mixin */
-/* reverse indent - works in reverse, unsurprisingly */
-/* Make an element invisible to sighted users, but still visible to screen readers
- * See: http://webaim.org/techniques/css/invisiblecontent/
- */
-.invisible,
-.totally-invisible {
-  position: absolute;
-  left: -100000px;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  outline: 0;
-}
-.invisible:focus {
-  position: static;
-  width: auto;
-  height: auto;
-}
-/* --reset */
+/* -------------------------------------------------------------
+ * Reset
+ * A collection of styles to unify initial appearance across
+ * browsers
+ * ---------------------------------------------------------- */
 body,
 div,
 article,
@@ -109,8 +102,13 @@ button::-moz-focus-inner {
   padding: 0;
   border: 0;
 }
-/* --page */
-/* this file should contain html and body styles, and any other styles that relate to the general wrapping of every page e.g. a pagewrapping element */
+/* -------------------------------------------------------------
+ * Page
+ * -------------------------------------------------------------
+ * This file should contain html and body styles, and any other
+ * styles that relate to the general wrapping of every page e.g.
+ * a page-wrapping element
+ * ---------------------------------------------------------- */
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -118,51 +116,53 @@ html {
 body {
   font-family: Arial, Verdana, sans-serif;
   font-size: 100%;
-  color: #333333;
+  color: #333;
 }
-/* --headings */
+/* -------------------------------------------------------------
+ * Typography
+ * Fonts, font sizes, styles, weights, etc.
+ * ---------------------------------------------------------- */
 h1,
 h2,
 h3,
 h4,
 h5,
 h6,
-.faux_h1,
-.faux_h2,
-.faux_h3,
-.faux_h4,
-.faux_h5,
-.faux_h6 {
+.faux-h1,
+.faux-h2,
+.faux-h3,
+.faux-h4,
+.faux-h5,
+.faux-h6 {
   display: block;
   margin: 0 0 0.5em 0;
   padding: 0;
   font-weight: normal;
 }
 h1,
-.faux_h1 {
+.faux-h1 {
   font-size: 200%;
 }
 h2,
-.faux_h2 {
+.faux-h2 {
   font-size: 170%;
 }
 h3,
-.faux_h3 {
+.faux-h3 {
   font-size: 150%;
 }
 h4,
-.faux_h4 {
+.faux-h4 {
   font-size: 140%;
 }
 h5,
-.faux_h5 {
+.faux-h5 {
   font-size: 120%;
 }
 h6,
-.faux_h6 {
+.faux-h6 {
   font-size: 110%;
 }
-/* --other */
 p {
   margin: 0px;
   padding: 0 0 0.75em 0;
@@ -173,7 +173,7 @@ small {
 blockquote {
   margin: 0 0 10px 20px;
   padding: 0 0 0 10px;
-  border-left: solid 3px #cccccc;
+  border-left: solid 3px #ccc;
   font-size: 1em;
   color: #666666;
 }
@@ -181,18 +181,23 @@ hr {
   height: 1px;
   margin: 0 0 0.5em 0;
   border: 0;
-  border-top: solid 1px #E7E7E7;
+  border-top: solid 1px #ccc;
   clear: both;
 }
 code {
   padding: 0 0.3em;
   font-size: 1.2em;
 }
-/*== GRID GENERATOR ==*/
-/* grid calculation mixins now stored in mixins.less */
-/* grid variables now stored in variables.less */
-/* base grid styles */
-/* IE8 will ignore border box when max/min width applied, solution is to create a wrapper for container and give that the max width and margin below */
+/* -------------------------------------------------------------
+ * Grid Generator
+ * Grid setup variables - column count, margins, etc. can be
+ * found in variables.less
+ * ---------------------------------------------------------- */
+/* -------------------------------------------------------------
+ * IE8 will ignore border-box when max/min width applied,
+ * solution is to create a wrapper for container and give that
+ * the max width and margin below
+ * ---------------------------------------------------------- */
 .container {
   margin: 0 auto;
   padding: 0 10px;
@@ -200,19 +205,8 @@ code {
   max-width: 1024px;
 }
 .row {
-  zoom: 1;
   clear: both;
-  /* build all the columns */
   /* http://blog.thehippo.de/2012/04/programming/do-a-loop-with-less-css/ */
-  /* build all the indents - need to use new variables for this loop */
-  /* fixed column spaced grid for nesting - most projects will not need this */
-  /* end fixed column spacing */
-  /* reverse layout for right to left, including indents */
-  /* end reverse layout */
-}
-.row:before {
-  content: '';
-  display: block;
 }
 .row:after {
   content: '';
@@ -328,90 +322,84 @@ code {
 .row .offset1:first-child {
   margin-left: 8.49609375%;
 }
-.row.fixedspacing {
-  /* indents */
-}
-.row.fixedspacing .row {
+.row.fixed-spacing .row {
   margin-left: -10px;
   margin-right: -10px;
 }
-.row.fixedspacing [class*="span"] {
+.row.fixed-spacing [class*="span"] {
   margin: 0;
   padding-left: 10px;
   padding-right: 10px;
   box-sizing: border-box;
 }
-.row.fixedspacing .span12 {
+.row.fixed-spacing .span12 {
   width: 100%;
 }
-.row.fixedspacing .span11 {
+.row.fixed-spacing .span11 {
   width: 91.66666667%;
 }
-.row.fixedspacing .span10 {
+.row.fixed-spacing .span10 {
   width: 83.33333333%;
 }
-.row.fixedspacing .span9 {
+.row.fixed-spacing .span9 {
   width: 75%;
 }
-.row.fixedspacing .span8 {
+.row.fixed-spacing .span8 {
   width: 66.66666667%;
 }
-.row.fixedspacing .span7 {
+.row.fixed-spacing .span7 {
   width: 58.33333333%;
 }
-.row.fixedspacing .span6 {
+.row.fixed-spacing .span6 {
   width: 50%;
 }
-.row.fixedspacing .span5 {
+.row.fixed-spacing .span5 {
   width: 41.66666667%;
 }
-.row.fixedspacing .span4 {
+.row.fixed-spacing .span4 {
   width: 33.33333333%;
 }
-.row.fixedspacing .span3 {
+.row.fixed-spacing .span3 {
   width: 25%;
 }
-.row.fixedspacing .span2 {
+.row.fixed-spacing .span2 {
   width: 16.66666667%;
 }
-.row.fixedspacing .span1 {
+.row.fixed-spacing .span1 {
   width: 8.33333333%;
 }
-.row.fixedspacing .offset11 {
+.row.fixed-spacing .offset11 {
   margin-left: 91.66666667%;
 }
-.row.fixedspacing .offset10 {
+.row.fixed-spacing .offset10 {
   margin-left: 83.33333333%;
 }
-.row.fixedspacing .offset9 {
+.row.fixed-spacing .offset9 {
   margin-left: 75%;
 }
-.row.fixedspacing .offset8 {
+.row.fixed-spacing .offset8 {
   margin-left: 66.66666667%;
 }
-.row.fixedspacing .offset7 {
+.row.fixed-spacing .offset7 {
   margin-left: 58.33333333%;
 }
-.row.fixedspacing .offset6 {
+.row.fixed-spacing .offset6 {
   margin-left: 50%;
 }
-.row.fixedspacing .offset5 {
+.row.fixed-spacing .offset5 {
   margin-left: 41.66666667%;
 }
-.row.fixedspacing .offset4 {
+.row.fixed-spacing .offset4 {
   margin-left: 33.33333333%;
 }
-.row.fixedspacing .offset3 {
+.row.fixed-spacing .offset3 {
   margin-left: 25%;
 }
-.row.fixedspacing .offset2 {
+.row.fixed-spacing .offset2 {
   margin-left: 16.66666667%;
 }
-.row.fixedspacing .offset1 {
+.row.fixed-spacing .offset1 {
   margin-left: 8.33333333%;
-}
-.row.reverselayout {
-  /* indents */
 }
 .row.reverselayout [class*="span"] {
   float: right;
@@ -487,13 +475,15 @@ code {
 .row.reverselayout .offset1:first-child {
   margin-right: 8.49609375%;
 }
-.row.reverselayout.fixedspacing [class*="span"] {
+.row.reverselayout.fixed-spacing [class*="span"] {
   margin: 0;
 }
 .ie7 .row [class*="span"] {
   margin-right: -1px;
 }
-/* --forms and form elements */
+/* -------------------------------------------------------------
+ * Forms
+ * ---------------------------------------------------------- */
 .form {
   margin-bottom: 20px;
 }
@@ -504,7 +494,7 @@ code {
   margin-bottom: 5px;
 }
 .form label,
-.form .faux_label {
+.form .faux-label {
   float: left;
   padding: 0 0 5px 0;
   width: 25%;
@@ -533,13 +523,13 @@ code {
 .form select[multiple="multiple"] {
   height: 80px;
 }
-.form .errormsg {
+.form .error-msg {
   display: none;
   box-sizing: border-box;
   color: red;
   font-size: 90%;
 }
-.form .helptext {
+.form .help-text {
   display: block;
   width: 70%;
   margin-left: 30%;
@@ -549,11 +539,6 @@ code {
 }
 .form .field {
   padding-bottom: 10px;
-  zoom: 1;
-}
-.form .field:before {
-  content: '';
-  display: block;
 }
 .form .field:after {
   content: '';
@@ -571,7 +556,7 @@ code {
 .form .field.error textarea {
   border-color: red;
 }
-.form .field.error .errormsg {
+.form .field.error .error-msg {
   display: block;
 }
 .form .field.radiocheck {
@@ -588,7 +573,7 @@ code {
   top: 3px;
   left: 5px;
 }
-.form .field.radiocheck .errormsg {
+.form .field.radiocheck .error-msg {
   padding-left: 30px;
   clear: left;
 }
@@ -600,22 +585,19 @@ code {
 .form .field.required label:after {
   content: " *";
 }
-/*
-    button[disabled], input[disabled] { cursor: default; }
-    */
-/* --links */
+/* -------------------------------------------------------------
+ * Links
+ * ---------------------------------------------------------- */
 a {
-  text-decoration: underline;
-}
-a:hover {
+  color: #428bca;
   text-decoration: none;
 }
-/* --buttons */
-/* button variables */
-/* left and right padding for buttons */
-/* button font size */
-/* used to control the vertical padding of buttons, should therefore be larger than btnfontsize */
-/* almost! managed to normalise the heights across IEs, FF and everyone else */
+a:hover {
+  text-decoration: underline;
+}
+/* -------------------------------------------------------------
+ * Buttons
+ * ---------------------------------------------------------- */
 input.btn {
   padding-top: 0;
   padding-bottom: 0;
@@ -624,7 +606,6 @@ input.btn {
 input.btn.btn-small {
   height: 1.21428571em;
 }
-/* Remove button padding in FF - otherwise all buttons are 2px taller than links with the same style */
 input::-moz-focus-inner,
 button::-moz-focus-inner {
   border: 0;
@@ -638,7 +619,7 @@ button::-moz-focus-inner {
   box-sizing: border-box;
   border: solid 1px #AAA;
   border: 0;
-  background: #DDD;
+  background: #ccc;
   color: #666;
   outline: 0;
   cursor: pointer;
@@ -650,17 +631,6 @@ button::-moz-focus-inner {
   border-collapse: separate;
   overflow: visible;
 }
-.btn.btn-small {
-  font-size: 0.9em;
-  line-height: 1.41666667em;
-  font-weight: normal;
-}
-.btn.btn-large {
-  font-size: 1.4em;
-}
-.btn:hover {
-  text-decoration: none;
-}
 .btn.btn-block {
   display: block;
   width: 100%;
@@ -669,33 +639,48 @@ button::-moz-focus-inner {
 .btn.btn-block.center {
   text-align: center;
 }
+.btn.btn-small {
+  font-size: 0.9em;
+  line-height: 1.41666667em;
+  font-weight: normal;
+}
+.btn.btn-large {
+  font-size: 1.4em;
+}
+.btn:hover,
+.btn:focus {
+  text-decoration: none;
+}
+.btn:active {
+  text-decoration: none;
+}
 .btn[disabled],
 .btn.disabled {
   cursor: default;
   text-decoration: line-through;
 }
 .btn.btn-primary {
-  color: #840100;
+  color: #428bca;
 }
 .btn.btn-secondary {
-  color: #2a3189;
+  color: #428bca;
 }
 .btn.btn-info {
-  color: green;
+  color: #5bc0de;
+}
+.btn.btn-warning {
+  color: #f0ad4e;
 }
 .btn.btn-danger {
-  color: red;
+  color: #d9534f;
 }
-/* --button dropdowns */
+/* -------------------------------------------------------------
+ * Button groups
+ * ---------------------------------------------------------- */
 .btn-group {
   display: inline-block;
   position: relative;
   vertical-align: middle;
-  zoom: 1;
-}
-.btn-group:before {
-  content: '';
-  display: block;
 }
 .btn-group:after {
   content: '';
@@ -765,43 +750,48 @@ button::-moz-focus-inner {
   border-width: 5px 5px 0 5px;
   border-color: #000000 transparent;
 }
-/* --lists */
-ul.standard {
+/* -------------------------------------------------------------
+ * Lists
+ * ---------------------------------------------------------- */
+ul.list-standard {
   margin: 0 0 1em 1.5em;
 }
-ul.standard li {
+ul.list-standard li {
   padding-bottom: 0.5em;
   list-style: disc;
 }
-ol.standard {
+ol.list-standard {
   margin: 0 0 1em 1.5em;
 }
-ol.standard li {
+ol.list-standard li {
   padding-bottom: 0.5em;
   list-style: decimal;
 }
-dl.standard {
+dl.list-standard {
   margin-bottom: 0.5em;
 }
-dl.standard dt {
+dl.list-standard dt {
   font-weight: bold;
 }
-dl.standard dd {
+dl.list-standard dd {
   padding: 0 0 0.5em 1em;
 }
-/* generic styling for lists inside content? */
-/* --media objects */
+/* -------------------------------------------------------------
+ * Media Objects
+ * img, object, iframe, etc.
+ * ---------------------------------------------------------- */
 img,
 object {
   max-width: 100%;
 }
-#map-canvas img {
-  max-width: inherit;
-}
 a img {
   border: 0;
 }
-/* useful styles to ensure youtube videos always maintain sensible aspect ratio, wrap iframe in this, set width to 100% and no height attribute */
+/* -------------------------------------------------------------
+ * Useful styles to ensure youtube videos always maintain sensible
+ * aspect ratio, wrap iframe in this, set width to 100% and no
+ * height attribute
+ * ---------------------------------------------------------- */
 .videomagic {
   position: relative;
   padding-bottom: 56.25%;
@@ -817,7 +807,12 @@ a img {
   width: 100%;
   height: 100%;
 }
-/* --tables */
+#map-canvas img {
+  max-width: inherit;
+}
+/* -------------------------------------------------------------
+ * Tables
+ * ---------------------------------------------------------- */
 .table {
   width: 100%;
   margin: 0 0 0.5em 0;
@@ -829,9 +824,6 @@ a img {
   vertical-align: top;
   text-align: left;
 }
-.table tr {
-  /* not sure this is a great idea */
-}
 .table tr th:first-child,
 .table tr td:first-child {
   padding-left: 0;
@@ -840,7 +832,10 @@ a img {
 .table tr td:last-child {
   padding-right: 0;
 }
-/* --utility classes */
+/* -------------------------------------------------------------
+ * Utility classes
+ * Useful stuff intended to be used on any HTML element
+ * ---------------------------------------------------------- */
 .align-center {
   text-align: center;
 }
@@ -849,6 +844,12 @@ a img {
 }
 .align-right {
   text-align: right;
+}
+.align-justify {
+  text-align: justify;
+}
+.align-justify-all {
+  text-align: justify-all;
 }
 .float-left {
   float: left;
@@ -862,40 +863,56 @@ a img {
 .italic {
   font-style: italic;
 }
+.underline {
+  text-decoration: underline;
+}
 .hidden {
   display: none;
+  visibility: hidden;
 }
 .block {
   display: block;
 }
-/* --clearfix */
-* html .clearfix {
-  height: 1%;
-  overflow: visible;
-}
-/* float clearing for IE6 */
-* + html .clearfix {
-  min-height: 1%;
-}
-/* float clearing for IE7 */
 .clearfix:after {
+  content: '';
+  display: table;
   clear: both;
-  content: ".";
-  display: block;
-  height: 0;
-  visibility: hidden;
-  font-size: 0;
 }
-/* float clearing for everyone else */
-/* --header */
-/* --footer */
-/* --navigation */
-/* --alerts */
+/* Make an element invisible to sighted users, but still
+ * visible to screen readers
+ * See: http://webaim.org/techniques/css/invisiblecontent/
+ */
+.invisible,
+.totally-invisible {
+  position: absolute;
+  left: -100000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  outline: 0;
+}
+.invisible:focus {
+  position: static;
+  width: auto;
+  height: auto;
+}
+/* -------------------------------------------------------------
+ * Header
+ * ---------------------------------------------------------- */
+/* -------------------------------------------------------------
+ * Footer
+ * ---------------------------------------------------------- */
+/* -------------------------------------------------------------
+ * Nav
+ * ---------------------------------------------------------- */
+/* -------------------------------------------------------------
+ * Alerts
+ * ---------------------------------------------------------- */
 .alert {
   position: relative;
   margin: 0 0 0.5em 0;
   padding: 10px 20px;
-  background: #CCCCCC;
+  background: #a6c8e6;
 }
 .alert .close {
   position: absolute;
@@ -909,18 +926,20 @@ a img {
   color: #000000;
 }
 .alert.alert-warning {
-  background: #b4b4f8;
+  background: #fae3c4;
 }
 .alert.alert-error {
-  background: #e59393;
+  background: #f0b9b8;
 }
 .alert.alert-success {
-  background: #a5e593;
+  background: #b5dfb5;
 }
 .no-js .alert .close {
   display: none;
 }
-/* --popups */
+/* -------------------------------------------------------------
+ * Popups
+ * ---------------------------------------------------------- */
 .popupwrapper .mask {
   display: none;
   position: fixed;
@@ -938,7 +957,7 @@ a img {
   padding: 10px;
   margin: 0 0 0 -300px;
   box-sizing: border-box;
-  background: #FFFFFF;
+  background: #FFF;
 }
 .popupwrapper .popup.fixed {
   position: fixed;
@@ -949,7 +968,9 @@ a img {
   max-height: 90%;
   overflow-y: scroll;
 }
-/* --tabs */
+/* -------------------------------------------------------------
+ * Tabs
+ * ---------------------------------------------------------- */
 .tabwrapper {
   margin: 0 0 1em 0;
 }
@@ -975,13 +996,6 @@ a img {
 .tabwrapper .tabpane.active {
   display: block;
 }
-.tabwrapper.tabs-left {
-  zoom: 1;
-}
-.tabwrapper.tabs-left:before {
-  content: '';
-  display: block;
-}
 .tabwrapper.tabs-left:after {
   content: '';
   display: table;
@@ -1000,13 +1014,6 @@ a img {
   width: 80%;
   clear: none;
   box-sizing: border-box;
-}
-.tabwrapper.tabs-right {
-  zoom: 1;
-}
-.tabwrapper.tabs-right:before {
-  content: '';
-  display: block;
 }
 .tabwrapper.tabs-right:after {
   content: '';
@@ -1027,7 +1034,9 @@ a img {
   clear: none;
   box-sizing: border-box;
 }
-/* --wells */
+/* -------------------------------------------------------------
+ * Wells
+ * ---------------------------------------------------------- */
 .well {
   padding: 20px;
   margin: 0 0 2em 0;

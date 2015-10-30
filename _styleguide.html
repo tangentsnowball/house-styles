@@ -99,13 +99,13 @@
                     
                     <h3>Headings</h3>
                     
-                    <span class="faux_h1">Heading 1</span>
-                    <span class="faux_h2">Heading 2</span>
-                    <span class="faux_h3">Heading 3</span>
-                    <span class="faux_h4">Heading 4</span>
-                    <span class="faux_h5">Heading 5</span>
-                    <span class="faux_h6">Heading 6</span>
-                    <p>Note that the appearance of headings can be created using the faux classes as shown above, e.g.<code>.faux_h1</code>.</p>
+                    <span class="faux-h1">Heading 1</span>
+                    <span class="faux-h2">Heading 2</span>
+                    <span class="faux-h3">Heading 3</span>
+                    <span class="faux-h4">Heading 4</span>
+                    <span class="faux-h5">Heading 5</span>
+                    <span class="faux-h6">Heading 6</span>
+                    <p>Note that the appearance of headings can be created using the faux classes as shown above, e.g.<code>.faux-h1</code>.</p>
                     <p>This is a paragraph of text. This is a paragraph of text. This is a paragraph of text. This is a paragraph of text. This is a paragraph of text. This is a paragraph of text. This is a paragraph of text. This is a paragraph of text. This is a <a href="#">link example</a>.</p>
                     <p><small>This is smalltext. This is smalltext. This is smalltext.</small></p>
                     <p>This paragraph demonstrates <strong>strong</strong>, <em>italic</em>.</p>
@@ -115,29 +115,29 @@
                         <li>This is an unstyled ul</li>
                         <li>This is an unstyled ul</li>
                     </ul>
-                    <ul class="standard">
-                        <li>This is a <code>.standard</code> ul</li>
-                        <li>This is a <code>.standard</code> ul</li>
+                    <ul class="list-standard">
+                        <li>This is a <code>.list-standard</code> ul</li>
+                        <li>This is a <code>.list-standard</code> ul</li>
                     </ul>
 
                     <ol>
                         <li>This is an unstyled ol</li>
                         <li>This is an unstyled ol</li>
                     </ol>
-                    <ol class="standard">
-                        <li>This is a <code>.standard</code> ol</li>
-                        <li>This is a <code>.standard</code> ol</li>
+                    <ol class="list-standard">
+                        <li>This is a <code>.list-standard</code> ol</li>
+                        <li>This is a <code>.list-standard</code> ol</li>
                     </ol>
 
                     <dl>
                         <dt>definition list dt</dt>
                         <dd>definition list dd</dd>
                     </dl>
-                    <dl class="standard">
-                        <dt>This is a <code>.standard</code> dl</dt>
-                        <dd>This is a <code>.standard</code> dl</dd>
-                        <dt>This is a <code>.standard</code> dl</dt>
-                        <dd>This is a <code>.standard</code> dl</dd>
+                    <dl class="list-standard">
+                        <dt>This is a <code>.list-standard</code> dl</dt>
+                        <dd>This is a <code>.list-standard</code> dl</dd>
+                        <dt>This is a <code>.list-standard</code> dl</dt>
+                        <dd>This is a <code>.list-standard</code> dl</dd>
                     </dl>
 
                     <h3>Blockquotes</h3>
@@ -373,15 +373,15 @@
 
                     <h2>Grid within grid, fixed spacing</h2>
                     <p>The grid is based on percentages, including the space between grid columns. This means that a grid row within a grid row will have a narrower gap between columns because the same percentage of a narrower column is smaller (see above example).</p>
-                    <p>For grids that must maintain a fixed column spacing, the <code>.fixedspacing</code> class can be applied to the parent grid row. This will ensure that the spacing between columns remains consistent even for nested grids.</p>
+                    <p>For grids that must maintain a fixed column spacing, the <code>.fixed-spacing</code> class can be applied to the parent grid row. This will ensure that the spacing between columns remains consistent even for nested grids.</p>
                     <p>This approach is considerably more limiting as the fixed column spacing must be split between the left and right of each column, meaning that the first left column will not align perfectly left as in the regular grid. e.g. if the column spacing is 20px, each column receives 10px of padding to the left and right.</p>
                     <p>Grid indents can also be applied to the fixed spaced grid as normal.</p>
 
-                    <div class="row fixedspacing">
+                    <div class="row fixed-spacing">
                         <div class="span8">.span8</div>
                         <div class="span4">.span4</div>
                     </div>
-                    <div class="row fixedspacing">
+                    <div class="row fixed-spacing">
                         <div class="span8">
                             <div class="row">
                                 <div class="span4">.span4</div>
@@ -398,7 +398,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row fixedspacing">
+                    <div class="row fixed-spacing">
                         <div class="span8">
                             <div class="row">
                                 <div class="span4">
@@ -481,13 +481,13 @@
                             <div class="field">
                                 <label for="text1">This is a text field</label>
                                 <input type="text" id="text1"/>
-                                <span class="helptext">This is some help text that has been put here to be helpful</span>
+                                <span class="help-text">This is some help text that has been put here to be helpful</span>
                             </div>
 
                             <div class="field">
                                 <label for="textarea1">This is a textarea</label>
                                 <textarea id="textarea1"></textarea>
-                                <span class="helptext">This is some help text that has been put here to be helpful</span>
+                                <span class="help-text">This is some help text that has been put here to be helpful</span>
                             </div>
 
                             <div class="field">
@@ -497,7 +497,7 @@
                                     <option>Option 1</option>
                                     <option>Option 2</option>
                                 </select>
-                                <span class="helptext">This is some help text that has been put here to be helpful</span>
+                                <span class="help-text">This is some help text that has been put here to be helpful</span>
                             </div>
 
                             <div class="field">
@@ -509,13 +509,13 @@
                                     <option>Option 4</option>
                                     <option>Option 5</option>
                                 </select>
-                                <span class="helptext">This is some help text that has been put here to be helpful</span>
+                                <span class="help-text">This is some help text that has been put here to be helpful</span>
                             </div>
 
                             <div class="field">
                                 <label for="file1">This is a file input</label>
                                 <input type="file" id="file1"/>
-                                <span class="helptext">This is some help text that has been put here to be helpful</span>
+                                <span class="help-text">This is some help text that has been put here to be helpful</span>
                             </div>
                             
                             <div class="buttons">
@@ -529,7 +529,7 @@
 &lt;div class="field"&gt;
     &lt;label for="text1"&gt;This is a text field&lt;/label&gt;
     &lt;input type="text" id="text1"/&gt;
-    &lt;span class="helptext"&gt;This is some help text that has been put here to be helpful&lt;/span&gt;
+    &lt;span class="help-text"&gt;This is some help text that has been put here to be helpful&lt;/span&gt;
 &lt;/div&gt;
 &lt;div class="buttons"&gt;
     &lt;button type="submit" class="btn"&gt;Submit&lt;/button&gt;
@@ -544,15 +544,15 @@
                             <div class="field error required">
                                 <label for="text2">This is a text field</label>
                                 <input type="text" id="text2"/>
-                                <span class="errormsg">This field is required</span>
-                                <span class="helptext">This is some help text that has been put here to be helpful</span>
+                                <span class="error-msg">This field is required</span>
+                                <span class="help-text">This is some help text that has been put here to be helpful</span>
                             </div>
 
                             <div class="field error required">
                                 <label for="textarea2">This is a textarea</label>
                                 <textarea id="textarea2"></textarea>
-                                <span class="errormsg">This field is required</span>
-                                <span class="helptext">This is some help text that has been put here to be helpful</span>
+                                <span class="error-msg">This field is required</span>
+                                <span class="help-text">This is some help text that has been put here to be helpful</span>
                             </div>
 
                             <div class="field error required">
@@ -562,8 +562,8 @@
                                     <option>Option 1</option>
                                     <option>Option 2</option>
                                 </select>
-                                <span class="errormsg">This field is required</span>
-                                <span class="helptext">This is some help text that has been put here to be helpful</span>
+                                <span class="error-msg">This field is required</span>
+                                <span class="help-text">This is some help text that has been put here to be helpful</span>
                             </div>
 
                             <div class="field error required">
@@ -575,15 +575,15 @@
                                     <option>Option 4</option>
                                     <option>Option 5</option>
                                 </select>
-                                <span class="errormsg">This field is required</span>
-                                <span class="helptext">This is some help text that has been put here to be helpful</span>
+                                <span class="error-msg">This field is required</span>
+                                <span class="help-text">This is some help text that has been put here to be helpful</span>
                             </div>
 
                             <div class="field error required">
                                 <label for="file2">This is a file input</label>
                                 <input type="file" id="file2"/>
-                                <span class="errormsg">This field is required</span>
-                                <span class="helptext">This is some help text that has been put here to be helpful</span>
+                                <span class="error-msg">This field is required</span>
+                                <span class="help-text">This is some help text that has been put here to be helpful</span>
                             </div>
 
                             <div class="buttons">
@@ -597,8 +597,8 @@
 &lt;div class="field error"&gt;
     &lt;label for="text1"&gt;This is a text field&lt;/label&gt;
     &lt;input type="text" id="text1"/&gt;
-    &lt;span class="errormsg"&gt;This field is required&lt;/span&gt;
-    &lt;span class="helptext"&gt;This is some help text that has been put here to be helpful&lt;/span&gt;
+    &lt;span class="error-msg"&gt;This field is required&lt;/span&gt;
+    &lt;span class="help-text"&gt;This is some help text that has been put here to be helpful&lt;/span&gt;
 &lt;/div&gt;
 &lt;div class="buttons"&gt;
     &lt;button type="submit" class="btn"&gt;Submit&lt;/button&gt;
@@ -625,11 +625,11 @@
                             <div class="field radiocheck error">
                                 <label for="cb3">This is a checkbox with an error</label>
                                 <input type="checkbox" id="cb3"/>
-                                <span class="errormsg">This field is required</span>
+                                <span class="error-msg">This field is required</span>
                             </div>
                             <div class="field radiocheck horizontal error">
-                                <span class="faux_label">Are these checkboxes?</span>
-                                <span class="helptext">The additional class of <code>.horizontal</code> is applied here. This might only work where the label text is short</span>
+                                <span class="faux-label">Are these checkboxes?</span>
+                                <span class="help-text">The additional class of <code>.horizontal</code> is applied here. This might only work where the label text is short</span>
                                 <label><input type="checkbox" name="cb4"/>Yes</label>
                                 <label><input type="checkbox" name="cb5"/>No</label>
                                 <label><input type="checkbox" name="cb6"/>Maybe</label>
@@ -641,15 +641,15 @@
                         <fieldset>
                             <!-- radio -->
                             <div class="field radiocheck error">
-                                <span class="faux_label">These are some radio buttons</span>
+                                <span class="faux-label">These are some radio buttons</span>
                                 <label><input type="radio" name="rad1"/>This is a radio button</label>
                                 <label><input type="radio" name="rad1"/>This is a radio button</label>
                                 <label><input type="radio" name="rad1"/>This is a radio button</label>
-                                <span class="errormsg">This field is required</span>
+                                <span class="error-msg">This field is required</span>
                             </div>
                             <div class="field radiocheck horizontal error">
-                                <span class="faux_label">Are these radio buttons?</span>
-                                <span class="helptext">The additional class of <code>.horizontal</code> is applied here. This might only work where the label text is short</span>
+                                <span class="faux-label">Are these radio buttons?</span>
+                                <span class="help-text">The additional class of <code>.horizontal</code> is applied here. This might only work where the label text is short</span>
                                 <label><input type="radio" name="rad2"/>Yes</label>
                                 <label><input type="radio" name="rad2"/>No</label>
                                 <label><input type="radio" name="rad2"/>Maybe</label>
@@ -664,15 +664,15 @@
     &lt;fieldset&gt;
         &lt;div class="field"&gt;
             &lt;label for="text"&gt;Text field&lt;/label&gt;
-            &lt;span class="helptext"&gt;Help text, optional&lt;/span&gt;
+            &lt;span class="help-text"&gt;Help text, optional&lt;/span&gt;
             &lt;input type="text" id="text"/&gt;
-            &lt;span class="errormsg"&gt;Error, only visible if parent has error class&lt;/span&gt;
+            &lt;span class="error-msg"&gt;Error, only visible if parent has error class&lt;/span&gt;
         &lt;/div&gt;
         &lt;div class="field error"&gt;
             &lt;label for="text"&gt;Text field&lt;/label&gt;
-            &lt;span class="helptext"&gt;Help text, optional&lt;/span&gt;
+            &lt;span class="help-text"&gt;Help text, optional&lt;/span&gt;
             &lt;input type="text" id="text"/&gt;
-            &lt;span class="errormsg"&gt;Error, only visible if parent has error class&lt;/span&gt;
+            &lt;span class="error-msg"&gt;Error, only visible if parent has error class&lt;/span&gt;
         &lt;/div&gt;
     &lt;/fieldset&gt;
 &lt;/form&gt;
@@ -708,7 +708,7 @@
                     <p>Buttons are controlled through the <code>.btn</code> class, with additional classes to control the appearance and size.</p>
                     <p>Buttons should look exactly the same for any reasonable element type they are applied to, although there seems to be an inherent difficulty in making <code>input</code> elements match the height of the other elements cross-browser. It is therefore recommended that only <code>a</code> and <code>button</code> are used for buttons.</p>
                     <p>Basic styles:</p>
-                    <ul class="standard">
+                    <ul class="list-standard">
                         <li><code>.btn-primary</code></li>
                         <li><code>.btn-secondary</code></li>
                         <li><code>.btn-info</code></li>
@@ -716,7 +716,7 @@
                     </ul>
 
                     <p>Additional button styles:<p>
-                    <ul class="standard">
+                    <ul class="list-standard">
                         <li><code>.disabled</code></li>
                         <li><code>.btn-small</code></li>
                         <li><code>.btn-large</code></li>
@@ -884,7 +884,7 @@
                 <section id="utility">
                     <h2>Utility classes</h2>
                     <p>The following classes are self explanatory.</p>
-                    <ul class="standard">
+                    <ul class="list-standard">
                         <li><code>.align-center</code></li>
                         <li><code>.align-left</code></li>
                         <li><code>.align-right</code></li>
@@ -903,7 +903,7 @@
                     <h2>Plugins and JavaScript</h2>
                     <h3>Class naming and use conventions</h3>
                     <p>All code on the site should adhere to the following convention for class naming and use with regard to JavaScript.</p>
-                    <ol class="standard">
+                    <ol class="list-standard">
                         <li>IDs should only be used for JavaScript, not for styling.</li>
                         <li>Any class used for JavaScript should be prefixed with "js-" and not have any styles associated with it.</li>
                         <li>JavaScript can also be activated through the use of the data attribute on elements.</li>
@@ -1037,7 +1037,7 @@
                     <p>Popups are hidden elements at the foot of the page revealed by a click action on a specific element. By default popups are positioned 10% from the top of the current window position, unless the <code>data-position="fixed"</code> attribute is added to the link.</p>
 
 
-                    <ul class="standard">
+                    <ul class="list-standard">
                         <li>
                             <a href="#" class="js-openpopup" data-target="1">Standard popup</a>
                             (<a href="#" class="js-openpopup" data-target="2">large version</a>)

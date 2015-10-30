@@ -1,25 +1,63 @@
-/* --variables */
+/* -------------------------------------------------------------
+ * Global application variables
+ * ---------------------------------------------------------- */
 
-    /* colours */
+// Colour palette
+// -------------------------------------------------------------
+// Greyscale
+@black: #000;
+@grey:  #888;
+    @grey-dark: #333;
+    @grey-pale: #ccc;
+@white: #FFF;
 
-    @black: #333333;
+// Branding
+@brand-primary:   #428bca;
+@brand-secondary: #428bca;
+@brand-success:   #5cb85c;
+@brand-info:      #5bc0de;
+@brand-warning:   #f0ad4e;
+@brand-danger:    #d9534f;
 
+// Scaffolding
+// -------------------------------------------------------------
+@body-bg: @white;
 
-    /* forms */
+// Forms
+// -------------------------------------------------------------
+@label-width: 25%;
+@input-width: 70%;
+@form-element-margin: 5%; // gap between label and input
+@form-element-spacing: 5px; //spacing beneath input
+@help-width: @input-width;
 
-    @labelWidth: 25%;
-    @inputWidth: 70%;
-    @formElementMargin: 5%; //gap between label and input
-    @formElementSpacing: 5px; //spacing beneath input
-    @helpWidth: @inputWidth;
+// Buttons
+// -------------------------------------------------------------
+@btn-x-padding: 0.5em; // left and right padding for buttons
+@btn-font-size: 1em; // button font size
+@btn-line-height: 1.7em; // used to control the vertical padding of buttons, should therefore be larger than btn-font-size
 
-    /* grid */
+// Popups
+// -------------------------------------------------------------
+@popup-width: 600px;
 
-    @gridWidth: 1024px; //set to maximum page width required
-    @gridSpacing: 20; //spacing between columns required
-    @numCols: 12; //number of columns required
-    @fixedspacing: 20px; //used for fixed spacing grid
+// Tabs
+// -------------------------------------------------------------
+@tab-colour: #AAAAAA;
+@tab-active: #CCCCCC;
 
-    @percentColGutter: percentage(@gridSpacing / @gridWidth);
-    @percentColWidth: percentage(((@gridWidth - (@gridSpacing * (@numCols - 1))) / @numCols) / @gridWidth);
-    @fixedColWidth: percentage((@gridWidth / @numCols) / @gridWidth);
+// Grid
+// -------------------------------------------------------------
+// @breakpoint-xs: 30em;  // 480px
+// @breakpoint-sm: 48em;  // 768px
+// @breakpoint-md: 62em;  // 992px
+// @breakpoint-lg: 75em; // 1200px
+// @breakpoint-xl: 90em; // 1440px
+@grid-width: 1024px; // set to maximum page width required
+@column-count: 12; // number of columns required
+@grid-spacing: 20; // spacing between columns required
+@grid-spacing-fixed: 20px; // used for fixed spacing grid
+
+@column-gutter-pct: percentage(@grid-spacing / @grid-width);
+@column-width-pct: percentage(((@grid-width - (@grid-spacing * (@column-count - 1))) / @column-count) / @grid-width);
+@column-width-fixed: percentage((@grid-width / @column-count) / @grid-width);

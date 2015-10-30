@@ -1,0 +1,46 @@
+/* -------------------------------------------------------------
+ * Mixin set - Gradients
+ * ---------------------------------------------------------- */
+
+// Vertical, two colour
+// -------------------------------------------------------------
+.vertical-gradient( @startcolor, @startpoint, @endcolor, @endpoint ) {
+    background: @endcolor;
+    background: linear-gradient(top, @startcolor @startpoint, @endcolor @endpoint);
+}
+
+// Vertical, four colours
+// -------------------------------------------------------------
+.vertical-multi-gradient( @color1, @pos1, @color2, @pos2, @color3, @pos3, @color4, @pos4 ){
+    background: @pos4;
+    background: linear-gradient(top, @color1 @pos1, @color2 @pos2, @color3 @pos3, @color4 @pos4);
+}
+
+// Vertical image-gradient
+// -------------------------------------------------------------
+/* Only for modern browsers. IE8 and 9 will only show the background image and one colour, IE7 will fail to show anything, so fallbacks will be needed.
+ * Note also that this defaults to no-repeat, top left, but this can be overridden
+ */
+.vertical-image-gradient( @startcolor, @startpoint, @endcolor, @endpoint, @image ){
+    background: @endcolor url(@image) no-repeat 0 0;
+    background: url(@image), linear-gradient(top, @startcolor @startpoint, @endcolor @endpoint);
+}
+
+// Horizontal, two colour
+// -------------------------------------------------------------
+.horizontal-gradient( @startcolor, @startpoint, @endcolor, @endpoint ) {
+    background: @endcolor;
+    background: linear-gradient(to right,  @startcolor @startpoint,@endcolor @endpoint);
+}
+
+// Radial
+// -------------------------------------------------------------
+/* limited support for IE, will only work in IE10+.
+ * @shape can be circle or ellipse (ellipse untested)
+ * @size can be closest-side, closest-corner, farthest-side, farthest-corner
+ * @position can be any value that background-position would accept, e.g. 10% 50%
+*/
+.radial-gradient(@inner-color: #0058a1, @outer-color: #040505, @shape: ellipse, @size: farthest-corner, @position: center center ){
+    background-color: @outer-color;
+    background-image: radial-gradient(@shape @size at @position , @inner-color 0%, @outer-color 100%);
+}
