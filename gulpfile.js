@@ -43,8 +43,8 @@ function processCss(inputStream, taskType) {
         .pipe($.rename({suffix: '.min'}))
         .pipe($.minifyCss({advanced: false}))
         .pipe(gulp.dest(paths.styles.dest))
-        .pipe(browserSync.stream())
-        .pipe($.notify({ message: taskType + ' task complete' }));
+        .pipe(browserSync.stream())/*
+        .pipe($.notify({ message: taskType + ' task complete' }))*/;
 }
 
 gulp.task('styles', ['less:main', 'less:responsive']);
@@ -71,8 +71,8 @@ gulp.task('scripts', ['scripts:moveFiles'], function() {
     .pipe($.uglify())
     .pipe($.bytediff.stop())
     .pipe(gulp.dest(paths.scripts.dest))
-    .pipe(browserSync.stream())
-    .pipe($.notify({ message: 'Scripts task complete' }));
+    .pipe(browserSync.stream())/*
+    .pipe($.notify({ message: 'Scripts task complete' }))*/;
 });
 
 /* Move JS files that are already minified to dist/js/ folder */
@@ -93,8 +93,8 @@ gulp.task('images', function() {
     .pipe($.cache($.imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
     .pipe($.bytediff.stop())
     .pipe(gulp.dest(paths.images.dest))
-    .pipe(browserSync.stream())
-    .pipe($.notify({ message: 'Images task complete' }));
+    .pipe(browserSync.stream())/*
+    .pipe($.notify({ message: 'Images task complete' }))*/;
 });
 
 /* BrowserSync */
