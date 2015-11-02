@@ -16,8 +16,8 @@ var basePaths = {
             dest: basePaths.dest + 'css/'
         },
         templates: {
-            src: basePaths.src + '',
-            dest: basePaths.dest + ''
+            src: '',
+            dest: ''
         }
     };
 
