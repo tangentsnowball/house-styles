@@ -15,7 +15,7 @@
             float:left;
             padding:0 0 @formElementSpacing 0;
             width:@labelWidth;
-            .border-box();
+            box-sizing: border-box;
         }
         input[type="text"],
         input[type="number"],
@@ -29,7 +29,7 @@
             padding:0.3em 0.4em;
             margin:0 0 @formElementSpacing @formElementMargin;
             width:@inputWidth;
-            .border-box();
+            box-sizing: border-box;
             background:#FFFFFF;
             border:solid 1px #CCCCCC;
             color:#000000;
@@ -45,7 +45,7 @@
 
         .errormsg {
             display:none;
-            .border-box();
+            box-sizing: border-box;
             color:red;
             font-size:90%;
         }

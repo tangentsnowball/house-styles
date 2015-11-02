@@ -16,8 +16,8 @@ var basePaths = {
             dest: basePaths.dest + 'css/'
         },
         templates: {
-            src: basePaths.src + '',
-            dest: basePaths.dest + ''
+            src: '',
+            dest: ''
         }
     };
 
@@ -40,13 +40,15 @@ function processCss(inputStream, taskType) {
         }))
         .pipe($.newer(paths.styles.dest))
         .pipe($.less({ paths: [$.path.join(__dirname, 'less', 'includes')] }))
+        .pipe($.autoprefixer({ browsers: ['last 2 versions', '> 5%'] }))
+        .pipe(gulp.dest(paths.styles.dest))
         .pipe($.sourcemaps.init())
             .pipe($.minifyCss({ advanced: false }))
             .pipe($.rename({ suffix: '.min' }))
         .pipe($.sourcemaps.write('./', { includeContent: false }))
         .pipe(gulp.dest(paths.styles.dest))
-        .pipe(browserSync.stream())
-        .pipe($.notify({ message: taskType + ' task complete' }));
+        .pipe(browserSync.stream())/*
+        .pipe($.notify({ message: taskType + ' task complete' }))*/;
 }
 
 gulp.task('styles', ['less:main', 'less:responsive']);
@@ -75,8 +77,8 @@ gulp.task('scripts', ['scripts:moveFiles'], function() {
         .pipe($.bytediff.stop())
     .pipe($.sourcemaps.write('./', { includeContent: false }))
     .pipe(gulp.dest(paths.scripts.dest))
-    .pipe(browserSync.stream())
-    .pipe($.notify({ message: 'Scripts task complete' }));
+    .pipe(browserSync.stream())/*
+    .pipe($.notify({ message: 'Scripts task complete' }))*/;
 });
 
 /* Move JS files that are already minified to dist/js/ folder */
@@ -97,8 +99,8 @@ gulp.task('images', function() {
     .pipe($.cache($.imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
     .pipe($.bytediff.stop())
     .pipe(gulp.dest(paths.images.dest))
-    .pipe(browserSync.stream())
-    .pipe($.notify({ message: 'Images task complete' }));
+    .pipe(browserSync.stream())/*
+    .pipe($.notify({ message: 'Images task complete' }))*/;
 });
 
 /* BrowserSync */
@@ -106,9 +108,9 @@ gulp.task('browser-sync', ['styles', 'scripts', 'images'], function() {
     browserSync.init({
         server: {
             baseDir: "./"
-        }
+        },
         //Use if you don't want BS to open a tab in your browser when it starts up
-        //open: false
+        open: false
         // Will not attempt to determine your network status, assumes you're OFFLINE
         //online: false
     });
