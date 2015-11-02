@@ -9,7 +9,7 @@
     .container {
         margin:0 auto;
         padding:0 10px;
-        .border-box();
+        box-sizing: border-box;
         max-width:@gridWidth;
     }
     .row {
@@ -60,7 +60,7 @@
                 margin:0;
                 padding-left:@fixedspacing / 2;
                 padding-right:@fixedspacing / 2;
-                .border-box();
+                box-sizing: border-box;
             }
 
             @fixedIterations: @numCols;
