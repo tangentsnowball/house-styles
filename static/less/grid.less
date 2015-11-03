@@ -1,133 +1,146 @@
-/*== GRID GENERATOR ==*/
+/* -------------------------------------------------------------
+ * Grid Generator
+ * Grid setup variables - column count, margins, etc. can be
+ * found in variables.less
+ * ---------------------------------------------------------- */
 
-/* grid calculation mixins now stored in mixins.less */
-/* grid variables now stored in variables.less */
 
+// Scaffolding
+// -------------------------------------------------------------
+/* -------------------------------------------------------------
+ * IE8 will ignore border-box when max/min width applied,
+ * solution is to create a wrapper for container and give that
+ * the max width and margin below
+ * ---------------------------------------------------------- */
+.container {
+    margin: 0 auto;
+    padding: 0 10px;
+    box-sizing: border-box;
+    max-width: @grid-width;
+} // /.container
 
-/* base grid styles */
-    /* IE8 will ignore border box when max/min width applied, solution is to create a wrapper for container and give that the max width and margin below */
-    .container {
-        margin:0 auto;
-        padding:0 10px;
-        .border-box();
-        max-width:@gridWidth;
+.row {
+    .clearfix;
+    clear: both;
+
+    [class*="span"] {
+        float: left;
+        margin-left: @column-gutter-pct;
+
+        &:first-child {
+            margin-left: 0;
+        } // /&:first-child
+    } // /[class*="span"]
+
+    // Build columns
+    // -------------------------------------------------------------
+    /* http://blog.thehippo.de/2012/04/programming/do-a-loop-with-less-css/ */
+    @column-iterations: @column-count;
+    .columnLoopingClass(@column-index) when (@column-index > 0){
+        .span@{column-index}{
+            width: @column-width-pct * @column-index + (@column-gutter-pct * (@column-index - 1));
+        }
+        .columnLoopingClass(@column-index - 1);
     }
-    .row {
-        .clearfix;
-        clear:both;
-        [class*="span"] {
-            float:left;
-            margin-left:@percentColGutter;
+    .columnLoopingClass(0){}
+    .columnLoopingClass(@column-iterations);
+
+    // Build offsets - need to use new variables for this loop
+    // -------------------------------------------------------------
+    @offset-iterations: @column-count - 1;
+    .offsetLoopingClass(@offset-index) when (@offset-index > 0){
+        .offset@{offset-index}{
+            .offset(@offset-index,1);
             &:first-child {
-                margin-left:0;
+                .offset(@offset-index);
             }
         }
-
-        /* build all the columns */
-        /* http://blog.thehippo.de/2012/04/programming/do-a-loop-with-less-css/ */
-        @columnIterations: @numCols;
-        .columnLoopingClass(@columnIndex) when (@columnIndex > 0){
-            .span@{columnIndex}{
-                width:@percentColWidth * @columnIndex + (@percentColGutter * (@columnIndex - 1));
-            }
-            .columnLoopingClass(@columnIndex - 1);
-        }
-        .columnLoopingClass(0){}
-        .columnLoopingClass(@columnIterations);
-
-        /* build all the indents - need to use new variables for this loop */
-        @indentIterations: @numCols - 1;
-        .indentLoopingClass(@indentIndex) when (@indentIndex > 0){
-            .offset@{indentIndex}{
-                .offset(@indentIndex,1);
-                &:first-child {
-                    .offset(@indentIndex);
-                }
-            }
-            .indentLoopingClass(@indentIndex - 1);
-        }
-        .indentLoopingClass(0){}
-        .indentLoopingClass(@indentIterations);
-        
-
-        /* fixed column spaced grid for nesting - most projects will not need this */
-        &.fixedspacing {
-            .row {
-                margin-left:-@fixedspacing / 2;
-                margin-right:-@fixedspacing / 2;
-            }
-            [class*="span"] {
-                margin:0;
-                padding-left:@fixedspacing / 2;
-                padding-right:@fixedspacing / 2;
-                .border-box();
-            }
-
-            @fixedIterations: @numCols;
-            .fixedLoopingClass(@fixedIndex) when (@fixedIndex > 0){
-                .span@{fixedIndex}{
-                    width:@fixedColWidth * @fixedIndex; // + (@percentColGutter * (@fixedIndex - 1));
-                }
-                .fixedLoopingClass(@fixedIndex - 1);
-            }
-            .fixedLoopingClass(0){}
-            .fixedLoopingClass(@fixedIterations);
-
-            /* indents */
-            @fixedIndentIterations: @numCols - 1;
-            .fixedIndentLoopingClass(@fixedIndentIndex) when (@fixedIndentIndex > 0){
-                .offset@{fixedIndentIndex}{
-                    .fixedOffset(@fixedIndentIndex);
-                }
-                .fixedIndentLoopingClass(@fixedIndentIndex - 1);
-            }
-            .fixedIndentLoopingClass(0){}
-            .fixedIndentLoopingClass(@fixedIndentIterations);
-        }
-        /* end fixed column spacing */
-
-
-        /* reverse layout for right to left, including indents */
-        &.reverselayout {
-            [class*="span"] {
-                float:right;
-                margin-right:@percentColGutter;
-                margin-left:0;
-                &:first-child {
-                    margin-right:0;
-                }
-            }
-
-            /* indents */
-            @reverseIndentIterations: @numCols - 1;
-            .reverseIndentLoopingClass(@reverseIndentIndex) when (@reverseIndentIndex > 0){
-                .offset@{reverseIndentIndex}{
-                    .reverseOffset(@reverseIndentIndex,1);
-                    &:first-child {
-                        .reverseOffset(@reverseIndentIndex);
-                    }
-                }
-                .reverseIndentLoopingClass(@reverseIndentIndex - 1);
-            }
-            .reverseIndentLoopingClass(0){}
-            .reverseIndentLoopingClass(@reverseIndentIterations);
-
-
-            &.fixedspacing {
-                [class*="span"] {
-                    margin:0;
-                }
-            }
-        }
-        /* end reverse layout */
+        .offsetLoopingClass(@offset-index - 1);
     }
+    .offsetLoopingClass(0){}
+    .offsetLoopingClass(@offset-iterations);
 
-    
-    //pandering to IE7
-    .ie7 {
+    // Fixed-spaced column grid for controlled nesting
+    // -------------------------------------------------------------
+    &.fixed-spacing {
         .row {
-            [class*="span"] {
-                margin-right:-1px;
+            margin-left: -@grid-spacing-fixed / 2;
+            margin-right: -@grid-spacing-fixed / 2;
+        } // /.row
+
+        [class*="span"] {
+            margin: 0;
+            padding-left: @grid-spacing-fixed / 2;
+            padding-right: @grid-spacing-fixed / 2;
+            box-sizing: border-box;
+        } // /[class*="span"]
+
+        // Build fixed-spacing columns
+        // -------------------------------------------------------------
+        @fixed-iterations: @column-count;
+        .fixedLoopingClass(@fixed-index) when (@fixed-index > 0){
+            .span@{fixed-index}{
+                width: @column-width-fixed * @fixed-index; // + (@column-gutter-pct * (@fixed-index - 1));
             }
+            .fixedLoopingClass(@fixed-index - 1);
         }
-    }
+        .fixedLoopingClass(0){}
+        .fixedLoopingClass(@fixed-iterations);
+
+        // Build offsets
+        // -------------------------------------------------------------
+        @fixedIndent-iterations: @column-count - 1;
+        .fixedIndentLoopingClass(@fixedIndent-index) when (@fixedIndent-index > 0){
+            .offset@{fixedIndent-index}{
+                .fixedOffset(@fixedIndent-index);
+            }
+            .fixedIndentLoopingClass(@fixedIndent-index - 1);
+        }
+        .fixedIndentLoopingClass(0){}
+        .fixedIndentLoopingClass(@fixedIndent-iterations);
+    } // /&.fixed-spacing
+
+    // Reverse layout for right to left, including offsets
+    // -------------------------------------------------------------
+    &.reverselayout {
+        [class*="span"] {
+            float: right;
+            margin-right: @column-gutter-pct;
+            margin-left: 0;
+
+            &:first-child {
+                margin-right: 0;
+            } // /&:first-child
+        } // /[class*="span"]
+
+        // Build offsets
+        // -------------------------------------------------------------
+        @reverseIndent-iterations: @column-count - 1;
+        .reverseIndentLoopingClass(@reverseIndent-index) when (@reverseIndent-index > 0){
+            .offset@{reverseIndent-index}{
+                .reverseOffset(@reverseIndent-index,1);
+                &:first-child {
+                    .reverseOffset(@reverseIndent-index);
+                }
+            }
+            .reverseIndentLoopingClass(@reverseIndent-index - 1);
+        }
+        .reverseIndentLoopingClass(0){}
+        .reverseIndentLoopingClass(@reverseIndent-iterations);
+
+        &.fixed-spacing {
+            [class*="span"] {
+                margin: 0;
+            } // /[class*="span"]
+        } // /&.fixed-spacing
+    } // /&.reverselayout
+} // /.row
+
+//pandering to IE7
+.ie7 {
+    .row {
+        [class*="span"] {
+            margin-right: -1px;
+        } // /[class*="span"]
+    } // /.row
+} // /.ie7

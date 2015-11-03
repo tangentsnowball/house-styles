@@ -1,20 +1,23 @@
+/* -------------------------------------------------------------
+ * Tabs - responsive
+ * ---------------------------------------------------------- */
 
-    .tabwrapper {
+.tabwrapper {
+    > .nav {
+        > li {
+            float: none;
+        }
+    } // /> .nav
+    &.tabs-left,
+    &.tabs-right {
         > .nav {
-            > li {
-                float:none;
-            }
-        }
-        &.tabs-left,
-        &.tabs-right {
-            > .nav {
-                float:none;
-                width:auto;
-            }
-            .tabpane {
-                float:none;
-                width:auto;
-            }
-        }
+            float: none;
+            width: auto;
+        } // /> .nav
 
-    }
+        .tabpane {
+            float: none;
+            width: auto;
+        } // /.tabpane
+    } // /&.tabs-left, &.tabs-right
+} // /.tabwrapper

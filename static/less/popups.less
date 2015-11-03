@@ -1,35 +1,37 @@
-/* --popups */
+/* -------------------------------------------------------------
+ * Popups
+ * ---------------------------------------------------------- */
 
-    @popupWidth: 600px;
+.popupwrapper {
+    .mask {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.3);
+    } // /.mask
 
-    .popupwrapper {
-        .mask {
-            display:none;
-            position:fixed;
-            top:0;
-            left:0;
-            width:100%;
-            height:100%;
-            background:rgba(0,0,0,0.3);
-        }
-        .popup {
-            display:none;
-            position:absolute;
-            left:50%;
-            width:@popupWidth;
-            padding:10px;
-            margin:0 0 0 -@popupWidth / 2;
-            .border-box();
-            background:#FFFFFF;
+    .popup {
+        display: none;
+        position: absolute;
+        left: 50%;
+        width: @popup-width;
+        padding: 10px;
+        margin: 0 0 0 -@popup-width / 2;
+        box-sizing: border-box;
+        background: @body-bg;
 
-            &.fixed {
-                position:fixed;
-                top:10%;
-                height:80%;
-                .inner {
-                    max-height:90%;
-                    overflow-y:scroll;
-                }
-            }
-        }
-    }
+        &.fixed {
+            position: fixed;
+            top: 10%;
+            height: 80%;
+
+            .inner {
+                max-height: 90%;
+                overflow-y: scroll;
+            } // /.inner
+        } // /&.fixed
+    } // /.popup
+} // /.popupwrapper
