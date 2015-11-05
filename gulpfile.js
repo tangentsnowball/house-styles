@@ -41,27 +41,14 @@ var gulp = require('gulp'),
     };
 
 /* CSS - LESS */
-function processCss(inputStream, filename, taskType) {
-    // Grab vendor CSS
-    var vendorStream = gulp.src(paths.styles.vendor.src + '*.css')
-        .pipe($.plumber(function(error) {
-            $.util.log($.util.colors.red('Error (' + error.plugin + '): ' + error.message));
-            this.emit('end');
-        }));
-
-    // Compile LESS stream
-    inputStream = inputStream
+function processCss(inputStream, taskType) {
+    return inputStream
         .pipe($.plumber(function(error) {
             $.util.log($.util.colors.red('Error (' + error.plugin + '): ' + error.message + '\n'));
             this.emit('end');
         }))
         .pipe($.newer(paths.styles.dest))
-        .pipe($.less({ paths: [$.path.join(__dirname, 'less', 'includes')] }));
-
-    // Merge vendor css with compiled LESS streams
-    return $.mergeStream(vendorStream, inputStream)
-        // concat into supplied filename
-        .pipe($.concat(filename))
+        .pipe($.less({ paths: [$.path.join(__dirname, 'less', 'includes')] }))
         .pipe($.sourcemaps.init())
             .pipe($.minifyCss({ advanced: false }))
             .pipe($.rename({ suffix: '.min' }))
@@ -91,10 +78,10 @@ function minifyJS (sourceStream, uglifyOptions, filename) {
 
 gulp.task('styles', ['bower:css', 'less:main', 'less:responsive']);
 gulp.task('less:main', ['bower:css'], function() {
-    return processCss(gulp.src(paths.styles.src + 'styles.less'), 'styles.css', 'Styles');
+    return processCss(gulp.src(paths.styles.src + 'styles.less'), 'Styles');
 });
 gulp.task('less:responsive', ['bower:css'], function() {
-    return processCss(gulp.src(paths.styles.src + 'styles-responsive.less'), 'styles-responsive.css', 'Responsive styles');
+    return processCss(gulp.src(paths.styles.src + 'styles-responsive.less'), 'Responsive styles');
 });
 
 /* JS */
