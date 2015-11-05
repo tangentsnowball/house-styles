@@ -1,32 +1,31 @@
+/* -------------------------------------------------------------
+ * Forms - responsive
+ * ---------------------------------------------------------- */
+.form {
+    label,
+    .faux-label,
+    .error-msg,
+    .help-text,
+    input[type="text"],
+    input[type="password"],
+    input[type="file"],
+    input[type="url"],
+    select,
+    textarea {
+        float: none;
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    } // /labels, inputs
 
-    .form {
-        label,
-        .faux_label,
-        .errormsg,
-        .helptext,
-        input[type="text"],
-        input[type="number"],
-        input[type="email"],
-        input[type="password"],
-        input[type="file"],
-        input[type="url"],
-        select,
-        textarea {
-            float:none;
-            width:100%;
-            margin-left:0;
-            margin-right:0;
-        }
-        label,
-        .faux_label,
-        .errormsg,
-        .helptext {
-            display:block;
-            padding-bottom:@formElementSpacing;
-            margin-left:0;
-        }
-        .buttons {
-            padding-left:0;
-        }
-    }
+    label,
+    .faux-label,
+    .error-msg,
+    .help-text {
+        display: block;
+    } // /labels
 
+    .buttons {
+        padding-left: 0;
+    } // /buttons
+} // /.form

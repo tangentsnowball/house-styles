@@ -1,23 +1,54 @@
-/* --utility classes */
+/* -------------------------------------------------------------
+ * Utility classes
+ * Useful stuff intended to be used on any HTML element
+ * ---------------------------------------------------------- */
 
-    .align-center {text-align:center;}
-    .align-left {text-align:left;}
-    .align-right {text-align:right;}
-    .float-left {float:left;}
-    .float-right {float:right;}
-    .bold {font-weight:bold;}
-    .italic {font-style:italic;}
-    .hidden {display:none;}
-    .block {display:block;}
-    
-/* --clearfix */
-    * html .clearfix{height:1%;overflow:visible;}/* float clearing for IE6 */
-    *+html .clearfix{min-height:1%;}/* float clearing for IE7 */
-    .clearfix:after{clear:both;content:".";display:block;height:0;visibility:hidden;font-size:0;}/* float clearing for everyone else */
+ // General
+ // -------------------------------------------------------------
+.align-center      { text-align: center;         }
+.align-left        { text-align: left;           }
+.align-right       { text-align: right;          }
+.align-justify     { text-align: justify;        }
+.align-justify-all { text-align: justify-all;    }
+.float-left        { float: left;                }
+.float-right       { float: right;               }
+.bold              { font-weight: bold;          }
+.italic            { font-style: italic;         }
+.underline         { text-decoration: underline; }
+.hidden            { display: none;
+                     visibility: hidden;         }
+.block             { display: block;             }
 
-    .clearfix() {
-      zoom: 1;
-      &:before { content: ''; display: block; }
-      &:after { content: ''; display: table; clear: both; }
-    }
-    
+// Clearfix
+// -------------------------------------------------------------
+.clearfix {
+    &:after {
+        content: '';
+        display: table;
+        clear: both;
+    } // /&:after
+} // /.clearfix
+
+// Content hiding
+// -------------------------------------------------------------
+/* Make an element invisible to sighted users, but still
+ * visible to screen readers
+ * See: http://webaim.org/techniques/css/invisiblecontent/
+ */
+.invisible,
+.totally-invisible {
+    position: absolute;
+    left: -100000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    outline: 0;
+} // /.invisible, .totally-invisible
+
+.invisible {
+    &:focus {
+        position: static;
+        width: auto;
+        height: auto;
+    } // /&:focus
+} // /.invisible
