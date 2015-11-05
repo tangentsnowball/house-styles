@@ -42,10 +42,8 @@ function processCss(inputStream, taskType) {
         .pipe($.less({ paths: [$.path.join(__dirname, 'less', 'includes')] }))
         .pipe($.autoprefixer({ browsers: ['last 2 versions', '> 5%'] }))
         .pipe(gulp.dest(paths.styles.dest))
-        .pipe($.sourcemaps.init())
-            .pipe($.minifyCss({ advanced: false }))
-            .pipe($.rename({ suffix: '.min' }))
-        .pipe($.sourcemaps.write('./', { includeContent: false }))
+        .pipe($.minifyCss({ advanced: false }))
+        .pipe($.rename({ suffix: '.min' }))
         .pipe(gulp.dest(paths.styles.dest))
         .pipe(browserSync.stream())/*
         .pipe($.notify({ message: taskType + ' task complete' }))*/;
@@ -75,7 +73,7 @@ gulp.task('scripts', ['scripts:moveFiles'], function() {
         .pipe($.uglify())
         .pipe($.rename({suffix: '.min'}))
         .pipe($.bytediff.stop())
-    .pipe($.sourcemaps.write('./', { includeContent: false }))
+    .pipe($.sourcemaps.write('./', { includeContent: true }))
     .pipe(gulp.dest(paths.scripts.dest))
     .pipe(browserSync.stream())/*
     .pipe($.notify({ message: 'Scripts task complete' }))*/;
