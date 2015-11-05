@@ -148,13 +148,17 @@ gulp.task('bower:js', function() {
     // Filters
     // -------------------------------------------------------------
     var filterHtml5shiv    = 'html5shiv/**/*',
-        filterJquery       = 'jquery/**/*';
+        filterJquery       = 'jquery/**/*',
+        filterRespond      = 'respond/**/*';
 
     // Vendor streams - process each library separately
     // -------------------------------------------------------------
         // html5shiv
     var streamHtml5shiv = bowerFiles
             .pipe($.filter(filterHtml5shiv)),
+        // Respond
+        streamRespond = bowerFiles
+            .pipe($.filter(filterRespond)),
         // jQuery
         streamJquery = bowerFiles
             .pipe($.filter(filterJquery));
@@ -162,12 +166,12 @@ gulp.task('bower:js', function() {
     // Package streams - group certain libs into single packages
     // -------------------------------------------------------------
     // IE8 JS stream
-    var streamIE8JS = minifyJS($.mergeStream(streamHtml5shiv), {
+    var streamIE8JS = minifyJS($.streamqueue({ objectMode: true }, streamHtml5shiv, streamRespond), {
                 mangle: { keep_fnames: true },
                 preserveComments: 'license'
             }, 'ie8.js' ),
     // Vendor JS stream, for all other 3rd-party JS
-        streamVendorJS = minifyJS($.mergeStream(streamJquery), {
+        streamVendorJS = minifyJS($.streamqueue({ objectMode: true }, streamJquery), {
             mangle: {
                 except: ['jQuery'],
                 keep_fnames: true
