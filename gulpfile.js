@@ -195,7 +195,11 @@ gulp.task('bower:js', function() {
 gulp.task('bower:css', function() {
     // Grab the main bower files
     // -------------------------------------------------------------
-    var bowerFiles = gulp.src($.mainBowerFiles({ filter: '**/*.css' }), { base: paths.bower.src });
+    var bowerFiles = gulp.src($.mainBowerFiles(
+        {
+            filter: '**/*.css'
+        }
+    ), { base: paths.bower.src });
 
     // Filters
     // -------------------------------------------------------------
@@ -203,18 +207,20 @@ gulp.task('bower:css', function() {
 
     // Vendor streams - process each library separately
     // -------------------------------------------------------------
-        // normalize-css
+    // normalize-css
     var streamNormalizeCss = bowerFiles
-            .pipe($.filter(filterNormalizeCss));
-
-    // Package streams - group certain libs into single packages
-    // -------------------------------------------------------------
+        .pipe($.filter(filterNormalizeCss));
 
     // Return vendor CSS stream, for all other 3rd-party CSS
-    return $.mergeStream(streamNormalizeCss)
+    return $.streamqueue({ objectMode: true }, streamNormalizeCss)
         .pipe($.plumber())
         .pipe($.concat('vendor.css'))
-        .pipe(gulp.dest(paths.styles.vendor.src));
+        .pipe(gulp.dest(paths.styles.vendor.src))
+        .pipe($.sourcemaps.init())
+            .pipe($.minifyCss({ advanced: false }))
+            .pipe($.rename({ suffix: '.min' }))
+        .pipe($.sourcemaps.write('./', { includeContent: true }))
+        .pipe(gulp.dest(paths.styles.dest));
 }); // /bower:css
 
 /* BrowserSync */
