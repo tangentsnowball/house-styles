@@ -62,9 +62,10 @@ function processCss(inputStream, filename, taskType) {
     return $.mergeStream(vendorStream, inputStream)
         // concat into supplied filename
         .pipe($.concat(filename))
-        .pipe(gulp.dest(paths.styles.dest))
-        .pipe($.minifyCss({ advanced: false }))
-        .pipe($.rename({ suffix: '.min' }))
+        .pipe($.sourcemaps.init())
+            .pipe($.minifyCss({ advanced: false }))
+            .pipe($.rename({ suffix: '.min' }))
+        .pipe($.sourcemaps.write('./', { includeContent: true }))
         .pipe(gulp.dest(paths.styles.dest))
         .pipe(browserSync.stream())
         .pipe($.if(flags.notify, $.notify({ message: 'Images task complete' })));
