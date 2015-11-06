@@ -1,3 +1,4 @@
 node_modules/
-static/dist/bower_components/
+bower_components/
+npm-debug.log
 
