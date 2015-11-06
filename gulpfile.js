@@ -76,8 +76,8 @@ function minifyJS (sourceStream, uglifyOptions, filename) {
         .pipe(gulp.dest(paths.scripts.dest));
 } // /function minifyJS
 
-gulp.task('styles', ['bower:css', 'less:main']);
-gulp.task('less:main', ['bower:css'], function() {
+gulp.task('styles', ['bower:css', 'less']);
+gulp.task('less', ['bower:css'], function() {
     return processCss(gulp.src(paths.styles.src + 'styles.less'), 'Styles');
 });
 
