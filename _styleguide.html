@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" id="site" class="nojs">
 <head>
-    <!--[if lt IE 9]>
-        <script src="static/dist/bower_components/html5shiv/dist/html5shiv.min.js"></script>
-    <![endif]-->
     <title>styleguide</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1.0">
@@ -12,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="static/dist/css/styles.min.css"/>
     <link rel="stylesheet" type="text/css" href="static/styleguide/prism.css"/>
     <link rel="stylesheet" media="screen and (min-width: 0) and (max-width: 767px)" href="static/dist/css/styles-responsive.min.css"/>
-    <!--[if lt IE 8 ]>
+    <!--[if lte IE 8 ]>
         <link rel="stylesheet" type="text/css" href="static/dist/css/styles-responsive.min.css"/>
         <script src="static/dist/js/ie8.min.js"/>
     <![endif]-->
@@ -330,23 +327,16 @@
                                 </div>
 
                                 <h3>Code</h3>
-                                <pre class="language-markup clear"><code>
-                                &lt;
-                                div class="row"&gt;
-                                    &lt;
-                                    div class="span1"&gt;.span1&lt;/div&gt;
-                                    &lt;
-                                    div class="span2"&gt;.span2&lt;/div&gt;
-                                    &lt;
-                                    div class="span3"&gt;.span3&lt;/div&gt;
-                                    &lt;
-                                    div class="span4"&gt;.span4&lt;/div&gt;
-                                    &lt;
-                                    div class="span5"&gt;.span5&lt;/div&gt;
-                                    &lt;
-                                    div class="span6"&gt;.span6&lt;/div&gt;
-                                &lt;/div&gt;
-                                </code></pre>
+<pre class="language-markup clear"><code>
+&lt;div class="row"&gt;
+    &lt;div class="span1"&gt;.span1&lt;/div&gt;
+    &lt;div class="span2"&gt;.span2&lt;/div&gt;
+    &lt;div class="span3"&gt;.span3&lt;/div&gt;
+    &lt;div class="span4"&gt;.span4&lt;/div&gt;
+    &lt;div class="span5"&gt;.span5&lt;/div&gt;
+    &lt;div class="span6"&gt;.span6&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
 
                                 <h2>Indents</h2>
                                 <p>The grid also has indent classes that can be applied for more complex layouts.</p>
@@ -402,13 +392,11 @@
 
 
                                 <h3>Code</h3>
-                                <pre class="language-markup clear"><code>
-                                &lt;
-                                div class="row"&gt;
-                                    &lt;
-                                    div class="span1 offset1"&gt;.span1&lt;/div&gt;
-                                &lt;/div&gt;
-                                </code></pre>
+<pre class="language-markup clear"><code>
+&lt;div class="row"&gt;
+    &lt;div class="span1 offset1"&gt;.span1&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
 
 
                                 <h2>Grid within grid</h2>
@@ -458,33 +446,23 @@
 
 
                                 <h3>Code</h3>
-                                <pre class="language-markup clear"><code>
-                                &lt;
-                                div class="row"&gt;
-                                    &lt;
-                                    div class="span8"&gt;
-                                        &lt;
-                                        div class="row"&gt;
-                                            &lt;
-                                            div class="span8"&gt;.span8&lt;/div&gt;
-                                            &lt;
-                                            div class="span4"&gt;.span4&lt;/div&gt;
-                                        &lt;/div&gt;
-                                    &lt;/div&gt;
-                                    &lt;
-                                    div class="span4"&gt;
-                                        &lt;
-                                        div class="row"&gt;
-                                            &lt;
-                                            div class="span4"&gt;.span4&lt;/div&gt;
-                                            &lt;
-                                            div class="span4"&gt;.span4&lt;/div&gt;
-                                            &lt;
-                                            div class="span4"&gt;.span4&lt;/div&gt;
-                                        &lt;/div&gt;
-                                    &lt;/div&gt;
-                                &lt;/div&gt;
-                                </code></pre>
+<pre class="language-markup clear"><code>
+&lt;div class="row"&gt;
+    &lt;div class="span8"&gt;
+        &lt;div class="row"&gt;
+            &lt;div class="span8"&gt;.span8&lt;/div&gt;
+            &lt;div class="span4"&gt;.span4&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="span4"&gt;
+        &lt;div class="row"&gt;
+            &lt;div class="span4"&gt;.span4&lt;/div&gt;
+            &lt;div class="span4"&gt;.span4&lt;/div&gt;
+            &lt;div class="span4"&gt;.span4&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
 
                                 <h2>Grid within grid, fixed spacing</h2>
                                 <p>The grid is based on percentages, including the space between grid columns. This means that a grid row within a grid row will have a narrower gap between columns because the same percentage of a narrower column is smaller (see above example).</p>
@@ -555,29 +533,22 @@
 
 
                                 <h3>Code</h3>
-                                <pre class="language-markup clear"><code>
-                                &lt;
-                                div class="row reverselayout"&gt;
-                                    &lt;
-                                    div class="span4"&gt;
-                                        &lt;
-                                        p&gt;
-                                        This column appears on the right at full size, but first when collapsed.&lt;/p&gt;
-                                    &lt;/div&gt;
-                                    &lt;
-                                    div class="span4"&gt;
-                                        &lt;
-                                        p&gt;
-                                        This column occurs in the middle.&lt;/p&gt;
-                                    &lt;/div&gt;
-                                    &lt;
-                                    div class="span4"&gt;
-                                        &lt;
-                                        p&gt;
-                                        This column appears on the left at full size, but last when collapsed.&lt;/p&gt;
-                                    &lt;/div&gt;
-                                &lt;/div&gt;
-                                </code></pre>
+<pre class="language-markup clear"><code>
+&lt;div class="row reverselayout"&gt;
+    &lt;div class="span4"&gt;
+        &lt;p&gt;
+        This column appears on the right at full size, but first when collapsed.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="span4"&gt;
+        &lt;p&gt;
+        This column occurs in the middle.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="span4"&gt;
+        &lt;p&gt;
+        This column appears on the left at full size, but last when collapsed.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
 
                                 <h2>Non-collapsing grid</h2>
                                 <p>Occasionally it can be useful to have grid elements that do not collapse with the rest of the grid on a narrow screen. To achieve this add the class of <code>.fix</code> to the <code>row</code> element you do not wish to collapse.</p>
@@ -650,25 +621,19 @@
                                 </form>
 
                                 <h3>Code</h3>
-                                <pre class="language-markup clear"><code>
-                                &lt;
-                                div class="field"&gt;
-                                    &lt;
-                                    label for="text1"&gt;
-                                    This is a text field&lt;/label&gt;
-                                    &lt;
-                                    input type="text" id="text1"/&gt;
-                                    &lt;
-                                    span class="helptext"&gt;
-                                    This is some help text that has been put here to be helpful&lt;/span&gt;
-                                &lt;/div&gt;
-                                &lt;
-                                div class="buttons"&gt;
-                                    &lt;
-                                    button type="submit" class="btn"&gt;
-                                    Submit&lt;/button&gt;
-                                &lt;/div&gt;
-                                </code></pre>
+<pre class="language-markup clear"><code>
+&lt;div class="field"&gt;
+    &lt;label for="text1"&gt;
+    This is a text field&lt;/label&gt;
+    &lt;input type="text" id="text1"/&gt;
+    &lt;span class="helptext"&gt;
+    This is some help text that has been put here to be helpful&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="buttons"&gt;
+    &lt;button type="submit" class="btn"&gt;
+    Submit&lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
 
                                 <h3>Regular inputs with error states</h3>
                                 <p>Add the <code>.required</code> class to a field to make it required. Add the <code>.error</code> class to a field for error states.</p>
@@ -727,28 +692,21 @@
                                 </form>
 
                                 <h3>Code</h3>
-                                <pre class="language-markup clear"><code>
-                                &lt;
-                                div class="field error"&gt;
-                                    &lt;
-                                    label for="text1"&gt;
-                                    This is a text field&lt;/label&gt;
-                                    &lt;
-                                    input type="text" id="text1"/&gt;
-                                    &lt;
-                                    span class="errormsg"&gt;
-                                    This field is required&lt;/span&gt;
-                                    &lt;
-                                    span class="helptext"&gt;
-                                    This is some help text that has been put here to be helpful&lt;/span&gt;
-                                &lt;/div&gt;
-                                &lt;
-                                div class="buttons"&gt;
-                                    &lt;
-                                    button type="submit" class="btn"&gt;
-                                    Submit&lt;/button&gt;
-                                &lt;/div&gt;
-                                </code></pre>
+<pre class="language-markup clear"><code>
+&lt;div class="field error"&gt;
+    &lt;label for="text1"&gt;
+    This is a text field&lt;/label&gt;
+    &lt;input type="text" id="text1"/&gt;
+    &lt;span class="errormsg"&gt;
+    This field is required&lt;/span&gt;
+    &lt;span class="helptext"&gt;
+    This is some help text that has been put here to be helpful&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="buttons"&gt;
+    &lt;button type="submit" class="btn"&gt;
+    Submit&lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
 
 
                                 <h3>Checkboxes</h3>
@@ -804,42 +762,30 @@
                                 </form>
 
                                 <h3>Code</h3>
-                                <pre class="language-markup clear"><code>
-                                &lt;
-                                form class="form" action=""&gt;
-                                    &lt;
-                                    fieldset&gt;
-                                        &lt;
-                                        div class="field"&gt;
-                                            &lt;
-                                            label for="text"&gt;
-                                            Text field&lt;/label&gt;
-                                            &lt;
-                                            span class="helptext"&gt;
-                                            Help text, optional&lt;/span&gt;
-                                            &lt;
-                                            input type="text" id="text"/&gt;
-                                            &lt;
-                                            span class="errormsg"&gt;
-                                            Error, only visible if parent has error class&lt;/span&gt;
-                                        &lt;/div&gt;
-                                        &lt;
-                                        div class="field error"&gt;
-                                            &lt;
-                                            label for="text"&gt;
-                                            Text field&lt;/label&gt;
-                                            &lt;
-                                            span class="helptext"&gt;
-                                            Help text, optional&lt;/span&gt;
-                                            &lt;
-                                            input type="text" id="text"/&gt;
-                                            &lt;
-                                            span class="errormsg"&gt;
-                                            Error, only visible if parent has error class&lt;/span&gt;
-                                        &lt;/div&gt;
-                                    &lt;/fieldset&gt;
-                                &lt;/form&gt;
-                                </code></pre>
+<pre class="language-markup clear"><code>
+&lt;form class="form" action=""&gt;
+    &lt;fieldset&gt;
+        &lt;div class="field"&gt;
+            &lt;label for="text"&gt;
+            Text field&lt;/label&gt;
+            &lt;span class="helptext"&gt;
+            Help text, optional&lt;/span&gt;
+            &lt;input type="text" id="text"/&gt;
+            &lt;span class="errormsg"&gt;
+            Error, only visible if parent has error class&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div class="field error"&gt;
+            &lt;label for="text"&gt;
+            Text field&lt;/label&gt;
+            &lt;span class="helptext"&gt;
+            Help text, optional&lt;/span&gt;
+            &lt;input type="text" id="text"/&gt;
+            &lt;span class="errormsg"&gt;
+            Error, only visible if parent has error class&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;/fieldset&gt;
+&lt;/form&gt;
+</code></pre>
                             </section>
 
 
@@ -988,11 +934,10 @@
                                 </table>
 
                                 <h3>Code</h3>
-                                <pre class="language-markup clear"><code>
-                                &lt;
-                                a href="#" class="btn btn-primary btn-large"&gt;
-                                Button&lt;/a&gt;
-                                </code></pre>
+<pre class="language-markup clear"><code>
+&lt;a href="#" class="btn btn-primary btn-large"&gt;
+Button&lt;/a&gt;
+</code></pre>
 
                                 <h2>Button groups</h2>
 
@@ -1107,18 +1052,15 @@
                                 </div>
 
                                 <h3>Code</h3>
-                                <pre class="language-markup clear"><code>
-                                &lt;
-                                div class="alert"&gt;
-                                    &lt;
-                                    a href="#" class="close"&gt;&amp;
-                                    times;&lt;/a&gt;
-                                    &lt;
-                                    strong&gt;
-                                    This is a default alert&lt;/strong&gt;
-                                    so there
-                                &lt;/div&gt;
-                                </code></pre>
+<pre class="language-markup clear"><code>
+&lt;div class="alert"&gt;
+    &lt;a href="#" class="close"&gt;&amp;
+    times;&lt;/a&gt;
+    &lt;strong&gt;
+    This is a default alert&lt;/strong&gt;
+    so there
+&lt;/div&gt;
+</code></pre>
                             </section>
 
 
@@ -1183,38 +1125,27 @@
                                 </div>
 
                                 <h3>Code</h3>
-                                <pre class="language-markup clear"><code>
-                                &lt;
-                                div class="tabwrapper js-tabbable"&gt;
-                                    &lt;
-                                    ul class="nav"&gt;
-                                        &lt;
-                                        li class="active"&gt;&lt;
-                                        a href="#tab1"&gt;
-                                        Tab 1&lt;/a&gt;&lt;/li&gt;
-                                        &lt;
-                                        li&gt;&lt;
-                                        a href="#tab2"&gt;
-                                        Tab 2&lt;/a&gt;&lt;/li&gt;
-                                        &lt;
-                                        li&gt;&lt;
-                                        a href="#tab3"&gt;
-                                        Tab 3&lt;/a&gt;&lt;/li&gt;
-                                    &lt;/ul&gt;
-                                    &lt;
-                                    div class="tabpane active" id="tab1"&gt;
-                                        content of tab 1
-                                    &lt;/div&gt;
-                                    &lt;
-                                    div class="tabpane" id="tab2"&gt;
-                                        content of tab 2
-                                    &lt;/div&gt;
-                                    &lt;
-                                    div class="tabpane" id="tab3"&gt;
-                                        content of tab 3
-                                    &lt;/div&gt;
-                                &lt;/div&gt;
-                                </code></pre>
+<pre class="language-markup clear"><code>
+&lt;div class="tabwrapper js-tabbable"&gt;
+    &lt;ul class="nav"&gt;
+        &lt;li class="active"&gt;&lt;a href="#tab1"&gt;
+        Tab 1&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#tab2"&gt;
+        Tab 2&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#tab3"&gt;
+        Tab 3&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div class="tabpane active" id="tab1"&gt;
+        content of tab 1
+    &lt;/div&gt;
+    &lt;div class="tabpane" id="tab2"&gt;
+        content of tab 2
+    &lt;/div&gt;
+    &lt;div class="tabpane" id="tab3"&gt;
+        content of tab 3
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
                             </section>
 
                             <section id="popups">
@@ -1235,30 +1166,23 @@
                                 </ul>
 
                                 <h3>Code</h3>
-                                <pre class="language-markup clear"><code>
-                                &lt;
-                                a href="#" class="js-openpopup" data-target="1"&gt;
-                                Standard popup&lt;/a&gt;
+<pre class="language-markup clear"><code>
+&lt;a href="#" class="js-openpopup" data-target="1"&gt;
+Standard popup&lt;/a&gt;
 
-                                &lt;
-                                div class="popupwrapper"&gt;
-                                    &lt;
-                                    div class="mask"&gt;&lt;/div&gt;
+&lt;div class="popupwrapper"&gt;
+    &lt;div class="mask"&gt;&lt;/div&gt;
 
-                                    &lt;
-                                    div class="popup" data-id="1"&gt;
-                                        &lt;
-                                        a href="#" class="js-closepopup"&gt;
-                                        close&lt;/a&gt;
-                                        &lt;
-                                        div class="inner"&gt;
-                                            &lt;
-                                            p&gt;
-                                            This is popup 1.&lt;/p&gt;
-                                        &lt;/div&gt;
-                                    &lt;/div&gt;
-                                &lt;/div&gt;
-                                </code></pre>
+    &lt;div class="popup" data-id="1"&gt;
+        &lt;a href="#" class="js-closepopup"&gt;
+        close&lt;/a&gt;
+        &lt;div class="inner"&gt;
+            &lt;p&gt;
+            This is popup 1.&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
                             </section>
 
                         </div>
@@ -1307,14 +1231,12 @@
         </div>
     </div>
 
-    <script src="static/dist/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="static/dist/js/vendor.min.js"></script>
     <!--[if lt IE 9 ]>
     <script>(function() {$('body').addClass('iex');})();</script>
     <![endif]-->
     <script src="static/dist/js/main.min.js"></script>
-
     <script src="static/styleguide/prism.js"></script>
-
     <script type="text/javascript">
         $(document).on('ready', function() {
             var $sections        = $('#stylesections').find('section[id]:not(.tab-content)'),
