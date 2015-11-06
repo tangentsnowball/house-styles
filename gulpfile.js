@@ -41,27 +41,14 @@ var gulp = require('gulp'),
     };
 
 /* CSS - LESS */
-function processCss(inputStream, filename, taskType) {
-    // Grab vendor CSS
-    var vendorStream = gulp.src(paths.styles.vendor.src + '*.css')
-        .pipe($.plumber(function(error) {
-            $.util.log($.util.colors.red('Error (' + error.plugin + '): ' + error.message));
-            this.emit('end');
-        }));
-
-    // Compile LESS stream
-    inputStream = inputStream
+function processCss(inputStream, taskType) {
+    return inputStream
         .pipe($.plumber(function(error) {
             $.util.log($.util.colors.red('Error (' + error.plugin + '): ' + error.message + '\n'));
             this.emit('end');
         }))
         .pipe($.newer(paths.styles.dest))
-        .pipe($.less({ paths: [$.path.join(__dirname, 'less', 'includes')] }));
-
-    // Merge vendor css with compiled LESS streams
-    return $.mergeStream(vendorStream, inputStream)
-        // concat into supplied filename
-        .pipe($.concat(filename))
+        .pipe($.less({ paths: [$.path.join(__dirname, 'less', 'includes')] }))
         .pipe($.sourcemaps.init())
             .pipe($.minifyCss({ advanced: false }))
             .pipe($.rename({ suffix: '.min' }))
@@ -91,10 +78,10 @@ function minifyJS (sourceStream, uglifyOptions, filename) {
 
 gulp.task('styles', ['bower:css', 'less:main', 'less:responsive']);
 gulp.task('less:main', ['bower:css'], function() {
-    return processCss(gulp.src(paths.styles.src + 'styles.less'), 'styles.css', 'Styles');
+    return processCss(gulp.src(paths.styles.src + 'styles.less'), 'Styles');
 });
 gulp.task('less:responsive', ['bower:css'], function() {
-    return processCss(gulp.src(paths.styles.src + 'styles-responsive.less'), 'styles-responsive.css', 'Responsive styles');
+    return processCss(gulp.src(paths.styles.src + 'styles-responsive.less'), 'Responsive styles');
 });
 
 /* JS */
@@ -152,13 +139,17 @@ gulp.task('bower:js', function() {
     // Filters
     // -------------------------------------------------------------
     var filterHtml5shiv    = 'html5shiv/**/*',
-        filterJquery       = 'jquery/**/*';
+        filterJquery       = 'jquery/**/*',
+        filterRespond      = 'respond/**/*';
 
     // Vendor streams - process each library separately
     // -------------------------------------------------------------
         // html5shiv
     var streamHtml5shiv = bowerFiles
             .pipe($.filter(filterHtml5shiv)),
+        // Respond
+        streamRespond = bowerFiles
+            .pipe($.filter(filterRespond)),
         // jQuery
         streamJquery = bowerFiles
             .pipe($.filter(filterJquery));
@@ -166,12 +157,12 @@ gulp.task('bower:js', function() {
     // Package streams - group certain libs into single packages
     // -------------------------------------------------------------
     // IE8 JS stream
-    var streamIE8JS = minifyJS($.mergeStream(streamHtml5shiv), {
+    var streamIE8JS = minifyJS($.streamqueue({ objectMode: true }, streamHtml5shiv, streamRespond), {
                 mangle: { keep_fnames: true },
                 preserveComments: 'license'
             }, 'ie8.js' ),
     // Vendor JS stream, for all other 3rd-party JS
-        streamVendorJS = minifyJS($.mergeStream(streamJquery), {
+        streamVendorJS = minifyJS($.streamqueue({ objectMode: true }, streamJquery), {
             mangle: {
                 except: ['jQuery'],
                 keep_fnames: true
@@ -191,7 +182,11 @@ gulp.task('bower:js', function() {
 gulp.task('bower:css', function() {
     // Grab the main bower files
     // -------------------------------------------------------------
-    var bowerFiles = gulp.src($.mainBowerFiles({ filter: '**/*.css' }), { base: paths.bower.src });
+    var bowerFiles = gulp.src($.mainBowerFiles(
+        {
+            filter: '**/*.css'
+        }
+    ), { base: paths.bower.src });
 
     // Filters
     // -------------------------------------------------------------
@@ -199,18 +194,20 @@ gulp.task('bower:css', function() {
 
     // Vendor streams - process each library separately
     // -------------------------------------------------------------
-        // normalize-css
+    // normalize-css
     var streamNormalizeCss = bowerFiles
-            .pipe($.filter(filterNormalizeCss));
-
-    // Package streams - group certain libs into single packages
-    // -------------------------------------------------------------
+        .pipe($.filter(filterNormalizeCss));
 
     // Return vendor CSS stream, for all other 3rd-party CSS
-    return $.mergeStream(streamNormalizeCss)
+    return $.streamqueue({ objectMode: true }, streamNormalizeCss)
         .pipe($.plumber())
         .pipe($.concat('vendor.css'))
-        .pipe(gulp.dest(paths.styles.vendor.src));
+        .pipe(gulp.dest(paths.styles.vendor.src))
+        .pipe($.sourcemaps.init())
+            .pipe($.minifyCss({ advanced: false }))
+            .pipe($.rename({ suffix: '.min' }))
+        .pipe($.sourcemaps.write('./', { includeContent: true }))
+        .pipe(gulp.dest(paths.styles.dest));
 }); // /bower:css
 
 /* BrowserSync */
