@@ -85,3 +85,31 @@
         } // /.tabpane
     } // /.tabwrapper
 } // /.no-js
+
+
+
+/* -------------------------------------------------------------
+ * Tabs - responsive
+ * ---------------------------------------------------------- */
+@media screen and (max-width: @breakpoint-mobile) {
+    .tabwrapper {
+        > .nav {
+            > li {
+                float: none;
+            }
+        } // /> .nav
+        &.tabs-left,
+        &.tabs-right {
+            > .nav {
+                float: none;
+                width: auto;
+            } // /> .nav
+
+            .tabpane {
+                float: none;
+                width: auto;
+            } // /.tabpane
+        } // /&.tabs-left, &.tabs-right
+    } // /.tabwrapper
+}
+

@@ -9,9 +9,7 @@
     <link rel="stylesheet" type="text/css" href="static/dist/css/vendor.min.css"/>
     <link rel="stylesheet" type="text/css" href="static/dist/css/styles.min.css"/>
     <link rel="stylesheet" type="text/css" href="static/styleguide/prism.css"/>
-    <link rel="stylesheet" media="screen and (min-width: 0) and (max-width: 767px)" href="static/dist/css/styles-responsive.min.css"/>
     <!--[if lte IE 8 ]>
-        <link rel="stylesheet" type="text/css" href="static/dist/css/styles-responsive.min.css"/>
         <script src="static/dist/js/ie8.min.js"/>
     <![endif]-->
 
@@ -177,7 +175,7 @@
 
                                 <h3>Responsiveness</h3>
                                 <p><span class="fillin">Notes on any responsiveness e.g. is there some, what devices, where is responsive CSS</span></p>
-                                <p>Responsive styles are included in a separate stylesheet (styles-responsive.css), also compiled from LESS. Responsive styles have been separated out so that the mobile stylesheet can be easily served to older browsers if required.</p>
+                                <p>Responsive styles for each LESS module is included in it's own .less file, with the values for the breakpoint(s) being managed in variables.less</p>
 
                                 <h3>HTML flats</h3>
                                 <p><span class="fillin">Location/links to HTML flats</span></p>
