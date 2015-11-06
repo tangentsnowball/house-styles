@@ -55,7 +55,7 @@ function processCss(inputStream, taskType) {
         .pipe($.sourcemaps.write('./', { includeContent: true }))
         .pipe(gulp.dest(paths.styles.dest))
         .pipe(browserSync.stream())
-        .pipe($.if(flags.notify, $.notify({ message: 'Images task complete' })));
+        .pipe($.if(flags.notify, $.notify({ message: taskType + ' task complete' })));
 }
 
 /*
@@ -86,7 +86,7 @@ gulp.task('less:responsive', ['bower:css'], function() {
 
 /* JS */
 gulp.task('scripts', ['scripts:moveFiles'], function() {
-  return gulp.src(paths.scripts.src + 'main.js')
+  return gulp.src(paths.scripts.src + 'app/*.js')
     .pipe($.plumber(function(error) {
         $.util.log($.util.colors.red('Error (' + error.plugin + '): ' + error.message));
         this.emit('end');
@@ -95,7 +95,7 @@ gulp.task('scripts', ['scripts:moveFiles'], function() {
     .pipe($.newer(paths.scripts.dest))
     .pipe($.jshint('.jshintrc'))
     .pipe($.jshint.reporter('jshint-stylish'))
-    .pipe($.concat('main.js'))
+    .pipe($.concat('app.js'))
     .pipe($.sourcemaps.init())
         .pipe($.uglify())
         .pipe($.rename({suffix: '.min'}))
@@ -103,7 +103,7 @@ gulp.task('scripts', ['scripts:moveFiles'], function() {
     .pipe($.sourcemaps.write('./', { includeContent: true }))
     .pipe(gulp.dest(paths.scripts.dest))
     .pipe(browserSync.stream())
-    .pipe($.if(flags.notify, $.notify({ message: 'Images task complete' })));
+    .pipe($.if(flags.notify, $.notify({ message: 'Scripts task complete' })));
 });
 
 /* Move JS files that are already minified to dist/js/ folder */
@@ -225,7 +225,7 @@ gulp.task('browser-sync', ['bower:js', 'styles', 'scripts', 'images'], function(
     });
 
     gulp.watch(paths.styles.src + '*.less', ['styles']);
-    gulp.watch(paths.scripts.src + '*.js', ['scripts']);
+    gulp.watch(paths.scripts.src + 'app/*.js', ['scripts']);
     gulp.watch(paths.images.src + '**/*', ['images']);
     gulp.watch(paths.templates.src + '*.html').on('change', browserSync.reload);
 });
