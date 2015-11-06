@@ -112,3 +112,38 @@
         } // /&.required
     } // /.field
 } // /.form
+
+
+/* -------------------------------------------------------------
+ * Forms - responsive
+ * ---------------------------------------------------------- */
+@media screen and (min-width: 0) and (max-width: @breakpoint-mobile) {
+    .form {
+        label,
+        .faux-label,
+        .error-msg,
+        .help-text,
+        input[type="text"],
+        input[type="password"],
+        input[type="file"],
+        input[type="url"],
+        select,
+        textarea {
+            float: none;
+            width: 100%;
+            margin-left: 0;
+            margin-right: 0;
+        } // /labels, inputs
+
+        label,
+        .faux-label,
+        .error-msg,
+        .help-text {
+            display: block;
+        } // /labels
+
+        .buttons {
+            padding-left: 0;
+        } // /buttons
+    } // /.form
+}

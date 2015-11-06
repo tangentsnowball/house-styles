@@ -144,3 +144,84 @@
         } // /[class*="span"]
     } // /.row
 } // /.ie7
+
+
+
+/* -------------------------------------------------------------
+ * Responsive Grid Generator
+ * ---------------------------------------------------------- */
+ @media screen and (min-width: 0) and (max-width: @breakpoint-mobile) {
+    .row,
+    .row.fixed-spacing {
+        [class*="span"] {
+            float: none;
+            width: auto;
+            margin-left: 0;
+            padding: 0;
+        } // /[class*="span"]
+
+        [class*="offset"] {
+            margin-left: 0;
+            &:first-child {
+                margin-left: 0;
+            } // /&:first-child
+        } // /[class*="offset"]
+
+        .row {
+            margin: 0;
+        } // /.row
+
+        // Non-collapsing grid
+        &.fix {
+            [class*="span"] {
+                float: left;
+                margin-left: @column-gutter-pct;
+
+                &:first-child {
+                    margin-left: 0;
+                } // /&:first-child
+            } // /[class*="span"]
+
+            // Build columns
+            // -------------------------------------------------------------
+            @fix-iterations: @column-count;
+            .fixLoopingClass(@fix-index) when (@fix-index > 0){
+                .span@{fix-index}{
+                    width: @column-width-pct * @fix-index + (@column-gutter-pct * (@fix-index - 1));
+                }
+                .fixLoopingClass(@fix-index - 1);
+            }
+            .fixLoopingClass(0){}
+            .fixLoopingClass(@fix-iterations);
+
+            // Build offsets - need to use new variables for this loop
+            // -------------------------------------------------------------
+            @offset-iterations: @column-count - 1;
+            .offsetLoopingClass(@offset-index) when (@offset-index > 0){
+                .offset@{offset-index}{
+                    .offset(@offset-index,1);
+                    &:first-child {
+                        .offset(@offset-index);
+                    }
+                }
+                .offsetLoopingClass(@offset-index - 1);
+            }
+            .offsetLoopingClass(0){}
+            .offsetLoopingClass(@offset-iterations);
+        } // /&.fix
+    } // /.row, .row.fixed-spacing
+
+    .row.reverselayout {
+        [class*="span"] {
+            float: none;
+            margin: 0;
+        } // /[class*="span"]
+
+        [class*="offset"] {
+            margin-right: 0;
+            &:first-child {
+                margin-right: 0;
+            } // /&:first-child
+        } // /[class*="offset"]
+    } // /.row.reverselayout
+}

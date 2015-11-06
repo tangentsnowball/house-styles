@@ -76,12 +76,9 @@ function minifyJS (sourceStream, uglifyOptions, filename) {
         .pipe(gulp.dest(paths.scripts.dest));
 } // /function minifyJS
 
-gulp.task('styles', ['bower:css', 'less:main', 'less:responsive']);
+gulp.task('styles', ['bower:css', 'less:main']);
 gulp.task('less:main', ['bower:css'], function() {
     return processCss(gulp.src(paths.styles.src + 'styles.less'), 'Styles');
-});
-gulp.task('less:responsive', ['bower:css'], function() {
-    return processCss(gulp.src(paths.styles.src + 'styles-responsive.less'), 'Responsive styles');
 });
 
 /* JS */
@@ -134,7 +131,11 @@ gulp.task('images', function() {
 gulp.task('bower:js', function() {
     // Grab the main bower files
     // -------------------------------------------------------------
-    var bowerFiles = gulp.src($.mainBowerFiles({ filter: '**/*.js' }), { base: paths.bower.src });
+    var bowerFiles = gulp.src($.mainBowerFiles(
+        { 
+            filter: '**/*.js' 
+        }
+    ), { base: paths.bower.src });
 
     // Filters
     // -------------------------------------------------------------
