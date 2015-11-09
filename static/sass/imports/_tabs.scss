@@ -13,13 +13,13 @@
                 display: block;
                 padding: 0.2em 0.5em;
                 text-decoration: none;
-                background: @tab-colour;
+                background: $tab-colour;
             } // /> a
 
             &.active {
                 > a {
                     font-weight: bold;
-                    background: @tab-active;
+                    background: $tab-active;
                 } // /> a
             } // /&.active
         } // /> li
@@ -29,7 +29,7 @@
         display: none;
         padding: 20px;
         clear: both;
-        background: @tab-active;
+        background: $tab-active;
 
         &.active {
             display: block;
@@ -37,7 +37,7 @@
     } // /.tabpane
 
     &.tabs-left {
-        .clearfix();
+        @include clearfix;
 
         > .nav {
             float: left;
@@ -57,7 +57,7 @@
     } // /&.tabs-left
 
     &.tabs-right {
-        .clearfix();
+        @include clearfix;
 
         > .nav {
             float: right;
@@ -91,7 +91,7 @@
 /* -------------------------------------------------------------
  * Tabs - responsive
  * ---------------------------------------------------------- */
-@media screen and (min-width: 0) and (max-width: @breakpoint-mobile) {
+@media (max-width: $breakpoint-mobile) {
     .tabwrapper {
         > .nav {
             > li {

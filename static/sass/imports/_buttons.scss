@@ -5,9 +5,9 @@
 input.btn {
     padding-top: 0;
     padding-bottom: 0;
-    height: @btn-line-height * 1.04;
+    height: $btn-line-height * 1.04;
     &.btn-small {
-        height: @btn-line-height / 1.4;
+        height: $btn-line-height / 1.4;
     } // /&.btn-small
 } // /input.btn
 
@@ -20,19 +20,19 @@ button::-moz-focus-inner {
 
 .btn {
     display: inline-block;
-    padding: 0 @btn-x-padding;
-    line-height: @btn-line-height;
+    padding: 0 $btn-x-padding;
+    line-height: $btn-line-height;
     margin: 0;
     box-sizing: border-box;
     border: solid 1px #AAA;
     border: 0;
-    background: @grey-pale;
+    background: $grey-pale;
     color: #666;
     outline: 0;
     cursor: pointer;
     text-align: center;
     text-decoration: none;
-    font-size: @btn-font-size;
+    font-size: $btn-font-size;
     vertical-align: middle;
     font-family: Arial,Helvetica;
     border-collapse: separate; //fix for IE9
@@ -49,13 +49,13 @@ button::-moz-focus-inner {
     } // /&.btn-block
 
     &.btn-small {
-        font-size: @btn-font-size * 0.9;
-        line-height: @btn-line-height / 1.2;
+        font-size: $btn-font-size * 0.9;
+        line-height: $btn-line-height / 1.2;
         font-weight: normal;
     } // /&.btn-small
 
     &.btn-large {
-        font-size: @btn-font-size * 1.4;
+        font-size: $btn-font-size * 1.4;
     } // /&.btn-large
 
     // Button states
@@ -75,9 +75,9 @@ button::-moz-focus-inner {
         text-decoration: line-through;
     } // /&[disabled], &.disabled
 
-    &.btn-primary   { color: @brand-primary;   } // /&.btn-primary
-    &.btn-secondary { color: @brand-secondary; } // /&.btn-secondary
-    &.btn-info      { color: @brand-info;      } // /&.btn-info
-    &.btn-warning   { color: @brand-warning;   } // /&.btn-warning
-    &.btn-danger    { color: @brand-danger;    } // /&.btn-danger
+    &.btn-primary   { color: $brand-primary;   } // /&.btn-primary
+    &.btn-secondary { color: $brand-secondary; } // /&.btn-secondary
+    &.btn-info      { color: $brand-info;      } // /&.btn-info
+    &.btn-warning   { color: $brand-warning;   } // /&.btn-warning
+    &.btn-danger    { color: $brand-danger;    } // /&.btn-danger
 } // /.btn

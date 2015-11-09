@@ -10,13 +10,13 @@
         border: 0;
     } // /fieldset
     legend {
-        margin-bottom: @form-element-spacing;
+        margin-bottom: $form-element-spacing;
     } // /legend
     label,
     .faux-label {
         float: left;
-        padding: 0 0 @form-element-spacing 0;
-        width: @label-width;
+        padding: 0 0 $form-element-spacing 0;
+        width: $label-width;
         box-sizing: border-box;
     } // /label, .faux-label
     input[type="text"],
@@ -29,8 +29,8 @@
     select,
     textarea {
         padding: 0.3em 0.4em;
-        margin: 0 0 @form-element-spacing @form-element-margin;
-        width: @input-width;
+        margin: 0 0 $form-element-spacing $form-element-margin;
+        width: $input-width;
         box-sizing: border-box;
         background: #FFFFFF;
         border: solid 1px #CCCCCC;
@@ -52,17 +52,17 @@
 
     .help-text {
         display: block;
-        width: @help-width;
-        margin-left: @label-width + @form-element-margin;
+        width: $help-width;
+        margin-left: $label-width + $form-element-margin;
     } // /.help-text
 
     .buttons {
-        padding-left: @label-width + @form-element-margin;
+        padding-left: $label-width + $form-element-margin;
     } // /.buttons
 
     .field {
-        padding-bottom: @form-element-spacing * 2;
-        .clearfix();
+        padding-bottom: $form-element-spacing * 2;
+        @include clearfix;
 
         &.error {
             input[type="text"],
@@ -117,7 +117,7 @@
 /* -------------------------------------------------------------
  * Forms - responsive
  * ---------------------------------------------------------- */
-@media screen and (min-width: 0) and (max-width: @breakpoint-mobile) {
+@media (max-width: $breakpoint-mobile) {
     .form {
         label,
         .faux-label,

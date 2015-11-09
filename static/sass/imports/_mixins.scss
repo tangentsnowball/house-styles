@@ -2,5 +2,6 @@
  * Global mixins
  * ---------------------------------------------------------- */
 
-@import 'mixins/grid.less';
-@import 'mixins/gradients.less';
+@import 'mixins/_utility';
+@import 'mixins/_grid';
+@import 'mixins/_gradients';

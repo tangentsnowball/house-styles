@@ -5,7 +5,7 @@
     display: inline-block;
     position: relative;
     vertical-align: middle;
-    .clearfix();
+    @include clearfix;
 
     .dropdown-menu {
         position: absolute;
