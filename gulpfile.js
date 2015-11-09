@@ -1,7 +1,9 @@
+    // Application basePaths
 var basePaths = {
         src: 'static/',
         dest: 'static/dist/'
     },
+    // Application paths
     paths = {
         images: {
             src: basePaths.src + 'img/',
@@ -26,6 +28,32 @@ var basePaths = {
         bower: {
             src: './bower_components/'
         }
+    },
+    // Define names of third-party dependencies
+    libs = {
+        vendor: {
+            /* -----------------------------------------------------
+             * core js libs - present on every site page, these will
+             * be concatenated in order into vendor.js
+             * -------------------------------------------------- */
+            core: {
+                jquery: {
+                    name: 'jquery'
+                }
+            },
+            /* -----------------------------------------------------
+             * ie8- js libs - present on every site page, thse will
+             * be concatenated in order into ie8.js
+             * -------------------------------------------------- */
+            ie8: {
+                html5shiv: {
+                    name: 'html5shiv'
+                },
+                respond: {
+                    name: 'respond'
+                }
+            }
+        }
     };
 
 var gulp = require('gulp'),
@@ -43,7 +71,7 @@ var gulp = require('gulp'),
 /* CSS - LESS */
 function processCss(inputStream, taskType) {
     return inputStream
-        .pipe($.plumber(function(error) {
+        .pipe($.plumber(function (error) {
             $.util.log($.util.colors.red('Error (' + error.plugin + '): ' + error.message + '\n'));
             this.emit('end');
         }))
@@ -64,7 +92,7 @@ function processCss(inputStream, taskType) {
  */
 function minifyJS (sourceStream, uglifyOptions, filename) {
     return sourceStream
-        .pipe($.plumber(function(error) {
+        .pipe($.plumber(function (error) {
             $.util.log($.util.colors.red('Error (' + error.plugin + '): ' + error.message));
             this.emit('end');
         }))
@@ -76,15 +104,45 @@ function minifyJS (sourceStream, uglifyOptions, filename) {
         .pipe(gulp.dest(paths.scripts.dest));
 } // /function minifyJS
 
+/*
+ * Generates a glob pattern from a list of matched vendor libs as
+ * defined in libs
+ */
+function getLibsGlob (libName) {
+    // 1. Set up empty libs array
+    var libArray = [];
+
+    // 2. loop through vendor libs in libName collection
+    for (var lib in libs.vendor[libName]) {
+        // jic, prevent looping through the object's prototype
+        if (libs.vendor[libName].hasOwnProperty(lib)) {
+            // 2a. get lib.name
+            var thisLib = libs.vendor[libName][lib];
+            // 2b. push to libsArray in order
+            libArray.push(thisLib.name);
+        }
+    }
+
+    // 3. join array, surround in glob brackets, ensure string
+    if (libArray.length > 1) {
+        return ('{' + libArray.join(',') + '}/**/*').toString();
+    } else if (libArray.length === 1) {
+        /* 3b. but there's no need to return a multi-glob if there's
+         * only one lib */
+        return (libArray[0] + '/**/*').toString();
+    }
+
+} // /function getLibsGlob
+
 gulp.task('styles', ['bower:css', 'less']);
-gulp.task('less', ['bower:css'], function() {
+gulp.task('less', ['bower:css'], function () {
     return processCss(gulp.src(paths.styles.src + 'styles.less'), 'Styles');
 });
 
 /* JS */
-gulp.task('scripts', ['scripts:moveFiles'], function() {
+gulp.task('scripts', ['scripts:moveFiles'], function () {
   return gulp.src(paths.scripts.src + 'app/*.js')
-    .pipe($.plumber(function(error) {
+    .pipe($.plumber(function (error) {
         $.util.log($.util.colors.red('Error (' + error.plugin + '): ' + error.message));
         this.emit('end');
     }))
@@ -104,15 +162,15 @@ gulp.task('scripts', ['scripts:moveFiles'], function() {
 });
 
 /* Move JS files that are already minified to dist/js/ folder */
-gulp.task('scripts:moveFiles', function() {
+gulp.task('scripts:moveFiles', function () {
     gulp.src(copyFiles.scripts, { base: './static/js/' })
     .pipe(gulp.dest(paths.scripts.dest));
 });
 
 /* Images */
-gulp.task('images', function() {
+gulp.task('images', function () {
   return gulp.src(paths.images.src + '**/*')
-    .pipe($.plumber(function(error) {
+    .pipe($.plumber(function (error) {
         $.util.log($.util.colors.red('Error (' + error.plugin + '): ' + error.message));
         this.emit('end');
     }))
@@ -128,62 +186,47 @@ gulp.task('images', function() {
 /*
  * Grab main bower files JS, chuck them exactly where we specify
  */
-gulp.task('bower:js', function() {
+gulp.task('bower:js', function () {
     // Grab the main bower files
     // -------------------------------------------------------------
-    var bowerFiles = gulp.src($.mainBowerFiles(
-        { 
-            filter: '**/*.js' 
-        }
+    var bowerStream = gulp.src($.mainBowerFiles(
+        { filter: '**/*.js' }
     ), { base: paths.bower.src });
 
-    // Filters
-    // -------------------------------------------------------------
-    var filterHtml5shiv    = 'html5shiv/**/*',
-        filterJquery       = 'jquery/**/*',
-        filterRespond      = 'respond/**/*';
-
-    // Vendor streams - process each library separately
-    // -------------------------------------------------------------
-        // html5shiv
-    var streamHtml5shiv = bowerFiles
-            .pipe($.filter(filterHtml5shiv)),
-        // Respond
-        streamRespond = bowerFiles
-            .pipe($.filter(filterRespond)),
-        // jQuery
-        streamJquery = bowerFiles
-            .pipe($.filter(filterJquery));
-
-    // Package streams - group certain libs into single packages
-    // -------------------------------------------------------------
-    // IE8 JS stream
-    var streamIE8JS = minifyJS($.streamqueue({ objectMode: true }, streamHtml5shiv, streamRespond), {
+    /* -------------------------------------------------------------
+     * Return merged, minified JS streams
+     * ---------------------------------------------------------- */
+    return $.mergeStream(
+        minifyJS(
+            bowerStream.pipe($.filter(getLibsGlob('core'))),
+            {
+                mangle: {
+                    except: ['jQuery'],
+                    keep_fnames: true
+                },
+                preserveComments: 'license'
+            },
+            'vendor.js'
+        ),
+        // IE8 JS stream
+        minifyJS(
+            bowerStream.pipe($.filter(getLibsGlob('ie8'))),
+            {
                 mangle: { keep_fnames: true },
                 preserveComments: 'license'
-            }, 'ie8.js' ),
-    // Vendor JS stream, for all other 3rd-party JS
-        streamVendorJS = minifyJS($.streamqueue({ objectMode: true }, streamJquery), {
-            mangle: {
-                except: ['jQuery'],
-                keep_fnames: true
             },
-            preserveComments: 'license'
-        }, 'vendor.js' );
-
-    /* return merged 'completed' streams to allow the task to
-     * register as done once all streams resolve
-     * ----------------------------------------------------------- */
-    return $.mergeStream(streamVendorJS, streamIE8JS);
+            'ie8.js'
+        )
+    );
 }); // /bower:js
 
 /*
  * Grab main bower files CSS, chuck them exactly where we specify
  */
-gulp.task('bower:css', function() {
+gulp.task('bower:css', function () {
     // Grab the main bower files
     // -------------------------------------------------------------
-    var bowerFiles = gulp.src($.mainBowerFiles(
+    var bowerStream = gulp.src($.mainBowerFiles(
         {
             filter: '**/*.css'
         }
@@ -196,7 +239,7 @@ gulp.task('bower:css', function() {
     // Vendor streams - process each library separately
     // -------------------------------------------------------------
     // normalize-css
-    var streamNormalizeCss = bowerFiles
+    var streamNormalizeCss = bowerStream
         .pipe($.filter(filterNormalizeCss));
 
     // Return vendor CSS stream, for all other 3rd-party CSS
@@ -212,7 +255,7 @@ gulp.task('bower:css', function() {
 }); // /bower:css
 
 /* BrowserSync */
-gulp.task('browser-sync', ['bower:js', 'styles', 'scripts', 'images'], function() {
+gulp.task('browser-sync', ['bower:js', 'styles', 'scripts', 'images'], function () {
     browserSync.init({
         server: {
             baseDir: './'
@@ -236,11 +279,11 @@ gulp.task('clear', function (done) {
 });
 
 /* Clean up stray files */
-gulp.task('clean', ['clear'], function(cb) {
+gulp.task('clean', ['clear'], function (cb) {
     $.del([paths.styles.dest, paths.scripts.dest, paths.images.dest], cb);
 });
 
 /* Default task */
-gulp.task('default', ['clean'], function() {
+gulp.task('default', ['clean'], function () {
     gulp.start('browser-sync');
 });
