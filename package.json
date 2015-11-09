@@ -24,7 +24,6 @@
     "bower": "^1.5.2",
     "browser-sync": "^2.9.11",
     "del": "^1.2.0",
-    "glob-stream": "^5.2.0",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.1.0",
     "gulp-bytediff": "^0.2.1",
