@@ -61,6 +61,7 @@ var gulp = require('gulp'),
         pattern: '*',
         camelize: true
     }),
+    path = require('path'),
     browserSync = $.browserSync.create(),
     flags       = require('minimist')(process.argv.slice(2)),
     isNotify    = flags.notify || false,
@@ -76,7 +77,7 @@ function processCss(inputStream, taskType) {
             this.emit('end');
         }))
         .pipe($.newer(paths.styles.dest))
-        .pipe($.less({ paths: [$.path.join(__dirname, 'less', 'includes')] }))
+        .pipe($.less({ paths: [path.join(__dirname, 'less', 'includes')] }))
         .pipe($.sourcemaps.init())
             .pipe($.minifyCss({ advanced: false }))
             .pipe($.rename({ suffix: '.min' }))

@@ -48,7 +48,6 @@
     "main-bower-files": "^2.9.0",
     "merge-stream": "^1.0.0",
     "minimist": "^1.2.0",
-    "path": "^0.11.14",
     "streamqueue": "^1.1.1"
   }
 }
