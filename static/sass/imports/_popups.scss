@@ -17,11 +17,11 @@
         display: none;
         position: absolute;
         left: 50%;
-        width: @popup-width;
+        width: $popup-width;
         padding: 10px;
-        margin: 0 0 0 -@popup-width / 2;
+        margin: 0 0 0 -$popup-width / 2;
         box-sizing: border-box;
-        background: @body-bg;
+        background: $body-bg;
 
         &.fixed {
             position: fixed;
@@ -41,7 +41,7 @@
 /* -------------------------------------------------------------
  * Popups - Responsive
  * ---------------------------------------------------------- */
-@media screen and (max-width: @breakpoint-mobile) {
+@media (max-width: $breakpoint-mobile) {
     .popupwrapper {
         .popup {
             width: 90%;

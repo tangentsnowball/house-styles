@@ -4,17 +4,17 @@
 
 // Alert-specific colours
 // -------------------------------------------------------------
-@alert-primary: lighten(@brand-primary, 25%);
-@alert-success: lighten(@brand-success, 25%);
-@alert-info:    lighten(@brand-info,    25%);
-@alert-warning: lighten(@brand-warning, 25%);
-@alert-error:   lighten(@brand-danger,  25%);
+$alert-primary: lighten($brand-primary, 25%);
+$alert-success: lighten($brand-success, 25%);
+$alert-info:    lighten($brand-info,    25%);
+$alert-warning: lighten($brand-warning, 25%);
+$alert-danger:  lighten($brand-danger,  25%);
 
 .alert {
     position: relative;
     margin: 0 0 0.5em 0;
     padding: 10px 20px;
-    background: @alert-primary;
+    background: $alert-primary;
 
     .close {
         position: absolute;
@@ -30,13 +30,13 @@
 
 
     &.alert-warning {
-        background: @alert-warning;
+        background: $alert-warning;
     } // /&.alert-warning
     &.alert-error {
-        background: @alert-error;
+        background: $alert-danger;
     } // /&.alert-error
     &.alert-success {
-        background: @alert-success;
+        background: $alert-success;
     } // /&.alert-success
 } // /.alert
 

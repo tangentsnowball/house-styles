@@ -12,7 +12,7 @@ var basePaths = {
             dest: basePaths.dest + 'js/'
         },
         styles: {
-            src: basePaths.src + 'less/',
+            src: basePaths.src + 'sass/',
             dest: basePaths.dest + 'css/',
             vendor: {
                 src: basePaths.src + 'css/',
@@ -48,7 +48,7 @@ function processCss(inputStream, taskType) {
             this.emit('end');
         }))
         .pipe($.newer(paths.styles.dest))
-        .pipe($.less({ paths: [$.path.join(__dirname, 'less', 'includes')] }))
+        .pipe($.sass({ includePaths: paths.styles.src + 'imports/' }))
         .pipe($.sourcemaps.init())
             .pipe($.minifyCss({ advanced: false }))
             .pipe($.rename({ suffix: '.min' }))
@@ -76,9 +76,9 @@ function minifyJS (sourceStream, uglifyOptions, filename) {
         .pipe(gulp.dest(paths.scripts.dest));
 } // /function minifyJS
 
-gulp.task('styles', ['bower:css', 'less']);
-gulp.task('less', ['bower:css'], function() {
-    return processCss(gulp.src(paths.styles.src + 'styles.less'), 'Styles');
+gulp.task('styles', ['bower:css', 'sass']);
+gulp.task('sass', ['bower:css'], function() {
+    return processCss(gulp.src(paths.styles.src + 'styles.scss'), 'Styles');
 });
 
 /* JS */
@@ -132,8 +132,8 @@ gulp.task('bower:js', function() {
     // Grab the main bower files
     // -------------------------------------------------------------
     var bowerFiles = gulp.src($.mainBowerFiles(
-        { 
-            filter: '**/*.js' 
+        {
+            filter: '**/*.js'
         }
     ), { base: paths.bower.src });
 
@@ -225,7 +225,7 @@ gulp.task('browser-sync', ['bower:js', 'styles', 'scripts', 'images'], function(
         // online: false
     });
 
-    gulp.watch(paths.styles.src + '*.less', ['styles']);
+    gulp.watch(paths.styles.src + '**/*.scss', ['styles']);
     gulp.watch(paths.scripts.src + 'app/*.js', ['scripts']);
     gulp.watch(paths.images.src + '**/*', ['images']);
     gulp.watch(paths.templates.src + '*.html').on('change', browserSync.reload);

@@ -1,0 +1,19 @@
+/* -------------------------------------------------------------
+ * Mixin set - Grid construction
+ * Used to construct the responsive grid
+ * ---------------------------------------------------------- */
+
+// Offsets
+@mixin offset($multiply, $add: 0){
+    margin-left:($column-width-pct * $multiply) + ($column-gutter-pct * $multiply) + ($column-gutter-pct * $add);
+}
+
+// Fixed-size offsets
+@mixin fixedOffset($multiply){
+    margin-left:($column-width-fixed * $multiply);
+}
+
+// Reverse offsets
+@mixin reverseOffset($multiply, $add: 0){
+    margin-right:($column-width-pct * $multiply) + ($column-gutter-pct * $multiply) + ($column-gutter-pct * $add);
+}
