@@ -1,9 +1,9 @@
-/* -----------------------------------------------------------------
+/* -----------------------------------------------------------------------------
  * Tangent Snowball - House Styles Gulpfile
- * -------------------------------------------------------------- */
+ * -------------------------------------------------------------------------- */
 
 // Global Vars
-// -------------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
     // Base app paths
 var basePaths = {
         src: 'static/',
@@ -46,19 +46,21 @@ var basePaths = {
     // Define names of third-party dependencies
     libs = {
         vendor: {
-            /* -------------------------------------------------------------------------------------
-             * core js libs - present on every site page, these will be concatenated in order into
+            /* -----------------------------------------------------------------
+             * core js libs - present on every site page, these will be
+             * concatenated in order into
              * vendor.js
-             * ---------------------------------------------------------------------------------- */
+             * -------------------------------------------------------------- */
             core: {
                 jquery: {
                     name: 'jquery'
                 }
             },
-            /* -------------------------------------------------------------------------------------
-             * ie8- js libs - present on every site page, thse will be concatenated in order into
+            /* -----------------------------------------------------------------
+             * ie8- js libs - present on every site page, thse will be
+             * concatenated in order into
              * ie8.js
-             * ---------------------------------------------------------------------------------- */
+             * -------------------------------------------------------------- */
             ie8: {
                 html5shiv: {
                     name: 'html5shiv'
@@ -71,7 +73,7 @@ var basePaths = {
     };
 
 // Load Node/Gulp plugins
-// -------------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 var gulp = require('gulp'),
     $ = require('gulp-load-plugins')({
         pattern: '*',
@@ -85,11 +87,11 @@ var gulp = require('gulp'),
         scripts: []
     };
 
-/* -------------------------------------------------------------------------------------------------
+/* -----------------------------------------------------------------------------
  * processCss
  * Accepts: a stream upon which to perform gulp stuff, and a message to display
  * Returns: the processed stream
- * ---------------------------------------------------------------------------------------------- */
+ * -------------------------------------------------------------------------- */
 function processCss(inputStream, taskType) {
     return inputStream
         .pipe($.plumber(function (error) {
@@ -107,12 +109,12 @@ function processCss(inputStream, taskType) {
         .pipe($.if(flags.notify, $.notify({ message: taskType + ' task complete' })));
 } // /function processCss
 
-/* -------------------------------------------------------------------------------------------------
+/* -----------------------------------------------------------------------------
  * minifyJS
  * Accepts: a gulp stream, gulp-uglify options, libType, filename
  * Returns: the processed stream
- * Concat stream content, minify using options and write to JS src/dest using filename
- * ---------------------------------------------------------------------------------------------- */
+ * Concat stream, minify using options and write to JS src/dest using filename
+ * -------------------------------------------------------------------------- */
 function minifyJS (sourceStream, uglifyOptions, libType, filename) {
     return sourceStream
         .pipe($.plumber(function (error) {
@@ -127,13 +129,14 @@ function minifyJS (sourceStream, uglifyOptions, libType, filename) {
         .pipe(gulp.dest(paths.scripts[libType].dest));
 } // /function minifyJS
 
-/* -------------------------------------------------------------------------------------------------
+/* -----------------------------------------------------------------------------
  * getLibsGlob
  * Accepts: either a single or an array of lib collection names
  * Returns: a glob pattern string
- * Generates a glob pattern from the lib collection name of vendor libs, as defined in libs.vendor.
+ * Generates a glob pattern from the collection name of vendor libs, as defined
+ * in libs.vendor
  * Can also accept an array of lib collection names - e.g. ['ie8', 'core']
- * ---------------------------------------------------------------------------------------------- */
+ * -------------------------------------------------------------------------- */
 function getLibsGlob (libCol) {
     // 1. Set up empty libs array
     var libArray = [],
@@ -152,8 +155,8 @@ function getLibsGlob (libCol) {
         } // /for...
     } // /function pushLibsToArray
 
-    /* 2. If libCol is an array of lib collection names, loop through and push each name to
-    * libArray for each collection */
+    /* 2. If libCol is an array of lib collection names, loop through and push
+     * each name to libArray for each collection */
     if (libColIsArray) {
         for (var c in libCol) {
             var thisLibCol = libCol[c];
@@ -168,23 +171,24 @@ function getLibsGlob (libCol) {
     if (libArray.length > 1) {
         return ('{' + libArray.join(',') + '}/**/*').toString();
     } else if (libArray.length === 1) {
-        // 3b. but there's no need to return a multi-glob if there's only one lib
+        // 3b. but there's no need to return a multiglob if there's only one lib
         return (libArray[0] + '/**/*').toString();
     } // /if...
 } // /function getLibsGlob
 
-/* -------------------------------------------------------------------------------------------------
+/* -----------------------------------------------------------------------------
  * Task - styles
- * Handles processing of LESS files
- * ---------------------------------------------------------------------------------------------- */
+ * Handles processing of SASS/SCSS files
+ * -------------------------------------------------------------------------- */
 gulp.task('styles', function () {
-    return processCss(gulp.src(paths.styles.core.src + 'styles.less'), 'Styles');
+    return processCss(gulp.src(paths.styles.core.src + 'styles.s{a,c}ss'), 'Styles');
 }); // /gulp.task('styles'...
 
-/* -------------------------------------------------------------------------------------------------
+/* -----------------------------------------------------------------------------
  * Task - scripts
- * Concatenates application js (anything in paths.scripts.core.src), generates sourcemaps, minifies
- * ---------------------------------------------------------------------------------------------- */
+ * Concatenates application js (anything in paths.scripts.core.src), generates
+ * sourcemaps, minifies
+ * -------------------------------------------------------------------------- */
 gulp.task('scripts', ['scripts:moveFiles'], function () {
   return gulp.src(paths.scripts.core.src + '*.js')
     .pipe($.plumber(function (error) {
@@ -212,10 +216,10 @@ gulp.task('scripts:moveFiles', function () {
     .pipe(gulp.dest(paths.scripts.core.dest));
 }); // /gulp.task('scripts:moveFiles'...
 
-/* -------------------------------------------------------------------------------------------------
+/* -----------------------------------------------------------------------------
  * Task - images
  * Uses imagemin to optimise images losslessly
- * ---------------------------------------------------------------------------------------------- */
+ * -------------------------------------------------------------------------- */
 gulp.task('images', function () {
   return gulp.src(paths.images.src + '**/*')
     .pipe($.plumber(function (error) {
@@ -231,20 +235,20 @@ gulp.task('images', function () {
     .pipe($.if(flags.notify, $.notify({ message: 'Images task complete' })));
 }); // /gulp.task('images'...
 
-/* -------------------------------------------------------------------------------------------------
+/* -----------------------------------------------------------------------------
  * Task - bower:js
  * Handles concatenation and movement of bower JS packages
- * ---------------------------------------------------------------------------------------------- */
+ * -------------------------------------------------------------------------- */
 gulp.task('bower:js', function () {
     // Grab the main bower files
-    // ---------------------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------
     var bowerStream = gulp.src($.mainBowerFiles(
         { filter: '**/*.js' }
     ), { base: paths.bower.src });
 
-    /* ---------------------------------------------------------------------------------------------
+    /* -------------------------------------------------------------------------
      * Return merged, minified JS streams
-     * ------------------------------------------------------------------------------------------ */
+     * ---------------------------------------------------------------------- */
     return $.mergeStream(
         // Core vendor libs - present site-wide
         minifyJS(
@@ -286,13 +290,13 @@ gulp.task('bower:js', function () {
     );
 }); // /gulp.task('bower:js'...
 
-/* -------------------------------------------------------------------------------------------------
+/* -----------------------------------------------------------------------------
  * Task - bower:css
  * Handles concatenation and movement of bower CSS packages
- * ---------------------------------------------------------------------------------------------- */
+ * -------------------------------------------------------------------------- */
 gulp.task('bower:css', function () {
     // Grab the main bower files
-    // ---------------------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------
     var bowerStream = gulp.src($.mainBowerFiles(
         {
             filter: '**/*.css'
@@ -300,11 +304,11 @@ gulp.task('bower:css', function () {
     ), { base: paths.bower.src });
 
     // Filters
-    // ---------------------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------
     var filterNormalizeCss = 'normalize-css/**/*';
 
     // Vendor streams - process each library separately
-    // ---------------------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------
     // normalize-css
     var streamNormalizeCss = bowerStream
         .pipe($.filter(filterNormalizeCss));
@@ -321,10 +325,10 @@ gulp.task('bower:css', function () {
         .pipe(gulp.dest(paths.styles.vendor.dest));
 }); // /gulp.task('bower:css'...
 
-/* -------------------------------------------------------------------------------------------------
+/* -----------------------------------------------------------------------------
  * Task - browser-sync
  * Sets up the BrowserSync instance for local development
- * ---------------------------------------------------------------------------------------------- */
+ * -------------------------------------------------------------------------- */
 gulp.task('browser-sync', ['bower:js', 'bower:css', 'styles', 'scripts', 'images'], function () {
     browserSync.init({
         server: {
@@ -339,31 +343,31 @@ gulp.task('browser-sync', ['bower:js', 'bower:css', 'styles', 'scripts', 'images
     });
 
     // Begin polling target directories for changes...
-    gulp.watch(paths.styles.core.src + '**/*.scss', ['styles']);
+    gulp.watch(paths.styles.core.src + '**/*.s{a,c}ss', ['styles']);
     gulp.watch(paths.scripts.core.src + '*.js', ['scripts']);
     gulp.watch(paths.images.src + '**/*', ['images']);
     gulp.watch(paths.templates.src + '*.html').on('change', browserSync.reload);
 }); // /gulp.task('browser-sync'...
 
-/* -------------------------------------------------------------------------------------------------
+/* -----------------------------------------------------------------------------
  * Task - clear
  * Clears gulp-cache
- * ---------------------------------------------------------------------------------------------- */
+ * -------------------------------------------------------------------------- */
 gulp.task('clear', function (done) {
   return $.cache.clearAll(done);
 }); // /gulp.task('clear'...
 
-/* -------------------------------------------------------------------------------------------------
+/* -----------------------------------------------------------------------------
  * Task - clean
  * Deletes everything in dest dirs
- * ---------------------------------------------------------------------------------------------- */
+ * -------------------------------------------------------------------------- */
 gulp.task('clean', ['clear'], function (cb) {
     $.del([paths.styles.core.dest, paths.scripts.core.dest, paths.images.dest], cb);
 }); // /gulp.task('clean'...
 
-/* -------------------------------------------------------------------------------------------------
+/* -----------------------------------------------------------------------------
  * Task - default
- * ---------------------------------------------------------------------------------------------- */
+ * -------------------------------------------------------------------------- */
 gulp.task('default', ['clean'], function () {
     gulp.start('browser-sync');
 }); // /gulp.task('default'...
