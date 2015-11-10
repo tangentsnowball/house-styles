@@ -1,0 +1,80 @@
+/* -----------------------------------------------------------------
+ * Utility classes
+ * Useful stuff intended to be used on any HTML element
+ * -------------------------------------------------------------- */
+
+// General
+// -----------------------------------------------------------------
+@mixin align-center      { text-align: center;         }
+@mixin align-left        { text-align: left;           }
+@mixin align-right       { text-align: right;          }
+@mixin align-justify     { text-align: justify;        }
+@mixin align-justify-all { text-align: justify-all;    }
+@mixin float-left        { float: left;                }
+@mixin float-right       { float: right;               }
+@mixin bold              { font-weight: bold;          }
+@mixin italic            { font-style: italic;         }
+@mixin underline         { text-decoration: underline; }
+@mixin hidden            { display: none;
+                           visibility: hidden;         }
+@mixin block             { display: block;             }
+
+.align-center      { @include align-center;      }
+.align-left        { @include align-left;        }
+.align-right       { @include align-right;       }
+.align-justify     { @include align-justify;     }
+.align-justify-all { @include align-justify-all; }
+.float-left        { @include float-left;        }
+.float-right       { @include float-right;       }
+.bold              { @include bold;              }
+.italic            { @include italic;            }
+.underline         { @include underline;         }
+.hidden            { @include hidden;            }
+.block             { @include block;             }
+
+// Clearfix
+// -----------------------------------------------------------------
+@mixin clearfix {
+    &:after {
+        content: '';
+        display: table;
+        clear: both;
+    } // /&:after
+} // /.clearfix
+
+.clearfix {
+    @include clearfix;
+} // /.clearfix
+
+// Content hiding
+// -----------------------------------------------------------------
+/* Make an element invisible to sighted users, but still
+ * visible to screen readers
+ * See: http://webaim.org/techniques/css/invisiblecontent/
+ */
+@mixin invisible {
+    position: absolute;
+    left: -100000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    outline: 0;
+} // /@mixin invisible
+
+@mixin sort-of-invisible {
+    &:focus {
+        position: static;
+        width: auto;
+        height: auto;
+    } // /&:focus
+} // /.invisible
+
+.invisible,
+.totally-invisible {
+    @include invisible;
+} // /.invisible, .totally-invisible
+
+.invisible {
+    @include sort-of-invisible;
+} // /.invisible
+

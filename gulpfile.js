@@ -27,7 +27,7 @@ var basePaths = {
         },
         styles: {
             core:   {
-                src:  basePaths.src  + 'less/',
+                src:  basePaths.src  + 'sass/',
                 dest: basePaths.dest + 'css/'
             },
             vendor: {
@@ -97,7 +97,7 @@ function processCss(inputStream, taskType) {
             this.emit('end');
         }))
         .pipe($.newer(paths.styles.core.dest))
-        .pipe($.less({ paths: [path.join(__dirname, 'less', 'includes')] }))
+        .pipe($.sass({ includePaths: paths.styles.src + 'imports/' }))
         .pipe($.sourcemaps.init())
             .pipe($.minifyCss({ advanced: false }))
             .pipe($.rename({ suffix: '.min' }))
@@ -339,7 +339,7 @@ gulp.task('browser-sync', ['bower:js', 'bower:css', 'styles', 'scripts', 'images
     });
 
     // Begin polling target directories for changes...
-    gulp.watch(paths.styles.core.src + '*.less', ['styles']);
+    gulp.watch(paths.styles.core.src + '**/*.scss', ['styles']);
     gulp.watch(paths.scripts.core.src + '*.js', ['scripts']);
     gulp.watch(paths.images.src + '**/*', ['images']);
     gulp.watch(paths.templates.src + '*.html').on('change', browserSync.reload);

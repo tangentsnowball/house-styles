@@ -51,7 +51,7 @@ small {
 blockquote {
     margin: 0 0 10px 20px;
     padding: 0 0 0 10px;
-    border-left: solid 3px @grey-pale;
+    border-left: solid 3px $grey-pale;
     font-size: 1em;
     color: #666666;
 } // /blockquote
@@ -60,7 +60,7 @@ hr {
     height: 1px;
     margin: 0 0 0.5em 0;
     border: 0;
-    border-top: solid 1px @grey-pale;
+    border-top: solid 1px $grey-pale;
     clear: both;
 } // /hr
 
