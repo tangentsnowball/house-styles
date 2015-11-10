@@ -268,8 +268,21 @@ gulp.task('bower:js', function () {
             },
             'vendor',
             'ie8.js'
-        )
-        // Everything else - don't concatenate, just dump out to
+        ),
+        // Everything else - don't concatenate, just dump out to paths.scripts.vendor.dest
+        bowerStream.pipe($.ignore(getLibsGlob(['core', 'ie8'])))
+            .pipe($.uglify({
+                mangle: {
+                    except: ['jQuery'],
+                    keep_fnames: true
+                },
+                preserveComments: 'license'
+            }))
+            .pipe($.rename(function (path) {
+                path.dirname = './';
+                path.extname = '.min.js';
+            }))
+            .pipe(gulp.dest(paths.scripts.vendor.dest))
     );
 }); // /gulp.task('bower:js'...
 
