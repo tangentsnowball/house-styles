@@ -43,19 +43,27 @@ var basePaths = {
             src: './bower_components/'
         }
     },
-    // Define names of third-party dependencies
+    /* -------------------------------------------------------------------------
+     * Define names of third-party dependencies
+     * -------------------------------------------------------------------------
+     * NOTE - when generating vendor lib collections (vendor/core.js,
+     * vendor/core.css, etc.) the order in which they are defined below is the
+     * order in which they will be concatenated
+     * -----------------------------------------------------------------------*/
     libs = {
         scripts: {
-            vendor: {
-                core: ['jquery'],
-                ie8:  ['html5shiv', 'respond']
-            }
+            core: ['jquery'],
+            ie8:  ['html5shiv', 'respond']
         },
         styles: {
-            vendor: {
-                core: ['normalize-css']
-            }
+            core: ['normalize-css']
         }
+    },
+    watchedPatterns = {
+        styles:  paths.styles.core.src  + '**/*.s{a,c}ss',
+        scripts: paths.scripts.core.src + '*.js',
+        images:  paths.images.src       + '**/*',
+        html:    paths.templates.src    + '*.html'
     };
 
 // Load Node/Gulp plugins
@@ -121,7 +129,7 @@ function minifyJS (sourceStream, uglifyOptions, libType, filename) {
             libCol - a single or an array of lib collection names
  * Returns: a glob pattern string
  * Generates a glob pattern from the collection name of vendor libs, as defined
- * in libs[libType].vendor
+ * in libs[libType]
  * Can also accept an array of lib collection names - e.g. ['ie8', 'core']
  * -------------------------------------------------------------------------- */
 function getLibsGlob (libType, libCol) {
@@ -138,10 +146,10 @@ function getLibsGlob (libType, libCol) {
     } // /function isArray
 
     function pushLibsToArray (name) {
-        // 1. loop through libs[libType].vendor using name as selector
-        for (var lib in libs[libType].vendor[name]) {
+        // 1. loop through libs[libType] using name as selector
+        for (var lib in libs[libType][name]) {
             // 2. get lib.name
-            var thisLib = libs[libType].vendor[name][lib];
+            var thisLib = libs[libType][name][lib];
             // 3. push to libsArray in order
             libArray.push(thisLib);
         } // /for...
@@ -295,17 +303,18 @@ gulp.task('bower:css', function () {
         { filter: '**/*.css' }
     ), { base: paths.bower.src });
 
-    // Core vendor libs - present site-wide
-    return bowerStream
-        .pipe($.filter(getLibsGlob('styles', 'core')))
-        .pipe($.plumber())
-        .pipe($.concat('core.css'))
-        .pipe(gulp.dest(paths.styles.vendor.src))
-        .pipe($.sourcemaps.init())
-           .pipe($.minifyCss({ advanced: false }))
-           .pipe($.rename({ suffix: '.min' }))
-        .pipe($.sourcemaps.write('./', { includeContent: true }))
-        .pipe(gulp.dest(paths.styles.vendor.dest));
+    return $.mergeStream(
+        // Core vendor libs - present site-wide
+        bowerStream.pipe($.filter(getLibsGlob('styles', 'core')))
+            .pipe($.plumber())
+            .pipe($.concat('core.css'))
+            .pipe(gulp.dest(paths.styles.vendor.src))
+            .pipe($.sourcemaps.init())
+               .pipe($.minifyCss({ advanced: false }))
+               .pipe($.rename({ suffix: '.min' }))
+            .pipe($.sourcemaps.write('./', { includeContent: true }))
+            .pipe(gulp.dest(paths.styles.vendor.dest))
+    );
 }); // /gulp.task('bower:css'...
 
 /* -----------------------------------------------------------------------------
@@ -326,10 +335,23 @@ gulp.task('browser-sync', ['bower:js', 'bower:css', 'styles', 'scripts', 'images
     });
 
     // Begin polling target directories for changes...
-    gulp.watch(paths.styles.core.src + '**/*.s{a,c}ss', ['styles']);
-    gulp.watch(paths.scripts.core.src + '*.js', ['scripts']);
-    gulp.watch(paths.images.src + '**/*', ['images']);
-    gulp.watch(paths.templates.src + '*.html').on('change', browserSync.reload);
+    // Watch: styles
+    console.log('\nWatching...');
+    console.log('styles:  ' + watchedPatterns.styles);
+    gulp.watch(watchedPatterns.styles,  ['styles']);
+
+    // Watch: scripts
+    console.log('scripts: ' + watchedPatterns.scripts);
+    gulp.watch(watchedPatterns.scripts, ['scripts']);
+
+    // Watch: images
+    console.log('images:  ' + watchedPatterns.images);
+    gulp.watch(watchedPatterns.images,  ['images']);
+
+    // Watch: html
+    console.log('html:    ' + watchedPatterns.html + '\n');
+    gulp.watch(watchedPatterns.html).on('change', browserSync.reload);
+
 }); // /gulp.task('browser-sync'...
 
 /* -----------------------------------------------------------------------------
