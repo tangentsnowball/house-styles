@@ -82,11 +82,11 @@ var gulp = require('gulp'),
     };
 
 /* -----------------------------------------------------------------------------
- * processCss
+ * compileSASS
  * Accepts: a stream upon which to perform gulp stuff, and a message to display
  * Returns: the processed stream
  * -------------------------------------------------------------------------- */
-function processCss(inputStream, taskType) {
+function compileSASS(inputStream, taskType) {
     return inputStream
         .pipe($.plumber(function (error) {
             $.util.log($.util.colors.red('Error (' + error.plugin + '): ' + error.message + '\n'));
@@ -101,30 +101,38 @@ function processCss(inputStream, taskType) {
         .pipe(gulp.dest(paths.styles.core.dest))
         .pipe(browserSync.stream())
         .pipe($.if(flags.notify, $.notify({ message: taskType + ' task complete' })));
-} // /function processCss
+} // /function compileSASS
 
 /* -----------------------------------------------------------------------------
- * minifyJS
- * Accepts: a gulp stream, gulp-uglify options, libType, filename
+ * minifySrc
+ * Accepts: a gulp stream, a source type, gulp-uglify options, libType, filename
  * Returns: the processed stream
  * Concat stream, minify using options and write to JS src/dest using filename
  * -------------------------------------------------------------------------- */
-function minifyJS (sourceStream, uglifyOptions, libType, filename) {
+function minifySrc (sourceType, libType, filename, minifierOptions, sourceStream) {
+    function getMinifier () {
+        switch (sourceType) {
+            case 'scripts':
+                return $.uglify(minifierOptions);
+            case 'styles':
+                return $.minifyCss(minifierOptions);
+        } // /switch (sourceType)
+    } // /function getMinifier(o)
+
     return sourceStream
         .pipe($.plumber(function (error) {
             $.util.log($.util.colors.red('Error (' + error.plugin + '): ' + error.message));
             this.emit('end');
         }))
         .pipe($.concat(filename))
-        .pipe(gulp.dest(paths.scripts[libType].src))
-        // Minify with safe mangling, preserve licenses
-        .pipe($.uglify(uglifyOptions))
+        .pipe(gulp.dest(paths[sourceType][libType].src))
+        .pipe(getMinifier())
         .pipe($.rename({ suffix: '.min' }))
-        .pipe(gulp.dest(paths.scripts[libType].dest));
-} // /function minifyJS
+        .pipe(gulp.dest(paths[sourceType][libType].dest));
+} // /function minifySrc
 
 /* -----------------------------------------------------------------------------
- * getLibsGlob
+ * getVendorLibsGlob
  * Accepts: libType - scripts, styles, etc.
             libCol - a single or an array of lib collection names
  * Returns: a glob pattern string
@@ -132,7 +140,7 @@ function minifyJS (sourceStream, uglifyOptions, libType, filename) {
  * in libs[libType]
  * Can also accept an array of lib collection names - e.g. ['ie8', 'core']
  * -------------------------------------------------------------------------- */
-function getLibsGlob (libType, libCol) {
+function getVendorLibsGlob (libType, libCol) {
     // 1. Set up empty libs array
     var libArray = [],
         glob = null;
@@ -176,14 +184,14 @@ function getLibsGlob (libType, libCol) {
         glob = (libArray[0] + '/**/*').toString();
     } // /if...
     return glob;
-} // /function getLibsGlob
+} // /function getVendorLibsGlob
 
 /* -----------------------------------------------------------------------------
  * Task - styles
  * Handles processing of SASS/SCSS files
  * -------------------------------------------------------------------------- */
 gulp.task('styles', function () {
-    return processCss(gulp.src(paths.styles.core.src + 'styles.s{a,c}ss'), 'Styles');
+    return compileSASS(gulp.src(paths.styles.core.src + 'styles.s{a,c}ss'), 'Styles');
 }); // /gulp.task('styles'...
 
 /* -----------------------------------------------------------------------------
@@ -253,35 +261,25 @@ gulp.task('bower:js', function () {
      * ---------------------------------------------------------------------- */
     return $.mergeStream(
         // Core vendor libs - present site-wide
-        minifyJS(
-            bowerStream.pipe($.filter(getLibsGlob('scripts', 'core'))),
+        minifySrc('scripts', 'vendor', 'core.js',
             {
-                mangle: {
-                    except: ['jQuery'],
-                    keep_fnames: true
-                },
+                mangle: { except: ['jQuery'], keep_fnames: true },
                 preserveComments: 'license'
             },
-            'vendor',
-            'core.js'
+            bowerStream.pipe($.filter(getVendorLibsGlob('scripts', 'core')))
         ),
         // IE8 JS stream - present site-wide for IE8- only
-        minifyJS(
-            bowerStream.pipe($.filter(getLibsGlob('scripts', 'ie8'))),
+        minifySrc('scripts', 'vendor', 'ie8.js',
             {
                 mangle: { keep_fnames: true },
                 preserveComments: 'license'
             },
-            'vendor',
-            'ie8.js'
+            bowerStream.pipe($.filter(getVendorLibsGlob('scripts', 'ie8')))
         ),
         // Everything else - don't concatenate, just dump out to paths.scripts.vendor.dest
-        bowerStream.pipe($.ignore(getLibsGlob('scripts', ['core', 'ie8'])))
+        bowerStream.pipe($.ignore(getVendorLibsGlob('scripts', ['core', 'ie8'])))
             .pipe($.uglify({
-                mangle: {
-                    except: ['jQuery'],
-                    keep_fnames: true
-                },
+                mangle: { except: ['jQuery'], keep_fnames: true },
                 preserveComments: 'license'
             }))
             .pipe($.rename(function (path) {
@@ -305,15 +303,9 @@ gulp.task('bower:css', function () {
 
     return $.mergeStream(
         // Core vendor libs - present site-wide
-        bowerStream.pipe($.filter(getLibsGlob('styles', 'core')))
-            .pipe($.plumber())
-            .pipe($.concat('core.css'))
-            .pipe(gulp.dest(paths.styles.vendor.src))
-            .pipe($.sourcemaps.init())
-               .pipe($.minifyCss({ advanced: false }))
-               .pipe($.rename({ suffix: '.min' }))
-            .pipe($.sourcemaps.write('./', { includeContent: true }))
-            .pipe(gulp.dest(paths.styles.vendor.dest))
+        minifySrc('styles', 'vendor', 'core.css', { advanced: false },
+            bowerStream.pipe($.filter(getVendorLibsGlob('styles', 'core')))
+        )
     );
 }); // /gulp.task('bower:css'...
 
