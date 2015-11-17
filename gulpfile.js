@@ -45,14 +45,16 @@ var basePaths = {
     },
     // Define names of third-party dependencies
     libs = {
-        js: {
+        scripts: {
             vendor: {
                 core: ['jquery'],
-                ie8: ['html5shiv', 'respond']
+                ie8:  ['html5shiv', 'respond']
             }
         },
-        css: {
-            vendor: ['normalize']
+        styles: {
+            vendor: {
+                core: ['normalize-css']
+            }
         }
     };
 
@@ -115,13 +117,14 @@ function minifyJS (sourceStream, uglifyOptions, libType, filename) {
 
 /* -----------------------------------------------------------------------------
  * getLibsGlob
- * Accepts: either a single or an array of lib collection names
+ * Accepts: libType - scripts, styles, etc.
+            libCol - a single or an array of lib collection names
  * Returns: a glob pattern string
  * Generates a glob pattern from the collection name of vendor libs, as defined
- * in libs.js.vendor
+ * in libs[libType].vendor
  * Can also accept an array of lib collection names - e.g. ['ie8', 'core']
  * -------------------------------------------------------------------------- */
-function getLibsGlob (libCol) {
+function getLibsGlob (libType, libCol) {
     // 1. Set up empty libs array
     var libArray = [],
         glob = null;
@@ -135,10 +138,10 @@ function getLibsGlob (libCol) {
     } // /function isArray
 
     function pushLibsToArray (name) {
-        // 1. loop through libs.js.vendor using name as selector
-        for (var lib in libs.js.vendor[name]) {
+        // 1. loop through libs[libType].vendor using name as selector
+        for (var lib in libs[libType].vendor[name]) {
             // 2. get lib.name
-            var thisLib = libs.js.vendor[name][lib];
+            var thisLib = libs[libType].vendor[name][lib];
             // 3. push to libsArray in order
             libArray.push(thisLib);
         } // /for...
@@ -243,7 +246,7 @@ gulp.task('bower:js', function () {
     return $.mergeStream(
         // Core vendor libs - present site-wide
         minifyJS(
-            bowerStream.pipe($.filter(getLibsGlob('core'))),
+            bowerStream.pipe($.filter(getLibsGlob('scripts', 'core'))),
             {
                 mangle: {
                     except: ['jQuery'],
@@ -256,7 +259,7 @@ gulp.task('bower:js', function () {
         ),
         // IE8 JS stream - present site-wide for IE8- only
         minifyJS(
-            bowerStream.pipe($.filter(getLibsGlob('ie8'))),
+            bowerStream.pipe($.filter(getLibsGlob('scripts', 'ie8'))),
             {
                 mangle: { keep_fnames: true },
                 preserveComments: 'license'
@@ -265,7 +268,7 @@ gulp.task('bower:js', function () {
             'ie8.js'
         ),
         // Everything else - don't concatenate, just dump out to paths.scripts.vendor.dest
-        bowerStream.pipe($.ignore(getLibsGlob(['core', 'ie8'])))
+        bowerStream.pipe($.ignore(getLibsGlob('scripts', ['core', 'ie8'])))
             .pipe($.uglify({
                 mangle: {
                     except: ['jQuery'],
@@ -289,29 +292,18 @@ gulp.task('bower:css', function () {
     // Grab the main bower files
     // -------------------------------------------------------------------------
     var bowerStream = gulp.src($.mainBowerFiles(
-        {
-            filter: '**/*.css'
-        }
+        { filter: '**/*.css' }
     ), { base: paths.bower.src });
 
-    // Filters
-    // -------------------------------------------------------------------------
-    var filterNormalizeCss = 'normalize-css/**/*';
-
-    // Vendor streams - process each library separately
-    // -------------------------------------------------------------------------
-    // normalize-css
-    var streamNormalizeCss = bowerStream
-        .pipe($.filter(filterNormalizeCss));
-
-    // Return vendor CSS stream, for all other 3rd-party CSS
-    return $.streamqueue({ objectMode: true }, streamNormalizeCss)
+    // Core vendor libs - present site-wide
+    return bowerStream
+        .pipe($.filter(getLibsGlob('styles', 'core')))
         .pipe($.plumber())
         .pipe($.concat('core.css'))
         .pipe(gulp.dest(paths.styles.vendor.src))
         .pipe($.sourcemaps.init())
-            .pipe($.minifyCss({ advanced: false }))
-            .pipe($.rename({ suffix: '.min' }))
+           .pipe($.minifyCss({ advanced: false }))
+           .pipe($.rename({ suffix: '.min' }))
         .pipe($.sourcemaps.write('./', { includeContent: true }))
         .pipe(gulp.dest(paths.styles.vendor.dest));
 }); // /gulp.task('bower:css'...
