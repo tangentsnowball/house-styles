@@ -45,30 +45,14 @@ var basePaths = {
     },
     // Define names of third-party dependencies
     libs = {
-        vendor: {
-            /* -----------------------------------------------------------------
-             * core js libs - present on every site page, these will be
-             * concatenated in order into
-             * vendor.js
-             * -------------------------------------------------------------- */
-            core: {
-                jquery: {
-                    name: 'jquery'
-                }
-            },
-            /* -----------------------------------------------------------------
-             * ie8- js libs - present on every site page, thse will be
-             * concatenated in order into
-             * ie8.js
-             * -------------------------------------------------------------- */
-            ie8: {
-                html5shiv: {
-                    name: 'html5shiv'
-                },
-                respond: {
-                    name: 'respond'
-                }
+        js: {
+            vendor: {
+                core: ['jquery'],
+                ie8: ['html5shiv', 'respond']
             }
+        },
+        css: {
+            vendor: ['normalize']
         }
     };
 
@@ -134,30 +118,36 @@ function minifyJS (sourceStream, uglifyOptions, libType, filename) {
  * Accepts: either a single or an array of lib collection names
  * Returns: a glob pattern string
  * Generates a glob pattern from the collection name of vendor libs, as defined
- * in libs.vendor
+ * in libs.js.vendor
  * Can also accept an array of lib collection names - e.g. ['ie8', 'core']
  * -------------------------------------------------------------------------- */
 function getLibsGlob (libCol) {
     // 1. Set up empty libs array
     var libArray = [],
-        libColIsArray  = (libCol.constructor === Array);
+        glob = null;
+
+    function isArray (v) {
+        if (v.constructor === Array) {
+            return true;
+        } else {
+            return false;
+        }
+    } // /function isArray
 
     function pushLibsToArray (name) {
-        // 2. loop through libs.vendor using name as selector
-        for (var lib in libs.vendor[name]) {
-            // jic, prevent looping through the object's prototype
-            if (libs.vendor[name].hasOwnProperty(lib)) {
-                // 2a. get lib.name
-                var thisLib = libs.vendor[name][lib];
-                // 2b. push to libsArray in order
-                libArray.push(thisLib.name);
-            } // /if...
+        // 1. loop through libs.js.vendor using name as selector
+        for (var lib in libs.js.vendor[name]) {
+            // 2. get lib.name
+            var thisLib = libs.js.vendor[name][lib];
+            // 3. push to libsArray in order
+            libArray.push(thisLib);
         } // /for...
     } // /function pushLibsToArray
 
+
     /* 2. If libCol is an array of lib collection names, loop through and push
      * each name to libArray for each collection */
-    if (libColIsArray) {
+    if (isArray(libCol)) {
         for (var c in libCol) {
             var thisLibCol = libCol[c];
             pushLibsToArray(thisLibCol);
@@ -169,11 +159,12 @@ function getLibsGlob (libCol) {
 
     // 3. join array, surround in glob brackets, ensure string
     if (libArray.length > 1) {
-        return ('{' + libArray.join(',') + '}/**/*').toString();
+        glob = ('{' + libArray.join(',') + '}/**/*').toString();
     } else if (libArray.length === 1) {
         // 3b. but there's no need to return a multiglob if there's only one lib
-        return (libArray[0] + '/**/*').toString();
+        glob = (libArray[0] + '/**/*').toString();
     } // /if...
+    return glob;
 } // /function getLibsGlob
 
 /* -----------------------------------------------------------------------------
