@@ -47,7 +47,6 @@
     "jshint-stylish": "^2.0.1",
     "main-bower-files": "^2.9.0",
     "merge-stream": "^1.0.0",
-    "minimist": "^1.2.0",
-    "streamqueue": "^1.1.1"
+    "minimist": "^1.2.0"
   }
 }
