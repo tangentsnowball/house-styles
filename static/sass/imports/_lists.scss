@@ -1,0 +1,43 @@
+/* -------------------------------------------------------------
+ * Lists
+ * ---------------------------------------------------------- */
+
+// Unordered
+// -------------------------------------------------------------
+ul {
+    margin: 0;
+    padding: 0;
+    
+    li {
+        list-style-type: none;
+    }
+}
+
+ul.list-standard {
+    margin: 0 0 1em 1.5em;
+
+    li {
+        padding-bottom: 0.5em;
+        list-style: disc;
+    } // /li
+} // /ul.list-standard
+
+// Ordered
+// -------------------------------------------------------------
+ol.list-standard {
+    margin: 0 0 1em 1.5em;
+
+    li {
+        padding-bottom: 0.5em;
+        list-style: decimal;
+    } // /li
+} // /ol.list-standard
+
+// Description
+// -------------------------------------------------------------
+dl.list-standard {
+    margin-bottom: 0.5em;
+
+    dt { font-weight: bold;      } // /dt
+    dd { padding: 0 0 0.5em 1em; } // /dd
+} // /dl.list-standard

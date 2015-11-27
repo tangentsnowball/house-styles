@@ -1,0 +1,115 @@
+/* -------------------------------------------------------------
+ * Tabs
+ * ---------------------------------------------------------- */
+
+.tabwrapper {
+    margin: 0 0 1em 0;
+
+    > .nav {
+        > li {
+            float: left;
+
+            > a {
+                display: block;
+                padding: 0.2em 0.5em;
+                text-decoration: none;
+                background: $tab-colour;
+            } // /> a
+
+            &.active {
+                > a {
+                    font-weight: bold;
+                    background: $tab-active;
+                } // /> a
+            } // /&.active
+        } // /> li
+    } // /> .nav
+
+    .tabpane {
+        display: none;
+        padding: 20px;
+        clear: both;
+        background: $tab-active;
+
+        &.active {
+            display: block;
+        } // /&.active
+    } // /.tabpane
+
+    &.tabs-left {
+        @include clearfix;
+
+        > .nav {
+            float: left;
+            width: 20%;
+            box-sizing: border-box;
+            > li {
+                float: none;
+            }
+        } // /> .nav
+
+        .tabpane {
+            float: left;
+            width: 80%;
+            clear: none;
+            box-sizing: border-box;
+        } // /.tabpane
+    } // /&.tabs-left
+
+    &.tabs-right {
+        @include clearfix;
+
+        > .nav {
+            float: right;
+            width: 20%;
+            box-sizing: border-box;
+
+            > li {
+                float: none;
+            }
+        } // /> .nav
+
+        .tabpane {
+            float: left;
+            width: 80%;
+            clear: none;
+            box-sizing: border-box;
+        } // /.tabpane
+    } // /&.tabs-right
+} // /.tabwrapper
+
+.no-js {
+    .tabwrapper {
+        .tabpane {
+
+        } // /.tabpane
+    } // /.tabwrapper
+} // /.no-js
+
+
+
+/* -------------------------------------------------------------
+ * Tabs - responsive
+ * ---------------------------------------------------------- */
+@media (max-width: $breakpoint-mobile) {
+    .tabwrapper {
+        > .nav {
+            > li {
+                float: none;
+            }
+        } // /> .nav
+        &.tabs-left,
+        &.tabs-right {
+            > .nav {
+                float: none;
+                width: auto;
+            } // /> .nav
+
+            .tabpane {
+                float: none;
+                width: auto;
+            } // /.tabpane
+        } // /&.tabs-left, &.tabs-right
+    } // /.tabwrapper
+}
+

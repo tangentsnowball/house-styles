@@ -1,0 +1,49 @@
+/* -------------------------------------------------------------
+ * Alerts
+ * ---------------------------------------------------------- */
+
+// Alert-specific colours
+// -------------------------------------------------------------
+$alert-primary: lighten($brand-primary, 25%);
+$alert-success: lighten($brand-success, 25%);
+$alert-info:    lighten($brand-info,    25%);
+$alert-warning: lighten($brand-warning, 25%);
+$alert-danger:  lighten($brand-danger,  25%);
+
+.alert {
+    position: relative;
+    margin: 0 0 0.5em 0;
+    padding: 10px 20px;
+    background: $alert-primary;
+
+    .close {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        color: #FFFFFF;
+        &:hover {
+            color: #000000;
+        } // /&:hover
+    } // /.close
+
+
+    &.alert-warning {
+        background: $alert-warning;
+    } // /&.alert-warning
+    &.alert-error {
+        background: $alert-danger;
+    } // /&.alert-error
+    &.alert-success {
+        background: $alert-success;
+    } // /&.alert-success
+} // /.alert
+
+.no-js {
+    .alert {
+        .close {
+            display: none;
+        } // /.close
+    } // /.alert
+} // /.no-js

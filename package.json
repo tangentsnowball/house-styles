@@ -3,6 +3,12 @@
   "version": "0.1.0",
   "description": "Gulp capabilities for Tangent Snowballs house styles",
   "author": "Ashley Firth <ashley.firth@tangentsnowball.com>",
+  "contributors": [
+    {
+      "name": "Edward Cobbold",
+      "email": "edward.cobbold@tangentsnowball.com"
+    }
+  ],
   "main": "gulpfile.js",
   "scripts": {
     "run-npm-install": "npm install",
@@ -19,22 +25,29 @@
     "browser-sync": "^2.9.11",
     "del": "^1.2.0",
     "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^3.1.0",
     "gulp-bytediff": "^0.2.1",
     "gulp-cache": "^0.2.10",
     "gulp-concat": "^2.6.0",
+    "gulp-filter": "^3.0.1",
+    "gulp-if": "^2.0.0",
+    "gulp-ignore": "^2.0.1",
     "gulp-imagemin": "^2.3.0",
     "gulp-jshint": "^1.11.2",
-    "gulp-less": "^3.0.3",
     "gulp-load-plugins": "^1.0.0-rc.1",
     "gulp-minify-css": "^1.2.0",
     "gulp-newer": "^0.5.1",
     "gulp-notify": "^2.2.0",
     "gulp-plumber": "^1.0.1",
     "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.1.0",
+    "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^1.2.0",
     "gulp-util": "^3.0.6",
     "jshint-stylish": "^2.0.1",
-    "path": "^0.11.14",
-    "stream-combiner2": "^1.0.2"
+    "main-bower-files": "^2.9.0",
+    "merge-stream": "^1.0.0",
+    "minimist": "^1.2.0",
+    "streamqueue": "^1.1.1"
   }
 }

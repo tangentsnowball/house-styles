@@ -1,19 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!--[if lt IE 9]>
-<script src="static/dist/bower_components/html5shiv/dist/html5shiv.min.js"></script>
-<![endif]-->
-
     <title>Grid test</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1.0">
     <link rel="shortcut icon" href="/static/dist/img/favicon.ico">
 
+    <link rel="stylesheet" type="text/css" href="static/dist/css/vendor/core.min.css"/>
     <link rel="stylesheet" type="text/css" href="static/dist/css/styles.min.css"/>
-    <link rel="stylesheet" media="screen and (min-width:0) and (max-width:767px)" href="static/dist/css/styles-responsive.min.css"/>
-    <!--[if lt IE 8 ]>
-        <link rel="stylesheet" type="text/css" href="static/dist/css/styles-responsive.css"/>
+    <!--[if lte IE 8 ]>
+        <script src="static/dist/js/vendor/ie8.min.js"/>
     <![endif]-->
 
     <style>
@@ -27,7 +23,7 @@
 <div class="container">
     <div class="row">
         <h1>Grid</h1>
-        <p>The grid is a responsive percentage based grid that uses the same markup and class names as the bootstrap 2.0 grid. This is intentional to support oscar projects if required. The grid is generated in the file grid.less and contains several variables to easily reconfigure the grid if required, e.g. to have a different number of columns.</p>
+        <p>The grid is a responsive percentage based grid that uses the same markup and class names as the bootstrap 2.0 grid. This is intentional to support oscar projects if required. The grid is generated in the file grid.scss and contains several variables to easily reconfigure the grid if required, e.g. to have a different number of columns.</p>
         <p>It collapses to a single column below a certain screen width. The first element in a row automatically has no left margin.</p>
         <p>Below should be a comprehensive test of every grid element. The layout here is based on the default configuration of a 12 column grid. Details of classes and markup are included in the styleguide along with simpler examples.</p>
 
@@ -159,7 +155,7 @@
     <div class="row">
         <div class="span1 offset11">1</div>
     </div>
-    
+
     <div class="row example">
         <div class="span1">.span1</div>
         <div class="span1">.span1</div>
@@ -208,7 +204,7 @@
     <div class="row example">
         <div class="span1 offset11">.span1</div>
     </div>
-    
+
     <!-- span2 offset -->
     <div class="row example">
         <div class="span2 offset1">.span2</div>
@@ -269,7 +265,7 @@
     <div class="row example">
         <div class="span3 offset9">.span3</div>
     </div>
-    
+
     <!-- span4 offset -->
     <div class="row example">
         <div class="span4 offset1">.span4</div>
@@ -338,7 +334,7 @@
     <div class="row example">
         <div class="span6 offset6">.span6</div>
     </div>
-    
+
     <!-- span7 offsets -->
     <div class="row example">
         <div class="span7 offset1">.span7</div>
@@ -355,7 +351,7 @@
     <div class="row example">
         <div class="span7 offset5">.span7</div>
     </div>
-    
+
     <!-- span8 offsets -->
     <div class="row example">
         <div class="span8 offset1">.span8</div>
@@ -380,7 +376,7 @@
     <div class="row example">
         <div class="span9 offset3">.span9</div>
     </div>
-    
+
     <!-- span10 offsets -->
     <div class="row example">
         <div class="span10 offset1">.span10</div>
@@ -388,7 +384,7 @@
     <div class="row example">
         <div class="span10 offset2">.span10</div>
     </div>
-    
+
     <!-- span11 offsets -->
     <div class="row example">
         <div class="span11 offset1">.span11</div>
@@ -440,7 +436,7 @@
         <div class="span4 offset1">.span3</div>
         <div class="span3 offset1">.span3</div>
     </div>
-    
+
     <div class="row example">
         <div class="span1">.span1</div>
         <div class="span1">.span1</div>
@@ -457,17 +453,11 @@
     </div>
 </div>
 
-    <script src="static/dist/bower_components/jquery/dist/jquery.min.js"></script>
-    <!--[if lt IE 9 ]> 
+    <script src="static/dist/js/vendor/core.min.js"></script>
+    <!--[if lt IE 9 ]>
     <script>(function() {$('body').addClass('iex');})();</script>
     <![endif]-->
-    <script>
-        $(document).ready(function(){
-            $(window).resize(function(){
-                console.log("Window width = " + $(window).width());
-            });
-        });
-    </script>
+    <script src="static/dist/js/app.min.js"></script>
 
 </body>
 </html>

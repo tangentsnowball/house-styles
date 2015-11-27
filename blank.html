@@ -1,19 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" id="site" class="nojs">
 <head>
-<!--[if lt IE 9]>
-<script src="static/dist/bower_components/html5shiv/dist/html5shiv.min.js"></script>
-<![endif]-->
-
     <title>blank page</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1.0">
     <link rel="shortcut icon" href="/static/dist/img/favicon.ico">
 
+    <link rel="stylesheet" type="text/css" href="static/dist/css/vendor/core.min.css"/>
     <link rel="stylesheet" type="text/css" href="static/dist/css/styles.min.css"/>
-    <link rel="stylesheet" media="screen and (min-width:0) and (max-width:767px)" href="static/dist/css/styles-responsive.min.css"/>
-    <!--[if lt IE 8 ]>
-        <link rel="stylesheet" type="text/css" href="static/css/styles-responsive.css"/>
+    <!--[if lte IE 8 ]>
+        <script src="static/dist/js/vendor/ie8.min.js"/>
     <![endif]-->
 
     <script>
@@ -24,12 +20,11 @@
 
 <body>
 
-
-    <script src="static/dist/bower_components/jquery/dist/jquery.min.js"></script>
-    <!--[if lt IE 9 ]> 
-    <script>(function() {$('body').addClass('iex');})();</script>
+    <script src="static/dist/js/vendor/core.min.js"></script>
+    <!--[if lt IE 9 ]>
+        <script>(function() {$('body').addClass('iex');})();</script>
     <![endif]-->
-    <script src="static/dist/js/main.min.js"></script>
+    <script src="static/dist/js/app.min.js"></script>
 
 </body>
 </html>
