@@ -1,6 +1,9 @@
-/* -------------------------------------------------------------
+/* -----------------------------------------------------------------------------
  * Global application variables
- * ---------------------------------------------------------- */
+ * -----------------------------------------------------------------------------
+ * Bootstrap 3 variables should be overwritten here in order to customise the
+ * build to requirements
+ * -------------------------------------------------------------------------- */
 
 // Colour palette
 // -------------------------------------------------------------
@@ -11,12 +14,23 @@ $grey:  #888;
     $grey-pale: #ccc;
 $white: #fff;
 
-// Branding
+// Colour Palette
+// -----------------------------------------------------------------------------
+// primary
 $brand-primary:   #428bca;
-$brand-secondary: #428bca;
+// secondary
+$brand-secondary: #ca42b2;
+    // secondary btn
+    $btn-secondary-color:  #fff !default;
+    $btn-secondary-bg:     $brand-secondary !default;
+    $btn-secondary-border: darken($btn-secondary-bg, 5%) !default;
+// success
 $brand-success:   #5cb85c;
+// info
 $brand-info:      #5bc0de;
+// warning
 $brand-warning:   #f0ad4e;
+// danger
 $brand-danger:    #d9534f;
 
 // Break points
@@ -29,17 +43,7 @@ $body-bg: $white;
 
 // Forms
 // -------------------------------------------------------------
-$label-width: 25%;
-$input-width: 70%;
-$form-element-margin: 5%; // gap between label and input
-$form-element-spacing: 5px; //spacing beneath input
-$help-width: $input-width;
-
-// Buttons
-// -------------------------------------------------------------
-$btn-x-padding: .5em; // left and right padding for buttons
-$btn-font-size: 1em; // button font size
-$btn-line-height: 1.7em; // used to control the vertical padding of buttons, should therefore be larger than btn-font-size
+$form-element-spacing: .5em; // spacing beneath input, 8px
 
 // Popups
 // -------------------------------------------------------------

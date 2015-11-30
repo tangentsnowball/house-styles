@@ -2,82 +2,55 @@
  * Buttons
  * ---------------------------------------------------------- */
 
-input.btn {
-    padding-top: 0;
-    padding-bottom: 0;
-    height: $btn-line-height * 1.04;
-    &.btn-small {
-        height: $btn-line-height / 1.4;
-    } // /&.btn-small
-} // /input.btn
+// Customise variants
+// --------------------------------------------------
 
-// Remove button padding in FF - otherwise all buttons are 2px taller than links with the same style
-input::-moz-focus-inner,
-button::-moz-focus-inner {
-    border: 0;
-    padding: 0;
-} // /input::-moz-focus-inner, button::-moz-focus-inner
+.btn-default {
+    @include button-variant($btn-default-color, $btn-default-bg, $btn-default-border);
+} // /.btn-default
 
-.btn {
-    display: inline-block;
-    padding: 0 $btn-x-padding;
-    line-height: $btn-line-height;
-    margin: 0;
-    box-sizing: border-box;
-    border: solid 1px #AAA;
-    border: 0;
-    background: $grey-pale;
-    color: #666;
-    outline: 0;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    font-size: $btn-font-size;
-    vertical-align: middle;
-    font-family: Arial,Helvetica;
-    border-collapse: separate; //fix for IE9
-    overflow: visible; //fix for IE7
+.btn-primary {
+    @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border);
+} // /.btn-primary
 
-    &.btn-block {
-        display: block;
-        width: 100%;
-        text-align: left;
+.btn-secondary {
+    @include button-variant($btn-secondary-color, $btn-secondary-bg, $btn-secondary-border);
+} // /.btn-secondary
 
-        &.center {
-            text-align: center;
-        } // /&.center
-    } // /&.btn-block
+// Success appears as green
+.btn-success {
+    @include button-variant($btn-success-color, $btn-success-bg, $btn-success-border);
+} // /.btn-success
 
-    &.btn-small {
-        font-size: $btn-font-size * 0.9;
-        line-height: $btn-line-height / 1.2;
-        font-weight: normal;
-    } // /&.btn-small
+// Info appears as blue-green
+.btn-info {
+    @include button-variant($btn-info-color, $btn-info-bg, $btn-info-border);
+} // /.btn-info
 
-    &.btn-large {
-        font-size: $btn-font-size * 1.4;
-    } // /&.btn-large
+// Warning appears as orange
+.btn-warning {
+    @include button-variant($btn-warning-color, $btn-warning-bg, $btn-warning-border);
+} // /.btn-warning
 
-    // Button states
-    // -------------------------------------------------------------
+// Danger and error appear as red
+.btn-danger {
+    @include button-variant($btn-danger-color, $btn-danger-bg, $btn-danger-border);
+} // /.btn-danger
 
-    &:hover, &:focus {
-        text-decoration: none;
-    } // /&:hover, &:focus
 
-    &:active {
-        text-decoration: none;
-    } // /&:active
+// Customise sizes Sizes
+// --------------------------------------------------
 
-    &[disabled],
-    &.disabled {
-        cursor: default;
-        text-decoration: line-through;
-    } // /&[disabled], &.disabled
+.btn-lg {
+  // line-height: ensure even-numbered height of button next to large input
+  @include button-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $btn-border-radius-large);
+} // /.btn-lg
 
-    &.btn-primary   { color: $brand-primary;   } // /&.btn-primary
-    &.btn-secondary { color: $brand-secondary; } // /&.btn-secondary
-    &.btn-info      { color: $brand-info;      } // /&.btn-info
-    &.btn-warning   { color: $brand-warning;   } // /&.btn-warning
-    &.btn-danger    { color: $brand-danger;    } // /&.btn-danger
-} // /.btn
+.btn-sm {
+  // line-height: ensure proper height of button next to small input
+  @include button-size($padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small, $btn-border-radius-small);
+} // /.btn-sm
+
+.btn-xs {
+    @include button-size($padding-xs-vertical, $padding-xs-horizontal, $font-size-small, $line-height-small, $btn-border-radius-small);
+} // /.btn-xs
