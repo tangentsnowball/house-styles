@@ -6,7 +6,7 @@
  * -------------------------------------------------------------------------- */
 
 // Colour palette
-// -------------------------------------------------------------
+// -----------------------------------------------------------------------------
 // Greyscale
 $black: #000;
 $grey:  #888;
@@ -34,39 +34,32 @@ $brand-warning:   #f0ad4e;
 $brand-danger:    #d9534f;
 
 // Break points
-// -------------------------------------------------------------
+// -----------------------------------------------------------------------------
 $breakpoint-mobile: 767px;
 
 // Scaffolding
-// -------------------------------------------------------------
+// -----------------------------------------------------------------------------
 $body-bg: $white;
 
 // Forms
-// -------------------------------------------------------------
+// -----------------------------------------------------------------------------
 $form-element-spacing: .5em; // spacing beneath input, 8px
 
 // Popups
-// -------------------------------------------------------------
+// -----------------------------------------------------------------------------
 $popup-width: 600px;
 
 // Tabs
-// -------------------------------------------------------------
+// -----------------------------------------------------------------------------
 $tab-colour: #aaa;
 $tab-active: #ccc;
 
 // Grid
-// -------------------------------------------------------------
-// $breakpoint-xs: 30em;  // 480px
-// $breakpoint-sm: 48em;  // 768px
-// $breakpoint-md: 62em;  // 992px
-// $breakpoint-lg: 75em; // 1200px
-// $breakpoint-xl: 90em; // 1440px
+// -----------------------------------------------------------------------------
+$screen-xs-min: 30em;  // 480px
+$screen-sm-min: 48em;  // 768px
+$screen-md-min: 62em;  // 992px
+$screen-lg-min: 75em; // 1200px
 
-$grid-width: 1024px; // set to maximum page width required
-$column-count: 12; // number of columns required
-$grid-spacing: 20px; // spacing between columns required
-$grid-spacing-fixed: 20px; // used for fixed spacing grid
-
-$column-gutter-pct: percentage($grid-spacing / $grid-width);
-$column-width-pct: percentage((($grid-width - ($grid-spacing * ($column-count - 1))) / $column-count) / $grid-width);
-$column-width-fixed: percentage(($grid-width / $column-count) / $grid-width);
+$grid-columns:      12 !default;
+$grid-gutter-width: 30px !default; // 30px

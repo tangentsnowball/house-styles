@@ -32,7 +32,7 @@
     } // /[class*="span"]
 
     // Build columns
-    // -------------------------------------------------------------
+    // -----------------------------------------------------------------------------
     @for $i from 1 through $column-count {
         .span#{$i} {
             width: $column-width-pct * $i + ($column-gutter-pct * ($i - 1));
@@ -40,7 +40,7 @@
     } // /Build columns
 
     // Build offsets
-    // -------------------------------------------------------------
+    // -----------------------------------------------------------------------------
     @for $i from 1 through ($column-count - 1) {
         .offset#{$i} {
             @include offset($i, 1);
@@ -51,7 +51,7 @@
     } // /Build offsets
 
     // Fixed-spaced column grid for controlled nesting
-    // -------------------------------------------------------------
+    // -----------------------------------------------------------------------------
     &.fixed-spacing {
         .row {
             margin-left: -$grid-spacing-fixed / 2;
@@ -84,7 +84,7 @@
     } // /&.fixed-spacing
 
     // Reverse layout for right to left, including offsets
-    // -------------------------------------------------------------
+    // -----------------------------------------------------------------------------
     &.reverselayout {
         [class*="span"] {
             float: right;

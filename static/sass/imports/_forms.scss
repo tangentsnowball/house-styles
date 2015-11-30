@@ -1,149 +1,49 @@
-/* -------------------------------------------------------------
+/* -----------------------------------------------------------------------------
  * Forms
- * ---------------------------------------------------------- */
+ * -------------------------------------------------------------------------- */
 
-// note that iphone requires a font-size of 100% set manually on input elements to prevent the 'zoom' problem when focussing
 .form {
-    margin-bottom: 20px;
-
-    fieldset {
-        border: 0;
-    } // /fieldset
-    legend {
-        margin-bottom: $form-element-spacing;
-    } // /legend
-    label,
-    .faux-label {
-        float: left;
-        padding: 0 0 $form-element-spacing 0;
-        width: $label-width;
-        box-sizing: border-box;
-    } // /label, .faux-label
-    input[type="text"],
-    input[type="number"],
-    input[type="email"],
-    input[type="password"],
-    input[type="search"],
-    input[type="file"],
-    input[type="url"],
-    select,
-    textarea {
-        padding: 0.3em 0.4em;
-        margin: 0 0 $form-element-spacing $form-element-margin;
-        width: $input-width;
-        box-sizing: border-box;
-        background: #FFFFFF;
-        border: solid 1px #CCCCCC;
-        color: #000000;
-        font-size: 100%;
-        font-family: Arial,Verdana;
-    } // /common text inputs
-    textarea,
-    select[multiple="multiple"] {
-        height: 80px;
-    } // /textarea, select[multiple="multiple"]
-
     .error-msg {
         display: none;
-        box-sizing: border-box;
-        color: red;
+        color: $brand-danger;
         font-size: 90%;
     } // /.error-msg
 
-    .help-text {
-        display: block;
-        width: $help-width;
-        margin-left: $label-width + $form-element-margin;
-    } // /.help-text
-
-    .buttons {
-        padding-left: $label-width + $form-element-margin;
-    } // /.buttons
-
     .field {
-        padding-bottom: $form-element-spacing * 2;
-        @include clearfix;
-
-        &.error {
-            input[type="text"],
-            input[type="number"],
-            input[type="email"],
-            input[type="password"],
-            input[type="search"],
-            input[type="file"],
-            input[type="url"],
-            select,
-            textarea {
-                border-color: red;
-            } // /common text inputs
-            .error-msg {
-                display: block;
-            } // /.error-msg
-        }
-        &.radiocheck {
-            position: relative;
-            label {
-                position: relative;
-                width: 100%;
-                padding-left: 30px;
-            } // /label
-            input[type="checkbox"],
-            input[type="radio"] {
-                position: absolute;
-                top: 3px;
-                left: 5px;
-            } // /input[type="checkbox"], input[type="radio"]
-            .error-msg {
-                padding-left: 30px;
-                clear: left;
-            } // /.error-msg
-            &.horizontal {
-                label {
-                    float: left;
-                    width: auto;
-                    margin-right: 1em;
-                } // /label
-            } // /&.horizontal
-        } // /&.radiocheck
         &.required {
-            label:after {
-                content: " *";
-            } // /label: after
+            label {
+                &:after {
+                    content: ' *';
+                } // /&:after
+            } // /label
         } // /&.required
     } // /.field
 } // /.form
 
 
-/* -------------------------------------------------------------
+/* -----------------------------------------------------------------------------
  * Forms - responsive
- * ---------------------------------------------------------- */
-@media (max-width: $breakpoint-mobile) {
-    .form {
-        label,
-        .faux-label,
-        .error-msg,
-        .help-text,
-        input[type="text"],
-        input[type="password"],
-        input[type="file"],
-        input[type="url"],
-        select,
-        textarea {
-            float: none;
-            width: 100%;
-            margin-left: 0;
-            margin-right: 0;
-        } // /labels, inputs
+ * -------------------------------------------------------------------------- */
+// > xs
+// -----------------------------------------------------------------------------
+@media (min-width: $screen-xs-min) {
 
-        label,
-        .faux-label,
-        .error-msg,
-        .help-text {
-            display: block;
-        } // /labels
+} // /xs
 
-        .buttons {
-            padding-left: 0;
-        } // /buttons
-    } // /.form
-}
+// > sm
+// -----------------------------------------------------------------------------
+@media (min-width: $screen-sm-min) {
+
+} // /sm
+
+// > md
+// -----------------------------------------------------------------------------
+@media (min-width: $screen-md-min) {
+
+} // /md
+
+// > lg
+// -----------------------------------------------------------------------------
+@media (min-width: $screen-lg-min) {
+
+} // /lg
