@@ -33,10 +33,6 @@ $brand-warning:   #f0ad4e;
 // danger
 $brand-danger:    #d9534f;
 
-// Break points
-// -----------------------------------------------------------------------------
-$breakpoint-mobile: 767px;
-
 // Scaffolding
 // -----------------------------------------------------------------------------
 $body-bg: $white;
@@ -49,17 +45,14 @@ $form-element-spacing: .5em; // spacing beneath input, 8px
 // -----------------------------------------------------------------------------
 $popup-width: 600px;
 
-// Tabs
-// -----------------------------------------------------------------------------
-$tab-colour: #aaa;
-$tab-active: #ccc;
-
-// Grid
+// Breakpoints
 // -----------------------------------------------------------------------------
 $screen-xs-min: 30em;  // 480px
 $screen-sm-min: 48em;  // 768px
 $screen-md-min: 62em;  // 992px
 $screen-lg-min: 75em; // 1200px
 
+// Grid Variables
+// -----------------------------------------------------------------------------
 $grid-columns:      12 !default;
 $grid-gutter-width: 30px !default; // 30px
