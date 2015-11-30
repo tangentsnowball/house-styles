@@ -1,0 +1,43 @@
+/* -----------------------------------------------------------------
+ * Utility classes
+ * Useful stuff intended to be used on any HTML element
+ * -------------------------------------------------------------- */
+
+// General
+// -----------------------------------------------------------------
+.align-center      { @include align-center;      }
+.align-left        { @include align-left;        }
+.align-right       { @include align-right;       }
+.align-justify     { @include align-justify;     }
+.align-justify-all { @include align-justify-all; }
+.float-left        { @include float-left;        }
+.float-right       { @include float-right;       }
+.bold              { @include bold;              }
+.italic            { @include italic;            }
+.underline         { @include underline;         }
+.hidden            { @include hidden;            }
+.block             { @include block;             }
+
+// Clearfix
+// -----------------------------------------------------------------
+
+.clearfix {
+    @include clearfix;
+} // /.clearfix
+
+// Content hiding
+// -----------------------------------------------------------------
+/* Make an element invisible to sighted users, but still
+ * visible to screen readers
+ * See: http://webaim.org/techniques/css/invisiblecontent/
+ */
+
+.invisible,
+.totally-invisible {
+    @include invisible;
+} // /.invisible, .totally-invisible
+
+.invisible {
+    @include sort-of-invisible;
+} // /.invisible
+
