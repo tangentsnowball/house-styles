@@ -8,15 +8,19 @@ object {
     max-width: 100%;
 } // /img, object
 
-a img { border: 0; } // /a img
+a {
+    img {
+        border: 0;
+    } // /img
+} // /a
 
-// Videomagic
+// Video objects
 /* -----------------------------------------------------------------------------
  * Useful styles to ensure youtube videos always maintain sensible
  * aspect ratio, wrap iframe in this, set width to 100% and no
  * height attribute
  * -------------------------------------------------------------------------- */
-.videomagic {
+.video-object {
 	position: relative;
 	padding-bottom: 56.25%; /* 16:9 */
 	padding-top: 25px;
@@ -30,7 +34,7 @@ a img { border: 0; } // /a img
     	width: 100%;
     	height: 100%;
     } // /iframe
-} // /.videomagic
+} // /.video-object
 
 // Google Maps
 // -----------------------------------------------------------------------------

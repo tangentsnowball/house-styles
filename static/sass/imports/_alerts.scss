@@ -2,7 +2,9 @@
  * Alerts
  * -------------------------------------------------------------------------- */
 
- .alert {
+// Base styles
+// -------------------------
+.alert {
     padding: $alert-padding;
     margin-bottom: $line-height-computed;
     border: 1px solid transparent;
@@ -13,23 +15,23 @@
         margin-top: 0;
         // Specified for the h4 to prevent conflicts of changing $headings-color
         color: inherit;
-    }
+    } // /h4
 
     // Provide class for links that match alerts
     .alert-link {
         font-weight: $alert-link-font-weight;
-    }
+    } // /.alert-link
 
     // Improve alignment and spacing of inner content
     > p,
     > ul {
         margin-bottom: 0;
-    }
+    } // /> ul
 
     > p + p {
         margin-top: 5px;
-    }
-}
+    } // /> p + p
+} // /.alert
 
 // Dismissible alerts
 //
@@ -45,33 +47,25 @@
         top: -2px;
         right: -21px;
         color: inherit;
-    }
-}
+    } // /.close
+} // /.alert-dismissible
 
 // Alternate styles
 //
 // Generate contextual modifier classes for colorizing the alert.
 
 .alert-success {
-  @include alert-variant($alert-success-bg, $alert-success-border, $alert-success-text);
-}
+    @include alert-variant($alert-success-bg, $alert-success-border, $alert-success-text);
+} // /.alert-success
 
 .alert-info {
-  @include alert-variant($alert-info-bg, $alert-info-border, $alert-info-text);
-}
+    @include alert-variant($alert-info-bg, $alert-info-border, $alert-info-text);
+} // /.alert-info
 
 .alert-warning {
-  @include alert-variant($alert-warning-bg, $alert-warning-border, $alert-warning-text);
-}
+    @include alert-variant($alert-warning-bg, $alert-warning-border, $alert-warning-text);
+} // /.alert-warning
 
 .alert-danger {
-  @include alert-variant($alert-danger-bg, $alert-danger-border, $alert-danger-text);
-}
-
-.no-js {
-    .alert {
-        .close {
-            display: none;
-        } // /.close
-    } // /.alert
-} // /.no-js
+    @include alert-variant($alert-danger-bg, $alert-danger-border, $alert-danger-text);
+} // /.alert-danger

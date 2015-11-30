@@ -24,20 +24,3 @@
 .clearfix {
     @include clearfix;
 } // /.clearfix
-
-// Content hiding
-// -----------------------------------------------------------------
-/* Make an element invisible to sighted users, but still
- * visible to screen readers
- * See: http://webaim.org/techniques/css/invisiblecontent/
- */
-
-.invisible,
-.totally-invisible {
-    @include invisible;
-} // /.invisible, .totally-invisible
-
-.invisible {
-    @include sort-of-invisible;
-} // /.invisible
-
