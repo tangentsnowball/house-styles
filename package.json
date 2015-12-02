@@ -11,10 +11,11 @@
   ],
   "main": "gulpfile.js",
   "scripts": {
-    "run-npm-install": "npm install",
-    "run-bower-install": "bower install",
+    "install-npm-global": "npm install -g gulp gulp-cli bower",
+    "install-npm-local": "npm install",
+    "install-bower-local": "bower install",
     "run-gulp": "gulp",
-    "setup": "npm run run-npm-install && npm run run-bower-install && npm run run-gulp"
+    "setup": "npm run install-npm-global && npm run install-npm-local && npm run install-bower-local && gulp"
   },
   "repository": {
     "type": "git",
