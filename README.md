@@ -29,16 +29,16 @@ This will:
 
 Note that the `node_packages` and `bower_components` folders are machine-specific, and are intentionally left untracked by Git. Installation
 
-Notes on Bower
--------------
+Bower usage
+--------------
 [Bower](_http://bower.io/) is used alongside Gulp to manage front-end library dependencies - jQuery, HTML5Shiv, etc. Gulp will handle moving/minifying these packages into their appropriate directories.
 
-### BrowserSync
-
-The main component of this Gulp setup is BrowserSync. This plugin provides the following advantages for development:
-* Simultaneous page scrolling for all devices connected to the same link
-* Clicking links or populating form fields on one device will duplicate this behaviour on all other linked devices
-* A dashboard at `localhost:3001` where you can send commands to all connected devices, perform actions and do network throttle testing.
+BrowserSync Usage
+-----------------
+A core component of this Gulp setup is BrowserSync. This plugin provides the following advantages for development:
+- Simultaneous page scrolling for all devices connected to the same link
+- Clicking links or populating form fields on one device will duplicate this behaviour on all other linked devices
+- A dashboard at `localhost:3001` where you can send commands to all connected devices, perform actions and do network throttle testing.
 
 
 Gulp packages currently used (December 2015)
