@@ -1,37 +1,36 @@
-<!DOCTYPE html>
-<html lang="en" id="site" class="nojs">
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie10 lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie10 lt-ie9" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js lt-ie10" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html lang="en"> <!--<![endif]-->
 <head>
-    <title>Tangent House Styles</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="initial-scale=1.0">
+    <title>Styleguide</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Tangent Snowball">
+    <!-- Favicon -->
     <link rel="shortcut icon" href="/static/dist/img/favicon.ico">
-
-    <link rel="stylesheet" type="text/css" href="static/dist/css/vendor/core.min.css"/>
-    <link rel="stylesheet" type="text/css" href="static/dist/css/styles.min.css"/>
-    <!--[if lte IE 8 ]>
-        <script src="static/dist/js/vendor/ie8.min.js"/>
-    <![endif]-->
-
-    <script>
-        /* we want to remove the nojs class as soon as possible on page load */
-        document.getElementById("site").className = document.getElementById("site").className.replace(/nojs/i,'');
-    </script>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="/static/dist/css/vendor/core.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/dist/css/application.min.css"/>
+    <link rel="stylesheet" type="text/css" href="static/styleguide/prism.css"/>
 </head>
 
 <body>
     <div class="container">
-        <h1>You're good to go!</h1>
+        <h1>Hello world!</h1>
         <p>If you're seeing this and running grunt, your server should be running on localhost:3000</p>
         <br/>
-        <p>There is a bare-bones page to get your started at <a href="blank.html"><code>/blank.html</code></a> and the styleguide is at <a href="_styleguide.html"><code>/_styleguide.html</code></a></p>
+        <p>There is a bare-bones page to get you started at <a href="blank.html"><code>/blank.html</code></a> and the styleguide is at <a href="_styleguide.html"><code>/_styleguide.html</code></a></p>
     </div>
 
-
-    <script src="static/dist/js/vendor/core.min.js"></script>
-    <!--[if lt IE 9 ]>
-    <script>(function() {$('body').addClass('iex');})();</script>
+    <!--[if lte IE 8 ]>
+        <script src="/static/dist/js/vendor/ie8.min.js"/>
     <![endif]-->
-    <script src="static/dist/js/app.min.js"></script>
-
+    <script src="/static/dist/js/vendor/core.min.js"></script>
+    <script src="/static/dist/js/app.min.js"></script>
 </body>
 </html>

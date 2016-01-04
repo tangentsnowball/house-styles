@@ -1,17 +1,22 @@
-<!DOCTYPE html>
-<html lang="en" id="site" class="nojs">
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie10 lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie10 lt-ie9" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js lt-ie10" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html lang="en"> <!--<![endif]-->
 <head>
-    <title>styleguide</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="initial-scale=1.0">
+    <title>Styleguide</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Tangent Snowball">
+    <!-- Favicon -->
     <link rel="shortcut icon" href="/static/dist/img/favicon.ico">
-
-    <link rel="stylesheet" type="text/css" href="static/dist/css/vendor/core.min.css"/>
-    <link rel="stylesheet" type="text/css" href="static/dist/css/styles.min.css"/>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="/static/dist/css/vendor/core.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/dist/css/application.min.css"/>
     <link rel="stylesheet" type="text/css" href="static/styleguide/prism.css"/>
-    <!--[if lte IE 8 ]>
-        <script src="static/dist/js/vendor/ie8.min.js"/>
-    <![endif]-->
 
     <style>
         html,
@@ -116,11 +121,6 @@
             left: 15em; /* 240px */
         }
     </style>
-
-    <script>
-        /* we want to remove the nojs class as soon as possible on page load */
-        document.getElementById('site').className = document.getElementById('site').className.replace(/nojs/i,'');
-    </script>
 </head>
 
 <body>
@@ -1341,11 +1341,11 @@ Standard popup&lt;/a&gt;
         </div>
     </div>
 
-    <script src="static/dist/js/vendor/core.min.js"></script>
-    <!--[if lt IE 9 ]>
-    <script>(function() {$('body').addClass('iex');})();</script>
+    <!--[if lte IE 8 ]>
+        <script src="/static/dist/js/vendor/ie8.min.js"/>
     <![endif]-->
-    <script src="static/dist/js/app.min.js"></script>
+    <script src="/static/dist/js/vendor/core.min.js"></script>
+    <script src="/static/dist/js/app.min.js"></script>
     <script src="static/styleguide/prism.js"></script>
     <script type="text/javascript">
         $(document).on('ready', function() {
