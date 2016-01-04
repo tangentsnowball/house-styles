@@ -1,17 +1,22 @@
-<!DOCTYPE html>
-<html lang="en" id="site" class="nojs">
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie10 lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie10 lt-ie9" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js lt-ie10" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html lang="en"> <!--<![endif]-->
 <head>
-    <title>styleguide</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="initial-scale=1.0">
+    <title>Styleguide</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Tangent Snowball">
+    <!-- Favicon -->
     <link rel="shortcut icon" href="/static/dist/img/favicon.ico">
-
-    <link rel="stylesheet" type="text/css" href="static/dist/css/vendor/core.min.css"/>
-    <link rel="stylesheet" type="text/css" href="static/dist/css/styles.min.css"/>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="/static/dist/css/vendor/core.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/dist/css/application.min.css"/>
     <link rel="stylesheet" type="text/css" href="static/styleguide/prism.css"/>
-    <!--[if lte IE 8 ]>
-        <script src="static/dist/js/vendor/ie8.min.js"/>
-    <![endif]-->
 
     <style>
         html,
@@ -116,16 +121,11 @@
             left: 15em; /* 240px */
         }
     </style>
-
-    <script>
-        /* we want to remove the nojs class as soon as possible on page load */
-        document.getElementById('site').className = document.getElementById('site').className.replace(/nojs/i,'');
-    </script>
 </head>
 
 <body>
     <div class="viewport">
-        <nav class="span3 nav-menu">
+        <nav class="col-xs-3 nav-menu">
             <ul>
                 <li><a href="#basics">Basics</a></li>
                 <li><a href="#overview">Overview</a></li>
@@ -145,7 +145,7 @@
                 <li><a href="#all">Show all</a></li>
             </ul>
         </nav>
-        <div class="span12 content">
+        <div class="col-xs-12 content">
             <header class="container header">
                 <div class="row nav-row">
                     <a href="#" class="nav-menu-toggle">
@@ -169,13 +169,13 @@
 
                             <section id="overview">
                                 <h2>Overview</h2>
-                                <p>CSS is written in LESS.</p>
-                                <p>LESS is located <span class="fillin">here</span></p>
+                                <p>CSS is written in SASS.</p>
+                                <p>SASS is located <span class="fillin">here</span></p>
                                 <p>Browser support is included for <span class="fillin">IE8 and above</span>.</p>
 
                                 <h3>Responsiveness</h3>
                                 <p><span class="fillin">Notes on any responsiveness e.g. is there some, what devices, where is responsive CSS</span></p>
-                                <p>Responsive styles for each LESS module is included in it's own .scss file, with the values for the breakpoint(s) being managed in variables.scss</p>
+                                <p>Responsive styles for each SASS module is included in it's own .scss file, with the values for the breakpoint(s) being managed in variables.scss</p>
 
                                 <h3>HTML flats</h3>
                                 <p><span class="fillin">Location/links to HTML flats</span></p>
@@ -242,7 +242,7 @@
 
                             <section id="variables">
                                 <h2>Variables</h2>
-                                <p>LESS variables should be detailed here.</p>
+                                <p>SASS variables should be detailed here.</p>
                                 <ul>
                                     <li>General variables, such as colours and responsive breakpoints, should be defined in the <code>variables.scss</code> file.</li>
                                     <li>Specific variables can be defined in their relevant file, e.g. form variables should be in <code>forms.scss</code>.</li>
@@ -262,307 +262,382 @@
 
 
                             <section id="grid">
-                                <h2>Grid</h2>
-                                <p>The grid is a responsive percentage based grid that uses the same markup and class names as the bootstrap 2.0 grid. This is intentional to support oscar projects if required. The grid is generated in the file grid.scss and contains several variables to easily reconfigure the grid if required, e.g. to have a different number of columns.</p>
-                                <p>It collapses to a single column below a certain screen width. The first element in a row automatically has no left margin. See the <a href="_grid.html">grid test file</a> for a full grid layout.</p>
-                                <div class="row">
-                                    <div class="span1">.span1</div>
-                                    <div class="span1">.span1</div>
-                                    <div class="span1">.span1</div>
-                                    <div class="span1">.span1</div>
-                                    <div class="span1">.span1</div>
-                                    <div class="span1">.span1</div>
-                                    <div class="span1">.span1</div>
-                                    <div class="span1">.span1</div>
-                                    <div class="span1">.span1</div>
-                                    <div class="span1">.span1</div>
-                                    <div class="span1">.span1</div>
-                                    <div class="span1">.span1</div>
-                                </div>
-                                <div class="row">
-                                    <div class="span2">.span2</div>
-                                    <div class="span2">.span2</div>
-                                    <div class="span2">.span2</div>
-                                    <div class="span2">.span2</div>
-                                    <div class="span2">.span2</div>
-                                    <div class="span2">.span2</div>
-                                </div>
-                                <div class="row">
-                                    <div class="span3">.span3</div>
-                                    <div class="span3">.span3</div>
-                                    <div class="span3">.span3</div>
-                                    <div class="span3">.span3</div>
-                                </div>
-                                <div class="row">
-                                    <div class="span4">.span4</div>
-                                    <div class="span4">.span4</div>
-                                    <div class="span4">.span4</div>
-                                </div>
-                                <div class="row">
-                                    <div class="span5">.span5</div>
-                                    <div class="span5">.span5</div>
-                                </div>
-                                <div class="row">
-                                    <div class="span6">.span6</div>
-                                    <div class="span6">.span6</div>
-                                </div>
-                                <div class="row">
-                                    <div class="span7">.span7</div>
-                                </div>
-                                <div class="row">
-                                    <div class="span8">.span8</div>
-                                </div>
-                                <div class="row">
-                                    <div class="span9">.span9</div>
-                                </div>
-                                <div class="row">
-                                    <div class="span10">.span10</div>
-                                </div>
-                                <div class="row">
-                                    <div class="span11">.span11</div>
-                                </div>
-                                <div class="row">
-                                    <div class="span12">.span12</div>
-                                </div>
+                                <h1 id="grid" class="page-header">Grid system</h1>
+                                <p>The following is purloined straight from the Bootstrap 3 docs.</p>
+                                <p>Bootstrap includes a responsive, mobile first fluid grid system that appropriately scales up to 12 columns as the device or viewport size increases. It includes <a href="#grid-example-basic">predefined classes</a> for easy layout options, as well as powerful <a href="#grid-sass">mixins for generating more semantic layouts</a>.</p>
+                                <h2 id="grid-intro">Introduction</h2>
+                                <p>Grid systems are used for creating page layouts through a series of rows and columns that house your content. Here's how the Bootstrap grid system works:</p>
+                                <ul>
+                                    <li>Rows must be placed within a <code>.container</code> (fixed-width) or <code>.container-fluid</code> (full-width) for proper alignment and padding.</li>
+                                    <li>Use rows to create horizontal groups of columns.</li>
+                                    <li>Content should be placed within columns, and only columns may be immediate children of rows.</li>
+                                    <li>Predefined grid classes like <code>.row</code> and <code>.col-xs-4</code> are available for quickly making grid layouts. Less mixins can also be used for more semantic layouts.</li>
+                                    <li>Columns create gutters (gaps between column content) via <code>padding</code>. That padding is offset in rows for the first and last column via negative margin on <code>.row</code>s.</li>
+                                    <li>The negative margin is why the examples below are outdented. It's so that content within grid columns is lined up with non-grid content.</li>
+                                    <li>Grid columns are created by specifying the number of twelve available columns you wish to span. For example, three equal columns would use three <code>.col-xs-4</code>.</li>
+                                    <li>If more than 12 columns are placed within a single row, each group of extra columns will, as one unit, wrap onto a new line.</li>
+                                    <li>Grid classes apply to devices with screen widths greater than or equal to the breakpoint sizes, and override grid classes targeted at smaller devices. Therefore, e.g. applying any <code>.col-md-*</code> class to an element will not only affect its styling on medium devices but also on large devices if a <code>.col-lg-*</code> class is not present.</li>
+                                </ul>
+                                <p>Look to the examples for applying these principles to your code.</p>
+                                <h2 id="grid-media-queries">Media queries</h2>
+                                <p>We use the following media queries in our Less files to create the key breakpoints in our grid system.</p>
+                                <pre class="language-markup clear">
+                                    <code>
+/* Extra small devices (phones, less than 768px) */
+/* No media query since this is the default in Bootstrap */
 
-                                <h3>Code</h3>
-<pre class="language-markup clear"><code>
-&lt;div class="row"&gt;
-    &lt;div class="span1"&gt;.span1&lt;/div&gt;
-    &lt;div class="span2"&gt;.span2&lt;/div&gt;
-    &lt;div class="span3"&gt;.span3&lt;/div&gt;
-    &lt;div class="span4"&gt;.span4&lt;/div&gt;
-    &lt;div class="span5"&gt;.span5&lt;/div&gt;
-    &lt;div class="span6"&gt;.span6&lt;/div&gt;
+/* Small devices (tablets, 768px and up) */
+@media (min-width: @screen-sm-min) { ... }
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: @screen-md-min) { ... }
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: @screen-lg-min) { ... }
+                                    </code>
+                                </pre>
+                                <p>We occasionally expand on these media queries to include a <code>max-width</code> to limit CSS to a narrower set of devices.</p>
+                                <pre class="language-markup clear">
+                                    <code>
+@media (max-width: @screen-xs-max) { ... }
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) { ... }
+@media (min-width: @screen-md-min) and (max-width: @screen-md-max) { ... }
+@media (min-width: @screen-lg-min) { ... }
+                                    </code>
+                                </pre>
+                                <h2 id="grid-options">Grid options</h2>
+                                <p>See how aspects of the Bootstrap grid system work across multiple devices with a handy table.</p>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th> Extra small devices <small>Phones (&lt;768px)</small>
+                                                </th>
+                                                <th> Small devices <small>Tablets (&ge;768px)</small>
+                                                </th>
+                                                <th> Medium devices <small>Desktops (&ge;992px)</small>
+                                                </th>
+                                                <th> Large devices <small>Desktops (&ge;1200px)</small>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th class="text-nowrap scope=row">Grid behavior</th>
+                                                <td>Horizontal at all times</td>
+                                                <td colspan=3>Collapsed to start, horizontal above breakpoints</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="text-nowrap scope=row">Container width</th>
+                                                <td>None (auto)</td>
+                                                <td>750px</td>
+                                                <td>970px</td>
+                                                <td>1170px</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="text-nowrap scope=row">Class prefix</th>
+                                                <td><code>.col-xs-</code></td>
+                                                <td><code>.col-sm-</code></td>
+                                                <td><code>.col-md-</code></td>
+                                                <td><code>.col-lg-</code></td>
+                                            </tr>
+                                            <tr>
+                                                <th class="text-nowrap scope=row"># of columns</th>
+                                                <td colspan=4>12</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="text-nowrap scope=row">Column width</th>
+                                                <td class="text-muted">Auto</td>
+                                                <td>~62px</td>
+                                                <td>~81px</td>
+                                                <td>~97px</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="text-nowrap scope=row">Gutter width</th>
+                                                <td colspan=4>30px (15px on each side of a column)</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="text-nowrap scope=row">Nestable</th>
+                                                <td colspan=4>Yes</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="text-nowrap scope=row">Offsets</th>
+                                                <td colspan=4>Yes</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="text-nowrap scope=row">Column ordering</th>
+                                                <td colspan=4>Yes</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <h2>Example: Stacked-to-horizontal</h2>
+                                <p>Using a single set of <code>.col-md-*</code> grid classes, you can create a basic grid system that starts out stacked on mobile devices and tablet devices (the extra small to small range) before becoming horizontal on desktop (medium) devices. Place grid columns in any <code>.row</code>.</p>
+                                <div class="row show-grid">
+                                    <div class="col-md-1">.col-md-1</div>
+                                    <div class="col-md-1">.col-md-1</div>
+                                    <div class="col-md-1">.col-md-1</div>
+                                    <div class="col-md-1">.col-md-1</div>
+                                    <div class="col-md-1">.col-md-1</div>
+                                    <div class="col-md-1">.col-md-1</div>
+                                    <div class="col-md-1">.col-md-1</div>
+                                    <div class="col-md-1">.col-md-1</div>
+                                    <div class="col-md-1">.col-md-1</div>
+                                    <div class="col-md-1">.col-md-1</div>
+                                    <div class="col-md-1">.col-md-1</div>
+                                    <div class="col-md-1">.col-md-1</div>
+                                </div>
+                                <div class="row show-grid">
+                                    <div class="col-md-8">.col-md-8</div>
+                                    <div class="col-md-4">.col-md-4</div>
+                                </div>
+                                <div class="row show-grid">
+                                    <div class="col-md-4">.col-md-4</div>
+                                    <div class="col-md-4">.col-md-4</div>
+                                    <div class="col-md-4">.col-md-4</div>
+                                </div>
+                                <div class="row show-grid">
+                                    <div class="col-md-6">.col-md-6</div>
+                                    <div class="col-md-6">.col-md-6</div>
+                                </div>
+                                <pre class="language-markup clear">
+                                    <code>
+&lt;div class='row'&gt;
+    &lt;div class="col-md-1"&gt;.col-md-1&lt;/div&gt;
+    &lt;div class="col-md-1"&gt;.col-md-1&lt;/div&gt;
+    &lt;div class="col-md-1"&gt;.col-md-1&lt;/div&gt;
+    &lt;div class="col-md-1"&gt;.col-md-1&lt;/div&gt;
+    &lt;div class="col-md-1"&gt;.col-md-1&lt;/div&gt;
+    &lt;div class="col-md-1"&gt;.col-md-1&lt;/div&gt;
+    &lt;div class="col-md-1"&gt;.col-md-1&lt;/div&gt;
+    &lt;div class="col-md-1"&gt;.col-md-1&lt;/div&gt;
+    &lt;div class="col-md-1"&gt;.col-md-1&lt;/div&gt;
+    &lt;div class="col-md-1"&gt;.col-md-1&lt;/div&gt;
+    &lt;div class="col-md-1"&gt;.col-md-1&lt;/div&gt;
+    &lt;div class="col-md-1"&gt;.col-md-1&lt;/div&gt;
 &lt;/div&gt;
-</code></pre>
-
-                                <h2>Indents</h2>
-                                <p>The grid also has indent classes that can be applied for more complex layouts.</p>
-                                <div class="row example">
-                                    <div class="span1">.span1</div>
-                                    <div class="span1">.span1</div>
-                                    <div class="span1">.span1</div>
-                                    <div class="span1">.span1</div>
-                                    <div class="span1">.span1</div>
-                                    <div class="span1">.span1</div>
-                                    <div class="span1">.span1</div>
-                                    <div class="span1">.span1</div>
-                                    <div class="span1">.span1</div>
-                                    <div class="span1">.span1</div>
-                                    <div class="span1">.span1</div>
-                                    <div class="span1">.span1</div>
-                                </div>
-                                <!-- span1 indent -->
-                                <div class="row">
-                                    <div class="span11 offset1">11</div>
-                                </div>
-                                <div class="row">
-                                    <div class="span10 offset2">10</div>
-                                </div>
-                                <div class="row">
-                                    <div class="span9 offset3">9</div>
-                                </div>
-                                <div class="row">
-                                    <div class="span8 offset4">8</div>
-                                </div>
-                                <div class="row">
-                                    <div class="span7 offset5">7</div>
-                                </div>
-                                <div class="row">
-                                    <div class="span6 offset6">6</div>
-                                </div>
-                                <div class="row">
-                                    <div class="span5 offset7">5</div>
-                                </div>
-                                <div class="row">
-                                    <div class="span4 offset8">4</div>
-                                </div>
-                                <div class="row">
-                                    <div class="span3 offset9">3</div>
-                                </div>
-                                <div class="row">
-                                    <div class="span2 offset10">2</div>
-                                </div>
-                                <div class="row">
-                                    <div class="span1 offset11">1</div>
-                                </div>
-
-
-
-                                <h3>Code</h3>
-<pre class="language-markup clear"><code>
-&lt;div class="row"&gt;
-    &lt;div class="span1 offset1"&gt;.span1&lt;/div&gt;
+&lt;div class='row'&gt;
+    &lt;div class="col-md-8"&gt;.col-md-8&lt;/div&gt;
+    &lt;div class="col-md-4"&gt;.col-md-4&lt;/div&gt;
 &lt;/div&gt;
-</code></pre>
-
-
-                                <h2>Grid within grid</h2>
-                                <p>Grid within a grid works as normal grid, except that it scales down i.e. any grid column that contains another grid is made up of the same number columns as the top level grid, as shown.</p>
-
-                                <div class="row">
-                                    <div class="span8">.span8</div>
-                                    <div class="span4">.span4</div>
-                                </div>
-                                <div class="row">
-                                    <div class="span8">
-                                        <div class="row">
-                                            <div class="span4">.span4</div>
-                                            <div class="span4">.span4</div>
-                                            <div class="span4">.span4</div>
-                                        </div>
-                                    </div>
-                                    <div class="span4">
-                                        <div class="row">
-                                            <div class="span4">.span4</div>
-                                            <div class="span4">.span4</div>
-                                            <div class="span4">.span4</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="span8">
-                                        <div class="row">
-                                            <div class="span4">
-                                                <div class="row">
-                                                    <div class="span6">.span6</div>
-                                                    <div class="span6">.span6</div>
-                                                </div>
-                                            </div>
-                                            <div class="span4">.span4</div>
-                                            <div class="span4">.span4</div>
-                                        </div>
-                                    </div>
-                                    <div class="span4">
-                                        <div class="row">
-                                            <div class="span4">.span4</div>
-                                            <div class="span4">.span4</div>
-                                            <div class="span4">.span4</div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <h3>Code</h3>
-<pre class="language-markup clear"><code>
-&lt;div class="row"&gt;
-    &lt;div class="span8"&gt;
-        &lt;div class="row"&gt;
-            &lt;div class="span8"&gt;.span8&lt;/div&gt;
-            &lt;div class="span4"&gt;.span4&lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="span4"&gt;
-        &lt;div class="row"&gt;
-            &lt;div class="span4"&gt;.span4&lt;/div&gt;
-            &lt;div class="span4"&gt;.span4&lt;/div&gt;
-            &lt;div class="span4"&gt;.span4&lt;/div&gt;
-        &lt;/div&gt;
+&lt;div class='row'&gt;
+    &lt;div class="col-md-4"&gt;.col-md-4&lt;/div&gt;
+    &lt;div class="col-md-4"&gt;.col-md-4&lt;/div&gt;
+    &lt;div class="col-md-4"&gt;.col-md-4&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class='row'&gt;
+    &lt;div class="col-md-6"&gt;.col-md-6&lt;/div&gt;
+    &lt;div class="col-md-6"&gt;.col-md-6&lt;/div&gt;
+&lt;/div&gt;
+                                    </code>
+                                </pre>
+                                <h2>Example: Fluid container</h2>
+                                <p>Turn any fixed-width grid layout into a full-width layout by changing your outermost <code>.container</code> to <code>.container-fluid</code>.</p>
+                                <pre class="language-markup clear">
+                                    <code>
+&lt;div class="container-fluid&gt;
+    &lt;div class='row'&gt;
+    ...
     &lt;/div&gt;
 &lt;/div&gt;
-</code></pre>
-
-                                <h2>Grid within grid, fixed spacing</h2>
-                                <p>The grid is based on percentages, including the space between grid columns. This means that a grid row within a grid row will have a narrower gap between columns because the same percentage of a narrower column is smaller (see above example).</p>
-                                <p>For grids that must maintain a fixed column spacing, the <code>.fixedspacing</code> class can be applied to the parent grid row. This will ensure that the spacing between columns remains consistent even for nested grids.</p>
-                                <p>This approach is considerably more limiting as the fixed column spacing must be split between the left and right of each column, meaning that the first left column will not align perfectly left as in the regular grid. e.g. if the column spacing is 20px, each column receives 10px of padding to the left and right.</p>
-                                <p>Grid indents can also be applied to the fixed spaced grid as normal.</p>
-
-                                <div class="row fixedspacing">
-                                    <div class="span8">.span8</div>
-                                    <div class="span4">.span4</div>
+                                    </code>
+                                </pre>
+                                <h2>Example: Mobile and desktop</h2>
+                                <p>Don't want your columns to simply stack in smaller devices? Use the extra small and medium device grid classes by adding <code>.col-xs-*</code><code>.col-md-*</code> to your columns. See the example below for a better idea of how it all works.</p>
+                                <div class="row show-grid">
+                                    <div class="col-xs-12 col-md-8">.col-xs-12 .col-md-8</div>
+                                    <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
                                 </div>
-                                <div class="row fixedspacing">
-                                    <div class="span8">
-                                        <div class="row">
-                                            <div class="span4">.span4</div>
-                                            <div class="span4">.span4</div>
-                                            <div class="span1">.span1</div>
-                                            <div class="span3">.span3</div>
-                                        </div>
-                                    </div>
-                                    <div class="span4">
-                                        <div class="row">
-                                            <div class="span4">.span4</div>
-                                            <div class="span4">.span4</div>
-                                            <div class="span4">.span4</div>
-                                        </div>
-                                    </div>
+                                <div class="row show-grid">
+                                    <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+                                    <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+                                    <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
                                 </div>
-                                <div class="row fixedspacing">
-                                    <div class="span8">
-                                        <div class="row">
-                                            <div class="span4">
-                                                <div class="row">
-                                                    <div class="span6">.span6</div>
-                                                    <div class="span6">.span6</div>
-                                                </div>
-                                            </div>
-                                            <div class="span4">.span4</div>
-                                            <div class="span3 offset1">.span3 .offset1</div>
-                                        </div>
-                                    </div>
-                                    <div class="span4">
-                                        <div class="row">
-                                            <div class="span4">.span4</div>
-                                            <div class="span4">.span4</div>
-                                            <div class="span4">.span4</div>
-                                        </div>
-                                    </div>
+                                <div class="row show-grid">
+                                    <div class="col-xs-6">.col-xs-6</div>
+                                    <div class="col-xs-6">.col-xs-6</div>
                                 </div>
-
-
-                                <h2>Reverse layout</h2>
-                                <p>When collapsed into a single column the grid translates left to right into top to bottom, meaning that the first column in a row will appear above the second column, and so forth.</p>
-                                <p>For some layouts, this approach is not suited. Where this approach should be reversed, apply the <code>.reverselayout</code> class to the parent row, and reverse the order of the elements in the page, as shown.</p>
-                                <p>Reverse layout can also be applied to the fixed spaced grid.</p>
-
-                                <div class="row reverselayout">
-                                    <div class="span4">
-                                        <p>This column appears on the right at full size, but first when collapsed.</p>
-                                    </div>
-                                    <div class="span4">
-                                        <p>This column occurs in the middle.</p>
-                                    </div>
-                                    <div class="span4">
-                                        <p>This column appears on the left at full size, but last when collapsed.</p>
-                                    </div>
-                                </div>
-
-
-                                <h3>Code</h3>
-<pre class="language-markup clear"><code>
-&lt;div class="row reverselayout"&gt;
-    &lt;div class="span4"&gt;
-        &lt;p&gt;
-        This column appears on the right at full size, but first when collapsed.&lt;/p&gt;
-    &lt;/div&gt;
-    &lt;div class="span4"&gt;
-        &lt;p&gt;
-        This column occurs in the middle.&lt;/p&gt;
-    &lt;/div&gt;
-    &lt;div class="span4"&gt;
-        &lt;p&gt;
-        This column appears on the left at full size, but last when collapsed.&lt;/p&gt;
-    &lt;/div&gt;
+                                <pre class="language-markup clear">
+                                    <code>
+&lt;!-- Stack the columns on mobile by making one full-width and the other half-width --&gt;
+&lt;div class='row'&gt;
+&lt;div class="col-xs-12 col-md-8"&gt;.col-xs-12 .col-md-8&lt;/div&gt;
+&lt;div class="col-xs-6 col-md-4"&gt;.col-xs-6 .col-md-4&lt;/div&gt;
 &lt;/div&gt;
-</code></pre>
 
-                                <h2>Non-collapsing grid</h2>
-                                <p>Occasionally it can be useful to have grid elements that do not collapse with the rest of the grid on a narrow screen. To achieve this add the class of <code>.fix</code> to the <code>row</code> element you do not wish to collapse.</p>
+&lt;!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop --&gt;
+&lt;div class='row'&gt;
+&lt;div class="col-xs-6 col-md-4"&gt;.col-xs-6 .col-md-4&lt;/div&gt;
+&lt;div class="col-xs-6 col-md-4"&gt;.col-xs-6 .col-md-4&lt;/div&gt;
+&lt;div class="col-xs-6 col-md-4"&gt;.col-xs-6 .col-md-4&lt;/div&gt;
+&lt;/div&gt;
 
-                                <div class="row fix">
-                                    <div class="span6">
-                                        This row
-                                    </div>
-                                    <div class="span6">
-                                        will never collapse
+&lt;!-- Columns are always 50% wide, on mobile and desktop --&gt;
+&lt;div class='row'&gt;
+&lt;div class="col-xs-6"&gt;.col-xs-6&lt;/div&gt;
+&lt;div class="col-xs-6"&gt;.col-xs-6&lt;/div&gt;
+&lt;/div&gt;
+                                    </code>
+                                </pre>
+                                <h2>Example: Mobile, tablet, desktop</h2>
+                                <p>Build on the previous example by creating even more dynamic and powerful layouts with tablet <code>.col-sm-*</code> classes.</p>
+                                <div class="row show-grid">
+                                    <div class="col-xs-12 col-sm-6 col-md-8">.col-xs-12 .col-sm-6 .col-md-8</div>
+                                    <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+                                </div>
+                                <div class="row show-grid">
+                                    <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+                                    <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>  <div class="clearfix visible-xs-block"></div>
+                                    <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+                                </div>
+                                <pre class="language-markup clear">
+                                    <code>
+&lt;div class='row'&gt;
+    &lt;div class="col-xs-12 col-sm-6 col-md-8"&gt;.col-xs-12 .col-sm-6 .col-md-8&lt;/div&gt;
+    &lt;div class="col-xs-6 col-md-4"&gt;.col-xs-6 .col-md-4&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class='row'&gt;
+    &lt;div class="col-xs-6 col-sm-4"&gt;.col-xs-6 .col-sm-4&lt;/div&gt;
+    &lt;div class="col-xs-6 col-sm-4"&gt;.col-xs-6 .col-sm-4&lt;/div&gt;
+    &lt;!-- Optional: clear the XS cols if their content doesn't match in height --&gt;
+    &lt;div class="clearfix visible-xs-block"&gt;&lt;/div&gt;
+    &lt;div class="col-xs-6 col-sm-4"&gt;.col-xs-6 .col-sm-4&lt;/div&gt;
+&lt;/div&gt;
+                                    </code>
+                                </pre>
+                                <h2>Example: Column wrapping</h2>
+                                <p>If more than 12 columns are placed within a single row, each group of extra columns will, as one unit, wrap onto a new line.</p>
+                                <div class="row show-grid">
+                                    <div class="col-xs-9">.col-xs-9</div>
+                                    <div class="col-xs-4">.col-xs-4<br>Since 9 + 4 = 13 &gt; 12, this 4-column-wide div gets wrapped onto a new line as one contiguous unit.</div>
+                                    <div class="col-xs-6">.col-xs-6<br>Subsequent columns continue along the new line.</div>
+                                </div>
+                                <pre class="language-markup clear">
+                                    <code>
+&lt;div class='row'&gt;
+&lt;div class="col-xs-9"&gt;.col-xs-9&lt;/div&gt;&lt;div class="col-xs-4"&gt;.col-xs-4&lt;br&gt;Since 9 + 4 = 13 &amp;gt; 12, this 4-column-wide div gets wrapped onto a new line as one contiguous unit.&lt;/div&gt;
+&lt;div class="col-xs-6"&gt;.col-xs-6&lt;br&gt;Subsequent columns continue along the new line.&lt;/div&gt;
+&lt;/div&gt;
+                                    </code>
+                                </pre>
+                                <h2 id="grid-responsive-resets">Responsive column resets</h2>
+                                <p>With the four tiers of grids available you're bound to run into issues where, at certain breakpoints, your columns don't clear quite right as one is taller than the other. To fix that, use a combination of a <code>.clearfix</code> and our <a href="#responsive-utilities">responsive utility classes</a>.</p>
+                                <div class="row show-grid">
+                                    <div class="col-xs-6 col-sm-3"> .col-xs-6 .col-sm-3 <br> Resize your viewport or check it out on your phone for an example. </div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>  <div class="clearfix visible-xs-block"></div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                </div>
+                                <pre class="language-markup clear">
+                                    <code>
+&lt;div class='row'&gt;
+&lt;div class="col-xs-6 col-sm-3"&gt;.col-xs-6 .col-sm-3&lt;/div&gt;
+&lt;div class="col-xs-6 col-sm-3"&gt;.col-xs-6 .col-sm-3&lt;/div&gt;
+
+&lt;!-- Add the extra clearfix for only the required viewport --&gt;
+&lt;div class="clearfix visible-xs-block"&gt;&lt;/div&gt;
+
+&lt;div class="col-xs-6 col-sm-3"&gt;.col-xs-6 .col-sm-3&lt;/div&gt;
+&lt;div class="col-xs-6 col-sm-3"&gt;.col-xs-6 .col-sm-3&lt;/div&gt;
+&lt;/div&gt;
+                                    </code>
+                                </pre>
+                                <p>In addition to column clearing at responsive breakpoints, you may need to <strong>reset offsets, pushes, or pulls</strong>. See this in action in <a href="../examples/grid/">the grid example</a>.</p>
+                                <pre class="language-markup clear">
+                                    <code>
+&lt;div class='row'&gt;
+&lt;div class="col-sm-5 col-md-6"&gt;.col-sm-5 .col-md-6&lt;/div&gt;
+&lt;div class="col-sm-5 col-sm-offset-2 col-md-6 col-md-offset-0"&gt;.col-sm-5 .col-sm-offset-2 .col-md-6 .col-md-offset-0&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class='row'&gt;
+&lt;div class="col-sm-6 col-md-5 col-lg-6"&gt;.col-sm-6 .col-md-5 .col-lg-6&lt;/div&gt;
+&lt;div class="col-sm-6 col-md-5 col-md-offset-2 col-lg-6 col-lg-offset-0"&gt;.col-sm-6 .col-md-5 .col-md-offset-2 .col-lg-6 .col-lg-offset-0&lt;/div&gt;
+&lt;/div&gt;
+                                    </code>
+                                </pre>
+                                <h2 id="grid-offsetting">Offsetting columns</h2>
+                                <p>Move columns to the right using <code>.col-md-offset-*</code> classes. These classes increase the left margin of a column by <code>*</code> columns. For example, <code>.col-md-offset-4</code> moves <code>.col-md-4</code> over four columns.</p>
+                                <div class="row show-grid">
+                                    <div class="col-md-4">.col-md-4</div>
+                                    <div class="col-md-4 col-md-offset-4">.col-md-4 .col-md-offset-4</div>
+                                </div>
+                                <div class="row show-grid">
+                                    <div class="col-md-3 col-md-offset-3">.col-md-3 .col-md-offset-3</div>
+                                    <div class="col-md-3 col-md-offset-3">.col-md-3 .col-md-offset-3</div>
+                                </div>
+                                <div class="row show-grid">
+                                    <div class="col-md-6 col-md-offset-3">.col-md-6 .col-md-offset-3</div>
+                                </div>
+                                <pre class="language-markup clear">
+                                    <code>
+&lt;div class='row'&gt;
+&lt;div class="col-md-4"&gt;.col-md-4&lt;/div&gt;
+&lt;div class="col-md-4 col-md-offset-4"&gt;.col-md-4 .col-md-offset-4&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class='row'&gt;
+&lt;div class="col-md-3 col-md-offset-3"&gt;.col-md-3 .col-md-offset-3&lt;/div&gt;
+&lt;div class="col-md-3 col-md-offset-3"&gt;.col-md-3 .col-md-offset-3&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class='row'&gt;
+&lt;div class="col-md-6 col-md-offset-3"&gt;.col-md-6 .col-md-offset-3&lt;/div&gt;
+&lt;/div&gt;
+                                    </code>
+                                </pre>
+                                <p>You can also override offsets from lower grid tiers with <code>.col-*-offset-0</code> classes.</p>
+                                <pre class="language-markup clear">
+                                    <code>
+&lt;div class='row'&gt;
+&llt;div class="col-xs-6 col-sm-4"&gt;
+&lt;/div&gt;
+&lt;div class="col-xs-6 col-sm-4"&gt;
+&lt;/div&gt;
+&lt;div class="col-xs-6 col-xs-offset-3 col-sm-4 col-sm-offset-0"&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+                                    </code>
+                                </pre>
+                                <h2 id="grid-nesting">Nesting columns</h2>
+                                <p>To nest your content with the default grid, add a new <code>.row</code> and set of <code>.col-sm-*</code> columns within an existing <code>.col-sm-*</code> column. Nested rows should include a set of columns that add up to 12 or fewer (it is not required that you use all 12 available columns).</p>
+                                <div class="row show-grid">
+                                    <div class="col-sm-9"> Level 1: .col-sm-9 <div class="row show-grid">
+                                        <div class="col-xs-8 col-sm-6"> Level 2: .col-xs-8 .col-sm-6 </div>
+                                        <div class="col-xs-4 col-sm-6"> Level 2: .col-xs-4 .col-sm-6 </div>
                                     </div>
                                 </div>
-
-
-
+                            </div>
+                            <pre class="language-markup clear">
+                                <code>
+                                    &lt;div class='row'&gt;
+                                    &lt;div class="col-sm-9"&gt;
+                                    Level 1: .col-sm-9
+                                    &lt;div class='row'&gt;
+                                    &lt;div class="col-xs-8 col-sm-6"&gt;
+                                    Level 2: .col-xs-8 .col-sm-6
+                                    &lt;/div&gt;
+                                    &lt;div class="col-xs-4 col-sm-6"&gt;
+                                    Level 2: .col-xs-4 .col-sm-6
+                                    &lt;/div&gt;
+                                    &lt;/div&gt;
+                                    &lt;/div&gt;
+                                    &lt;/div&gt;
+                            </code>
+                            </pre>
+                            <h2 id="grid-column-ordering">Column ordering</h2>
+                            <p>Easily change the order of our built-in grid columns with <code>.col-md-push-*</code> and <code>.col-md-pull-*</code> modifier classes.</p>
+                            <div class="row show-grid">
+                                <div class="col-md-9 col-md-push-3">.col-md-9 .col-md-push-3</div>
+                                <div class="col-md-3 col-md-pull-9">.col-md-3 .col-md-pull-9</div>
+                            </div>
+                            <pre class="language-markup clear">
+                                <code>
+                                    &lt;div class='row'&gt;
+                                    &lt;div class="col-md-9 col-md-push-3"&gt;.col-md-9 .col-md-push-3&lt;/div&gt;
+                                    &lt;div class="col-md-3 col-md-pull-9"&gt;.col-md-3 .col-md-pull-9&lt;/div&gt;
+                                    &lt;/div&gt;
+                            </code>
+                            </pre>
                             </section>
 
 
@@ -620,19 +695,21 @@
                                 </form>
 
                                 <h3>Code</h3>
-<pre class="language-markup clear"><code>
-&lt;div class="field"&gt;
-    &lt;label for="text1"&gt;
-    This is a text field&lt;/label&gt;
-    &lt;input type="text" id="text1"/&gt;
-    &lt;span class="helptext"&gt;
-    This is some help text that has been put here to be helpful&lt;/span&gt;
-&lt;/div&gt;
-&lt;div class="buttons"&gt;
-    &lt;button type="submit" class="btn"&gt;
-    Submit&lt;/button&gt;
-&lt;/div&gt;
-</code></pre>
+                                <pre class="language-markup clear">
+                                        <code>
+        &lt;div class="field"&gt;
+            &lt;label for="text1"&gt;
+            This is a text field&lt;/label&gt;
+            &lt;input type="text" id="text1"/&gt;
+            &lt;span class="helptext"&gt;
+            This is some help text that has been put here to be helpful&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div class="buttons"&gt;
+            &lt;button type="submit" class="btn"&gt;
+            Submit&lt;/button&gt;
+        &lt;/div&gt;
+                                </code>
+                            </pre>
 
                                 <h3>Regular inputs with error states</h3>
                                 <p>Add the <code>.required</code> class to a field to make it required. Add the <code>.error</code> class to a field for error states.</p>
@@ -691,21 +768,23 @@
                                 </form>
 
                                 <h3>Code</h3>
-<pre class="language-markup clear"><code>
-&lt;div class="field error"&gt;
-    &lt;label for="text1"&gt;
-    This is a text field&lt;/label&gt;
-    &lt;input type="text" id="text1"/&gt;
-    &lt;span class="errormsg"&gt;
-    This field is required&lt;/span&gt;
-    &lt;span class="helptext"&gt;
-    This is some help text that has been put here to be helpful&lt;/span&gt;
-&lt;/div&gt;
-&lt;div class="buttons"&gt;
-    &lt;button type="submit" class="btn"&gt;
-    Submit&lt;/button&gt;
-&lt;/div&gt;
-</code></pre>
+                                <pre class="language-markup clear">
+                                        <code>
+        &lt;div class="field error"&gt;
+            &lt;label for="text1"&gt;
+            This is a text field&lt;/label&gt;
+            &lt;input type="text" id="text1"/&gt;
+            &lt;span class="errormsg"&gt;
+            This field is required&lt;/span&gt;
+            &lt;span class="helptext"&gt;
+            This is some help text that has been put here to be helpful&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div class="buttons"&gt;
+            &lt;button type="submit" class="btn"&gt;
+            Submit&lt;/button&gt;
+        &lt;/div&gt;
+                                </code>
+                            </pre>
 
 
                                 <h3>Checkboxes</h3>
@@ -761,30 +840,32 @@
                                 </form>
 
                                 <h3>Code</h3>
-<pre class="language-markup clear"><code>
-&lt;form class="form" action=""&gt;
-    &lt;fieldset&gt;
-        &lt;div class="field"&gt;
-            &lt;label for="text"&gt;
-            Text field&lt;/label&gt;
-            &lt;span class="helptext"&gt;
-            Help text, optional&lt;/span&gt;
-            &lt;input type="text" id="text"/&gt;
-            &lt;span class="errormsg"&gt;
-            Error, only visible if parent has error class&lt;/span&gt;
-        &lt;/div&gt;
-        &lt;div class="field error"&gt;
-            &lt;label for="text"&gt;
-            Text field&lt;/label&gt;
-            &lt;span class="helptext"&gt;
-            Help text, optional&lt;/span&gt;
-            &lt;input type="text" id="text"/&gt;
-            &lt;span class="errormsg"&gt;
-            Error, only visible if parent has error class&lt;/span&gt;
-        &lt;/div&gt;
-    &lt;/fieldset&gt;
-&lt;/form&gt;
-</code></pre>
+                                <pre class="language-markup clear">
+                                        <code>
+        &lt;form class="form" action=""&gt;
+            &lt;fieldset&gt;
+                &lt;div class="field"&gt;
+                    &lt;label for="text"&gt;
+                    Text field&lt;/label&gt;
+                    &lt;span class="helptext"&gt;
+                    Help text, optional&lt;/span&gt;
+                    &lt;input type="text" id="text"/&gt;
+                    &lt;span class="errormsg"&gt;
+                    Error, only visible if parent has error class&lt;/span&gt;
+                &lt;/div&gt;
+                &lt;div class="field error"&gt;
+                    &lt;label for="text"&gt;
+                    Text field&lt;/label&gt;
+                    &lt;span class="helptext"&gt;
+                    Help text, optional&lt;/span&gt;
+                    &lt;input type="text" id="text"/&gt;
+                    &lt;span class="errormsg"&gt;
+                    Error, only visible if parent has error class&lt;/span&gt;
+                &lt;/div&gt;
+            &lt;/fieldset&gt;
+        &lt;/form&gt;
+                                </code>
+                            </pre>
                             </section>
 
 
@@ -814,7 +895,8 @@
                             <section id="buttons">
                                 <h2>Buttons</h2>
                                 <p>Buttons are controlled through the <code>.btn</code> class, with additional classes to control the appearance and size.</p>
-                                <p>Buttons should look exactly the same for any reasonable element type they are applied to, although there seems to be an inherent difficulty in making <code>input</code> elements match the height of the other elements cross-browser. It is therefore recommended that only <code>a</code> and <code>button</code> are used for buttons.</p>
+                                <p>The syntax for these is exactly as is in BS3.</p>
+
                                 <p>Basic styles:</p>
                                 <ul class="standard">
                                     <li><code>.btn-primary</code></li>
@@ -826,8 +908,9 @@
                                 <p>Additional button styles:<p>
                                 <ul class="standard">
                                     <li><code>.disabled</code></li>
-                                    <li><code>.btn-small</code></li>
-                                    <li><code>.btn-large</code></li>
+                                    <li><code>.btn-xs</code></li>
+                                    <li><code>.btn-sm</code></li>
+                                    <li><code>.btn-lg</code></li>
                                     <li><code>.btn-block</code></li>
                                 </ul>
 
@@ -844,17 +927,21 @@
                                             btn
                                         </td>
                                         <td>
-                                            <a href="#" class="btn btn-small">Link</a>
-                                            <button type="submit" class="btn btn-small">Button</button>
-                                            <button type="submit" class="btn btn-small" disabled="disabled">Disabled</button>
+                                            <a href="#" class="btn btn-xs">Link</a>
+                                            <button type="submit" class="btn btn-xs">Button</button>
+                                            <button type="submit" class="btn btn-xs" disabled="disabled">Disabled</button>
+
+                                            <a href="#" class="btn btn-sm">Link</a>
+                                            <button type="submit" class="btn btn-sm">Button</button>
+                                            <button type="submit" class="btn btn-sm" disabled="disabled">Disabled</button>
 
                                             <a href="#" class="btn">Link</a>
                                             <button type="submit" class="btn">Button</button>
                                             <button type="submit" class="btn" disabled="disabled">Disabled</button>
 
-                                            <a href="#" class="btn btn-large">Link</a>
-                                            <button type="submit" class="btn btn-large">Button</button>
-                                            <button type="submit" class="btn btn-large" disabled="disabled">Disabled</button>
+                                            <a href="#" class="btn btn-lg">Link</a>
+                                            <button type="submit" class="btn btn-lg">Button</button>
+                                            <button type="submit" class="btn btn-lg" disabled="disabled">Disabled</button>
                                         </td>
                                     </tr>
                                     <tr>
@@ -862,17 +949,21 @@
                                             btn-primary
                                         </td>
                                         <td>
-                                            <a href="#" class="btn btn-primary btn-small">Link</a>
-                                            <button type="submit" class="btn btn-primary btn-small">Button</button>
-                                            <button type="submit" class="btn btn-primary btn-small" disabled="disabled">Disabled</button>
+                                            <a href="#" class="btn btn-primary btn-xs">Link</a>
+                                            <button type="submit" class="btn btn-primary btn-xs">Button</button>
+                                            <button type="submit" class="btn btn-primary btn-xs" disabled="disabled">Disabled</button>
+
+                                            <a href="#" class="btn btn-primary btn-sm">Link</a>
+                                            <button type="submit" class="btn btn-primary btn-sm">Button</button>
+                                            <button type="submit" class="btn btn-primary btn-sm" disabled="disabled">Disabled</button>
 
                                             <a href="#" class="btn btn-primary">Link</a>
                                             <button type="submit" class="btn btn-primary">Button</button>
                                             <button type="submit" class="btn btn-primary" disabled="disabled">Disabled</button>
 
-                                            <a href="#" class="btn btn-primary btn-large">Link</a>
-                                            <button type="submit" class="btn btn-primary btn-large">Button</button>
-                                            <button type="submit" class="btn btn-primary btn-large" disabled="disabled">Disabled</button>
+                                            <a href="#" class="btn btn-primary btn-lg">Link</a>
+                                            <button type="submit" class="btn btn-primary btn-lg">Button</button>
+                                            <button type="submit" class="btn btn-primary btn-lg" disabled="disabled">Disabled</button>
                                         </td>
                                     </tr>
                                     <tr>
@@ -880,17 +971,21 @@
                                             btn-secondary
                                         </td>
                                         <td>
-                                            <a href="#" class="btn btn-secondary btn-small">Link</a>
-                                            <button type="submit" class="btn btn-secondary btn-small">Button</button>
-                                            <button type="submit" class="btn btn-secondary btn-small" disabled="disabled">Disabled</button>
+                                            <a href="#" class="btn btn-secondary btn-xs">Link</a>
+                                            <button type="submit" class="btn btn-secondary btn-xs">Button</button>
+                                            <button type="submit" class="btn btn-secondary btn-xs" disabled="disabled">Disabled</button>
+
+                                            <a href="#" class="btn btn-secondary btn-sm">Link</a>
+                                            <button type="submit" class="btn btn-secondary btn-sm">Button</button>
+                                            <button type="submit" class="btn btn-secondary btn-sm" disabled="disabled">Disabled</button>
 
                                             <a href="#" class="btn btn-secondary">Link</a>
                                             <button type="submit" class="btn btn-secondary">Button</button>
                                             <button type="submit" class="btn btn-secondary" disabled="disabled">Disabled</button>
 
-                                            <a href="#" class="btn btn-secondary btn-large">Link</a>
-                                            <button type="submit" class="btn btn-secondary btn-large">Button</button>
-                                            <button type="submit" class="btn btn-secondary btn-large" disabled="disabled">Disabled</button>
+                                            <a href="#" class="btn btn-secondary btn-lg">Link</a>
+                                            <button type="submit" class="btn btn-secondary btn-lg">Button</button>
+                                            <button type="submit" class="btn btn-secondary btn-lg" disabled="disabled">Disabled</button>
                                         </td>
                                     </tr>
                                     <tr>
@@ -898,17 +993,21 @@
                                             btn-info
                                         </td>
                                         <td>
-                                            <a href="#" class="btn btn-info btn-small">Link</a>
-                                            <button type="submit" class="btn btn-info btn-small">Button</button>
-                                            <button type="submit" class="btn btn-info btn-small" disabled="disabled">Disabled</button>
+                                            <a href="#" class="btn btn-info btn-xs">Link</a>
+                                            <button type="submit" class="btn btn-info btn-xs">Button</button>
+                                            <button type="submit" class="btn btn-info btn-xs" disabled="disabled">Disabled</button>
+
+                                            <a href="#" class="btn btn-info btn-sm">Link</a>
+                                            <button type="submit" class="btn btn-info btn-sm">Button</button>
+                                            <button type="submit" class="btn btn-info btn-sm" disabled="disabled">Disabled</button>
 
                                             <a href="#" class="btn btn-info">Link</a>
                                             <button type="submit" class="btn btn-info">Button</button>
                                             <button type="submit" class="btn btn-info" disabled="disabled">Disabled</button>
 
-                                            <a href="#" class="btn btn-info btn-large">Link</a>
-                                            <button type="submit" class="btn btn-info btn-large">Button</button>
-                                            <button type="submit" class="btn btn-info btn-large" disabled="disabled">Disabled</button>
+                                            <a href="#" class="btn btn-info btn-lg">Link</a>
+                                            <button type="submit" class="btn btn-info btn-lg">Button</button>
+                                            <button type="submit" class="btn btn-info btn-lg" disabled="disabled">Disabled</button>
                                         </td>
                                     </tr>
                                     <tr>
@@ -916,32 +1015,38 @@
                                             btn-danger
                                         </td>
                                         <td>
-                                            <a href="#" class="btn btn-danger btn-small">Link</a>
-                                            <button type="submit" class="btn btn-danger btn-small">Button</button>
-                                            <button type="submit" class="btn btn-danger btn-small" disabled="disabled">Disabled</button>
+                                            <a href="#" class="btn btn-danger btn-xs">Link</a>
+                                            <button type="submit" class="btn btn-danger btn-xs">Button</button>
+                                            <button type="submit" class="btn btn-danger btn-xs" disabled="disabled">Disabled</button>
+
+                                            <a href="#" class="btn btn-danger btn-sm">Link</a>
+                                            <button type="submit" class="btn btn-danger btn-sm">Button</button>
+                                            <button type="submit" class="btn btn-danger btn-sm" disabled="disabled">Disabled</button>
 
                                             <a href="#" class="btn btn-danger">Link</a>
                                             <button type="submit" class="btn btn-danger">Button</button>
                                             <button type="submit" class="btn btn-danger" disabled="disabled">Disabled</button>
 
-                                            <a href="#" class="btn btn-danger btn-large">Link</a>
-                                            <button type="submit" class="btn btn-danger btn-large">Button</button>
-                                            <button type="submit" class="btn btn-danger btn-large" disabled="disabled">Disabled</button>
+                                            <a href="#" class="btn btn-danger btn-lg">Link</a>
+                                            <button type="submit" class="btn btn-danger btn-lg">Button</button>
+                                            <button type="submit" class="btn btn-danger btn-lg" disabled="disabled">Disabled</button>
                                         </td>
                                     </tr>
                                 </tbody>
                                 </table>
 
                                 <h3>Code</h3>
-<pre class="language-markup clear"><code>
-&lt;a href="#" class="btn btn-primary btn-large"&gt;
-Button&lt;/a&gt;
-</code></pre>
+                                <pre class="language-markup clear">
+                                        <code>
+        &lt;a href="#" class="btn btn-primary btn-lg"&gt;
+        Button&lt;/a&gt;
+                                </code>
+                            </pre>
 
                                 <h2>Button groups</h2>
 
                                 <div class="btn-group">
-                                    <a class="btn btn-small dropdown-toggle" href="#">Action</a>
+                                    <a class="btn btn-sm dropdown-toggle" href="#">Action</a>
                                     <ul class="dropdown-menu">
                                         <li><a href="#">Link</a></li>
                                         <li><a href="#">Link</a></li>
@@ -959,7 +1064,7 @@ Button&lt;/a&gt;
                                 </div>
 
                                 <div class="btn-group">
-                                    <a class="btn btn-large dropdown-toggle" href="#">Action</a>
+                                    <a class="btn btn-lg dropdown-toggle" href="#">Action</a>
                                     <ul class="dropdown-menu">
                                         <li><a href="#">Another link</a></li>
                                         <li><a href="#">Another link</a></li>
@@ -968,8 +1073,8 @@ Button&lt;/a&gt;
                                 </div>
 
                                 <div class="btn-group">
-                                    <a class="btn btn-large" href="#">Action</a>
-                                    <a class="btn btn-large dropdown-toggle" href="#"><span class="caret"></span></a>
+                                    <a class="btn btn-lg" href="#">Action</a>
+                                    <a class="btn btn-lg dropdown-toggle" href="#"><span class="caret"></span></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="#">Another link</a></li>
                                         <li><a href="#">Another link</a></li>
@@ -1051,15 +1156,17 @@ Button&lt;/a&gt;
                                 </div>
 
                                 <h3>Code</h3>
-<pre class="language-markup clear"><code>
-&lt;div class="alert"&gt;
-    &lt;a href="#" class="close"&gt;&amp;
-    times;&lt;/a&gt;
-    &lt;strong&gt;
-    This is a default alert&lt;/strong&gt;
-    so there
-&lt;/div&gt;
-</code></pre>
+                                <pre class="language-markup clear">
+                                        <code>
+        &lt;div class="alert"&gt;
+            &lt;a href="#" class="close"&gt;&amp;
+            times;&lt;/a&gt;
+            &lt;strong&gt;
+            This is a default alert&lt;/strong&gt;
+            so there
+        &lt;/div&gt;
+                                </code>
+                            </pre>
                             </section>
 
 
@@ -1124,27 +1231,29 @@ Button&lt;/a&gt;
                                 </div>
 
                                 <h3>Code</h3>
-<pre class="language-markup clear"><code>
-&lt;div class="tabwrapper js-tabbable"&gt;
-    &lt;ul class="nav"&gt;
-        &lt;li class="active"&gt;&lt;a href="#tab1"&gt;
-        Tab 1&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href="#tab2"&gt;
-        Tab 2&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href="#tab3"&gt;
-        Tab 3&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-    &lt;div class="tabpane active" id="tab1"&gt;
-        content of tab 1
-    &lt;/div&gt;
-    &lt;div class="tabpane" id="tab2"&gt;
-        content of tab 2
-    &lt;/div&gt;
-    &lt;div class="tabpane" id="tab3"&gt;
-        content of tab 3
-    &lt;/div&gt;
-&lt;/div&gt;
-</code></pre>
+                                <pre class="language-markup clear">
+                                        <code>
+        &lt;div class="tabwrapper js-tabbable"&gt;
+            &lt;ul class="nav"&gt;
+                &lt;li class="active"&gt;&lt;a href="#tab1"&gt;
+                Tab 1&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#tab2"&gt;
+                Tab 2&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#tab3"&gt;
+                Tab 3&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+            &lt;div class="tabpane active" id="tab1"&gt;
+                content of tab 1
+            &lt;/div&gt;
+            &lt;div class="tabpane" id="tab2"&gt;
+                content of tab 2
+            &lt;/div&gt;
+            &lt;div class="tabpane" id="tab3"&gt;
+                content of tab 3
+            &lt;/div&gt;
+        &lt;/div&gt;
+                                </code>
+                            </pre>
                             </section>
 
                             <section id="popups">
@@ -1165,7 +1274,8 @@ Button&lt;/a&gt;
                                 </ul>
 
                                 <h3>Code</h3>
-<pre class="language-markup clear"><code>
+                                <pre class="language-markup clear">
+                                        <code>
 &lt;a href="#" class="js-openpopup" data-target="1"&gt;
 Standard popup&lt;/a&gt;
 
@@ -1181,7 +1291,8 @@ Standard popup&lt;/a&gt;
         &lt;/div&gt;
     &lt;/div&gt;
 &lt;/div&gt;
-</code></pre>
+                                </code>
+                            </pre>
                             </section>
 
                         </div>
@@ -1230,11 +1341,11 @@ Standard popup&lt;/a&gt;
         </div>
     </div>
 
-    <script src="static/dist/js/vendor/core.min.js"></script>
-    <!--[if lt IE 9 ]>
-    <script>(function() {$('body').addClass('iex');})();</script>
+    <!--[if lte IE 8 ]>
+        <script src="/static/dist/js/vendor/ie8.min.js"/>
     <![endif]-->
-    <script src="static/dist/js/app.min.js"></script>
+    <script src="/static/dist/js/vendor/core.min.js"></script>
+    <script src="/static/dist/js/app.min.js"></script>
     <script src="static/styleguide/prism.js"></script>
     <script type="text/javascript">
         $(document).on('ready', function() {
