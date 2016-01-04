@@ -2,29 +2,25 @@
 <html lang="en" id="site" class="nojs">
 <head>
     <title>blank page</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Tangent Snowball">
+    <!-- Favicon -->
     <link rel="shortcut icon" href="/static/dist/img/favicon.ico">
-
-    <link rel="stylesheet" type="text/css" href="static/dist/css/vendor/core.min.css"/>
-    <link rel="stylesheet" type="text/css" href="static/dist/css/styles.min.css"/>
-    <!--[if lte IE 8 ]>
-        <script src="static/dist/js/vendor/ie8.min.js"/>
-    <![endif]-->
-
-    <script>
-        /* we want to remove the nojs class as soon as possible on page load */
-        document.getElementById("site").className = document.getElementById("site").className.replace(/nojs/i,'');
-    </script>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="/static/dist/css/vendor/core.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/dist/css/application.min.css"/>
+    <link rel="stylesheet" type="text/css" href="static/styleguide/prism.css"/>
 </head>
 
 <body>
 
-    <script src="static/dist/js/vendor/core.min.js"></script>
-    <!--[if lt IE 9 ]>
-        <script>(function() {$('body').addClass('iex');})();</script>
+    <!--[if lte IE 8 ]>
+        <script src="/static/dist/js/vendor/ie8.min.js"/>
     <![endif]-->
-    <script src="static/dist/js/app.min.js"></script>
-
+    <script src="/static/dist/js/vendor/core.min.js"></script>
+    <script src="/static/dist/js/app.min.js"></script>
 </body>
 </html>

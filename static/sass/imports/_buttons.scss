@@ -1,83 +1,193 @@
-/* -------------------------------------------------------------
- * Buttons
- * ---------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * Buttons - taken from BS3
+ * -------------------------------------------------------------------------- */
 
-input.btn {
-    padding-top: 0;
-    padding-bottom: 0;
-    height: $btn-line-height * 1.04;
-    &.btn-small {
-        height: $btn-line-height / 1.4;
-    } // /&.btn-small
-} // /input.btn
-
-// Remove button padding in FF - otherwise all buttons are 2px taller than links with the same style
-input::-moz-focus-inner,
-button::-moz-focus-inner {
-    border: 0;
-    padding: 0;
-} // /input::-moz-focus-inner, button::-moz-focus-inner
-
+// Base styles
+// --------------------------------------------------
 .btn {
     display: inline-block;
-    padding: 0 $btn-x-padding;
-    line-height: $btn-line-height;
-    margin: 0;
-    box-sizing: border-box;
-    border: solid 1px #AAA;
-    border: 0;
-    background: $grey-pale;
-    color: #666;
-    outline: 0;
-    cursor: pointer;
+    margin-bottom: 0;
+    font-weight: $btn-font-weight;
     text-align: center;
-    text-decoration: none;
-    font-size: $btn-font-size;
     vertical-align: middle;
-    font-family: Arial,Helvetica;
-    border-collapse: separate; //fix for IE9
-    overflow: visible; //fix for IE7
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    @include button-size($padding-base-vertical, $padding-base-horizontal, $font-size-base, $line-height-base, $btn-border-radius-base);
+    @include user-select(none);
 
-    &.btn-block {
-        display: block;
-        width: 100%;
-        text-align: left;
+    &,
+    &:active,
+    &.active {
+        &:focus,
+        &.focus {
+            @include tab-focus;
+        } // /&.focus
+    } // /&.active
 
-        &.center {
-            text-align: center;
-        } // /&.center
-    } // /&.btn-block
-
-    &.btn-small {
-        font-size: $btn-font-size * 0.9;
-        line-height: $btn-line-height / 1.2;
-        font-weight: normal;
-    } // /&.btn-small
-
-    &.btn-large {
-        font-size: $btn-font-size * 1.4;
-    } // /&.btn-large
-
-    // Button states
-    // -------------------------------------------------------------
-
-    &:hover, &:focus {
+    &:hover,
+    &:focus,
+    &.focus {
+        color: $btn-default-color;
         text-decoration: none;
-    } // /&:hover, &:focus
+    } // /&.focus
 
+    &:active,
+    &.active {
+        outline: 0;
+        background-image: none;
+        @include box-shadow(inset 0 3px 5px rgba(0,0,0,.125));
+    } // /&.active
+
+    &.disabled,
+    &[disabled],
+    fieldset[disabled] & {
+        cursor: $cursor-disabled;
+        @include opacity(.65);
+        @include box-shadow(none);
+    } // /fieldset[disabled] &
+} // /.btn
+
+a.btn {
+    &.disabled,
+    fieldset[disabled] & {
+        pointer-events: none;
+    } // /fieldset[disabled] &
+} // /a.btn
+
+
+// Alternate buttons
+// --------------------------------------------------
+
+.btn-default {
+    @include button-variant($btn-default-color, $btn-default-bg, $btn-default-border);
+} // /.btn-default
+
+.btn-primary {
+    @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border);
+} // /.btn-primary
+
+// Success appears as green
+.btn-success {
+    @include button-variant($btn-success-color, $btn-success-bg, $btn-success-border);
+} // /.btn-success
+
+// Info appears as blue-green
+.btn-info {
+    @include button-variant($btn-info-color, $btn-info-bg, $btn-info-border);
+} // /.btn-info
+
+// Warning appears as orange
+.btn-warning {
+    @include button-variant($btn-warning-color, $btn-warning-bg, $btn-warning-border);
+} // /.btn-warning
+
+// Danger and error appear as red
+.btn-danger {
+    @include button-variant($btn-danger-color, $btn-danger-bg, $btn-danger-border);
+} // /.btn-danger
+
+
+// Link buttons
+// -------------------------
+
+// Make a button look and behave like a link
+.btn-link {
+    color: $link-color;
+    font-weight: normal;
+    border-radius: 0;
+
+    &,
+    &:active,
+    &.active,
+    &[disabled],
+    fieldset[disabled] & {
+        background-color: transparent;
+        @include box-shadow(none);
+    } // /fieldset[disabled] &
+
+    &,
+    &:hover,
+    &:focus,
     &:active {
-        text-decoration: none;
+        border-color: transparent;
     } // /&:active
 
-    &[disabled],
-    &.disabled {
-        cursor: default;
-        text-decoration: line-through;
-    } // /&[disabled], &.disabled
+    &:hover,
+    &:focus {
+        color: $link-hover-color;
+        text-decoration: $link-hover-decoration;
+        background-color: transparent;
+    } // /&:focus
 
-    &.btn-primary   { color: $brand-primary;   } // /&.btn-primary
-    &.btn-secondary { color: $brand-secondary; } // /&.btn-secondary
-    &.btn-info      { color: $brand-info;      } // /&.btn-info
-    &.btn-warning   { color: $brand-warning;   } // /&.btn-warning
-    &.btn-danger    { color: $brand-danger;    } // /&.btn-danger
-} // /.btn
+    &[disabled],
+    fieldset[disabled] & {
+        &:hover,
+        &:focus {
+            color: $btn-link-disabled-color;
+            text-decoration: none;
+        } // /&:focus
+    } // /fieldset[disabled] &
+} // /.btn-link
+
+
+// Button Sizes
+// --------------------------------------------------
+
+.btn-lg {
+    // line-height: ensure even-numbered height of button next to large input
+    @include button-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $btn-border-radius-large);
+} // /.btn-lg
+
+.btn-sm {
+    // line-height: ensure proper height of button next to small input
+    @include button-size($padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small, $btn-border-radius-small);
+} // /.btn-sm
+
+.btn-xs {
+      @include button-size($padding-xs-vertical, $padding-xs-horizontal, $font-size-small, $line-height-small, $btn-border-radius-small);
+} // /.btn-xs
+
+
+// Block button
+// --------------------------------------------------
+
+.btn-block {
+    display: block;
+    width: 100%;
+} // /.btn-block
+
+// Vertically space out multiple block buttons
+.btn-block + .btn-block {
+    margin-top: 5px;
+} // /.btn-block + .btn-block
+
+// Specificity overrides
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+    &.btn-block {
+      width: 100%;
+    } // /&.btn-block
+} // /input[type="button"]
+
+/* -----------------------------------------------------------------------------
+ * Buttons - responsive
+ * -------------------------------------------------------------------------- */
+// > xs
+// -----------------------------------------------------------------------------
+@media (min-width: $screen-xs-min) {} // /xs
+
+// > sm
+// -----------------------------------------------------------------------------
+@media (min-width: $screen-sm-min) {} // /sm
+
+// > md
+// -----------------------------------------------------------------------------
+@media (min-width: $screen-md-min) {} // /md
+
+// > lg
+// -----------------------------------------------------------------------------
+@media (min-width: $screen-lg-min) {} // /lg
