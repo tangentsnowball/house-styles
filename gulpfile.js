@@ -12,8 +12,7 @@ var basePaths = {
     // File paths
     paths = {
         images: {
-            src: basePaths.src   + 'img/',
-            dest: basePaths.dest + 'img/'
+            src:  basePaths.src  + 'img/'
         },
         scripts: {
             core:   {
@@ -35,12 +34,12 @@ var basePaths = {
                 dest: basePaths.dest + 'css/vendor/'
             }
         },
-        templates: {
-            src: basePaths.src + '',
+        html: {
+            src:  basePaths.src  + '',
             dest: basePaths.dest + ''
         },
         bower: {
-            src: './bower_components/'
+            src: 'bower_components/'
         }
     },
     /* -------------------------------------------------------------------------
@@ -63,7 +62,13 @@ var basePaths = {
         styles:  paths.styles.core.src  + '**/*.s{a,c}ss',
         scripts: paths.scripts.core.src + '*.js',
         images:  paths.images.src       + '**/*',
-        html:    paths.templates.src    + '*.html'
+        html:    paths.html.src    + '*.html'
+    },
+    settings = {
+        imagemin: {
+            // PNG
+            optimizationLevel: 3
+        }
     };
 
 // Load Node/Gulp plugins
@@ -191,7 +196,7 @@ function getVendorLibsGlob (libType, libCol) {
  * Handles processing of SASS/SCSS files
  * -------------------------------------------------------------------------- */
 gulp.task('styles', function () {
-    return compileSASS(gulp.src(paths.styles.core.src + 'styles.s{a,c}ss'), 'Styles');
+    return compileSASS(gulp.src(paths.styles.core.src + 'application.s{a,c}ss'), 'Styles');
 }); // /gulp.task('styles'...
 
 /* -----------------------------------------------------------------------------
@@ -236,11 +241,13 @@ gulp.task('images', function () {
         $.util.log($.util.colors.red('Error (' + error.plugin + '): ' + error.message));
         this.emit('end');
     }))
+    // Pass through only files that have changed
+    .pipe($.changedInPlace())
     .pipe($.bytediff.start())
-    .pipe($.newer(paths.images.dest))
-    .pipe($.cache($.imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
+    // Minify using global settings
+    .pipe($.imagemin(settings.imagemin))
     .pipe($.bytediff.stop())
-    .pipe(gulp.dest(paths.images.dest))
+    .pipe(gulp.dest(paths.images.src))
     .pipe(browserSync.stream())
     .pipe($.if(flags.notify, $.notify({ message: 'Images task complete' })));
 }); // /gulp.task('images'...
@@ -313,7 +320,7 @@ gulp.task('bower:css', function () {
  * Task - browser-sync
  * Sets up the BrowserSync instance for local development
  * -------------------------------------------------------------------------- */
-gulp.task('browser-sync', ['bower:js', 'bower:css', 'styles', 'scripts', 'images'], function () {
+gulp.task('browser-sync', function () {
     browserSync.init({
         server: {
             baseDir: './'
@@ -347,24 +354,6 @@ gulp.task('browser-sync', ['bower:js', 'bower:css', 'styles', 'scripts', 'images
 }); // /gulp.task('browser-sync'...
 
 /* -----------------------------------------------------------------------------
- * Task - clear
- * Clears gulp-cache
- * -------------------------------------------------------------------------- */
-gulp.task('clear', function (done) {
-  return $.cache.clearAll(done);
-}); // /gulp.task('clear'...
-
-/* -----------------------------------------------------------------------------
- * Task - clean
- * Deletes everything in dest dirs
- * -------------------------------------------------------------------------- */
-gulp.task('clean', ['clear'], function (cb) {
-    $.del([paths.styles.core.dest, paths.scripts.core.dest, paths.images.dest], cb);
-}); // /gulp.task('clean'...
-
-/* -----------------------------------------------------------------------------
  * Task - default
  * -------------------------------------------------------------------------- */
-gulp.task('default', ['clean'], function () {
-    gulp.start('browser-sync');
-}); // /gulp.task('default'...
+gulp.task('default', ['browser-sync']);
